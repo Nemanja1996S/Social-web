@@ -1,0 +1,26 @@
+<div class="reg-div">
+    <h1>Welcome to SocialWeb!</h1>
+    <small>First time here?
+        <a href="" (click)="$event.preventDefault(); goToRegistry()">Registry</a>
+    </small>
+
+</div>
+
+
+<h3>Please log in:</h3>
+<form class="reg-form mt-3">
+    <div class="mb-3">
+      <label class="form-label">Your email address</label>
+      <input type="email" class="form-control" >
+      <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-control" >
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" >x    
+      <label class="form-check-label" >Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
