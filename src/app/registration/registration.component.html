@@ -1,41 +1,64 @@
-<form action="/action_page.php">
+<form [formGroup]="registryFormGroup" (ngSubmit)="$event.preventDefault(); submitForm()">
     <div class="mb-3 mt-3">
         <label class="form-label">Name:</label>
-        <input type="text" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Surname:</label>
-        <input type="text" class="form-control">
-    </div>
-    <div class="mb-3 mt-3">
-      <label class="form-label">Email:</label>
-      <input type="email" class="form-control" placeholder="Enter email" name="email">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Password:</label>
-        <input type="password" class="form-control" placeholder="Enter password" name="pswd">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Date of birth:</label>
-        <div class="input-group date" data-provide="datepicker">
-            <input type="text" class="form-control">
-            <div class="input-group-addon">
-                <span class="glyphicon glyphicon-th"></span>
-            </div>
+        <input type="text" class="form-control" formControlName="nameFormControl">
+        <div *ngIf="this.registryFormGroup.get('nameFormControl')?.invalid && 
+        this.registryFormGroup.get('nameFormControl')?.touched ">
+            <small class="text-danger" 
+            *ngIf="this.registryFormGroup.get('nameFormControl')?.hasError('required')">Name is required</small>
         </div>
     </div>
     <div class="mb-3">
+        <label class="form-label">Surname:</label>
+        <input type="text" class="form-control" formControlName="surnameFormControl">
+        <div *ngIf="this.registryFormGroup.get('surnameFormControl')?.invalid && 
+        this.registryFormGroup.get('surnameFormControl')?.touched ">
+            <small class="text-danger" 
+            *ngIf="this.registryFormGroup.get('surnameFormControl')?.hasError('required')">Surname is required</small>
+        </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email:</label>
+      <input type="email" class="form-control" placeholder="Enter email" name="email" formControlName="emailFormControl">
+      <div *ngIf="this.registryFormGroup.get('emailFormControl')?.invalid && 
+        this.registryFormGroup.get('emailFormControl')?.touched ">
+            <small class="text-danger" 
+            *ngIf="this.registryFormGroup.get('emailFormControl')?.hasError('required')">Email is required</small>
+            <small class="text-danger" 
+            *ngIf="this.registryFormGroup.get('emailFormControl')?.hasError('email')">Email is not valid</small>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password:</label>
+        <div class="input-password">
+            <input [type]="this.visiblePassword? 'text' : 'password'" class="form-control input-password" placeholder="Enter password" name="pswd" formControlName="passwordFormControl">
+            <div class="d-flex" *ngIf="!this.visiblePassword else crossEye">
+            <i class="fa-solid fa-eye fa-align" (click)="togglePasswordText()"></i>
+            </div>
+            <ng-template #crossEye>
+                <div class="d-flex">
+                    <i class="fa-solid fa-eye-slash fa-align" (click)="togglePasswordText()"></i>
+                </div>
+            </ng-template>
+        </div> 
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">Date of birth:</label>
+        <input type="date" class="form-control" formControlName="dateFormControl">
+    </div>
+    <div class="mb-3">
         <label class="form-label">Education:</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="educationFormControl">
     </div>
     <div class="mb-3">
         <label class="form-label">Work:</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="workFormControl">
     </div>
     <div class="mb-3">
         <label class="form-label">About me:</label>
         <div class="form-floating">
-            <textarea class="form-control" style="height: 100px" ></textarea>
+            <textarea class="form-control" style="height: 100px" formControlName="aboutMeFormControl"></textarea>
         </div>
     </div>
     <div class="form-check mb-3">
@@ -43,5 +66,5 @@
         <input class="form-check-input" type="checkbox" name="remember"> Remember me
       </label>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="this.registryFormGroup.invalid">Submit</button>
   </form>
