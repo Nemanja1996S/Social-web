@@ -1,3 +1,4 @@
+<h4>Please enter registration informations:</h4>
 <form [formGroup]="registryFormGroup" (ngSubmit)="$event.preventDefault(); submitForm()">
     <div class="mb-3 mt-3">
         <label class="form-label">Name:</label>
@@ -42,6 +43,23 @@
             </ng-template>
         </div> 
     </div>
+    <div class="mb-3">
+        <label class="form-label">Choose sports of interest:</label>
+        <select class="form-select" formControlName="selectedSportFormControl" (change)="addSelectedOption()" >
+            <option *ngFor="let option of sportsOptions"
+             value={{option}} >{{option}} </option>
+          </select>
+        <div *ngIf="this.registryFormGroup.get('selectedSportFormControl')?.invalid && 
+          this.registryFormGroup.get('selectedSportFormControl')?.touched else showChosenSports ">
+              <small class="text-danger" *ngIf="this.registryFormGroup
+              .get('selectedSportFormControl')?.hasError('required')">You must choose at least 1 sport</small>
+        </div>
+        <ng-template #showChosenSports>
+            <ul class="d-flex">
+                <li *ngFor="let sport of sportsSelected" class="list-sports">{{sport}}</li>
+            </ul>
+        </ng-template>
+    </div>
     
     <div class="mb-3">
         <label class="form-label">Date of birth:</label>
@@ -68,3 +86,4 @@
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="this.registryFormGroup.invalid">Submit</button>
   </form>
+  <!--  -->
