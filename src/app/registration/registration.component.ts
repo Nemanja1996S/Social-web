@@ -48,4 +48,10 @@ export class RegistrationComponent {
     }
     console.log(this.sportsSelected);
   }
+
+  removeSport(sport: string){
+    this.sportsSelected = this.sportsSelected.filter( sportSel => sportSel !== sport);
+    console.log(this.sportsSelected);
+    //this.registryFormGroup.setValue({...this.registryFormGroup, selectedSportFormControl: ''})
+  }
 }

@@ -11,5 +11,5 @@ import { LogInComponent } from './log-in/log-in.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Social-web';
+  title = 'SportSocial';
 }
