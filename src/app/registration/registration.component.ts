@@ -1,6 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SportSocialService } from '../services/sport-social.service';
 
 @Component({
   selector: 'registration',
@@ -10,6 +11,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './registration.component.scss'
 })
 export class RegistrationComponent {
+
+  constructor(private service: SportSocialService) {}
 
   visiblePassword : boolean = false;
   sportsOptions = ["Soccer", "Basketball", "Tennis"] ;
@@ -30,6 +33,21 @@ export class RegistrationComponent {
 
   submitForm(){
     console.log(this.registryFormGroup.value);
+    if(this.registryFormGroup.value){
+      this.service.addUser({
+        id: 1,
+        name: this.registryFormGroup.get('nameFormContol')?.value ?? 'sfasfa',
+        surname: this.registryFormGroup.get('surnameFormContol')?.value ?? 'sfasfa',
+        email: this.registryFormGroup.get('emailFormContol')?.value ?? 'sfasfa',
+        password: this.registryFormGroup.get('passwordFormContol')?.value ?? 'sfasfa',
+        selectedSports: this.sportsSelected,
+        dateOfBirth: this.registryFormGroup.get('dateFormContol')?.value ?? 'sfasfa',
+        education: this.registryFormGroup.get('educationFormContol')?.value ?? 'sfasfa',
+        work: this.registryFormGroup.get('workFormContol')?.value ?? 'sfasfa',
+        aboutMe: this.registryFormGroup.get('aboutMeFormContol')?.value ?? 'sfasfa'
+      });
+    }
+    
   }
 
   togglePasswordText(){

@@ -1,0 +1,17 @@
+{
+    "users": [
+        {
+            "id": 0,
+            "name": "Nemanja",
+            "surname": "Savic",
+            "email": "savic1996.neca@gmail.com",
+            "password": "nekipas3jhur3",
+            "selectedSports": [ "tenis", "basketball"],
+            "dateOfBirth": "12.03.1996",
+            "education": "University of Nis",
+            "work": "Nowhere",
+            "aboutMe": "Something"
+
+        }
+    ]
+}
