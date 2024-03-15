@@ -1,6 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../models/User';
+import { catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,24 @@ export class SportSocialService {
     };
   }
 
+  private errorHandler = (error: HttpErrorResponse) => {
+    const errorMessage =
+      error.status === 0
+        ? `Cant connetvt to API ${error.error}`
+        : `Backend return code ${error.status}`
+    return throwError(errorMessage);
+  };
+
   getAllUsers(){
-    return this.httpClient.get<User[]>("http://localhost:3000/" + "users");
+    return this.httpClient
+    .get<User[]>(`${environment.apiUrl}/users`)
+    .pipe(catchError(this.errorHandler));
+  }
+
+  getUserById(id: number){
+    return this.httpClient
+    .get<User[]>(`${environment.apiUrl}/users/${id}`)
+    .pipe(catchError(this.errorHandler));
   }
 
   addUser(user: User){
