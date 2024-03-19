@@ -2,6 +2,8 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SportSocialService } from '../services/sport-social.service';
+import { User } from '../../models/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'registration',
@@ -12,7 +14,7 @@ import { SportSocialService } from '../services/sport-social.service';
 })
 export class RegistrationComponent {
 
-  constructor(private service: SportSocialService) {}
+  constructor(private service: SportSocialService, private router: Router) {}
 
   visiblePassword : boolean = false;
   sportsOptions = ["Soccer", "Basketball", "Tennis"] ;
@@ -23,7 +25,6 @@ export class RegistrationComponent {
     surnameFormControl: new FormControl('', Validators.required),
     emailFormControl: new FormControl('', [Validators.required, Validators.email]),
     passwordFormControl: new FormControl('', Validators.required),
-    //sportsArrayFormControl: new FormControl([], Validators.required),
     selectedSportFormControl: new FormControl('', Validators.required),
     dateFormControl: new FormControl(''),
     educationFormControl: new FormControl(''),
@@ -31,22 +32,24 @@ export class RegistrationComponent {
     aboutMeFormControl: new FormControl(''),
   });
 
-  submitForm(){
-    console.log(this.registryFormGroup.value);
-    if(this.registryFormGroup.value){
-      this.service.addUser({
+  submitForm(){  
+    const user: User = {
         id: 1,
-        name: this.registryFormGroup.get('nameFormContol')?.value ?? 'sfasfa',
-        surname: this.registryFormGroup.get('surnameFormContol')?.value ?? 'sfasfa',
-        email: this.registryFormGroup.get('emailFormContol')?.value ?? 'sfasfa',
-        password: this.registryFormGroup.get('passwordFormContol')?.value ?? 'sfasfa',
+        name: this.registryFormGroup.get('nameFormControl')?.value ?? '',
+        surname: this.registryFormGroup.get('surnameFormControl')?.value ?? '',
+        email: this.registryFormGroup.get('emailFormControl')?.value ?? '',
+        password: this.registryFormGroup.get('passwordFormControl')?.value ?? '',
         selectedSports: this.sportsSelected,
-        dateOfBirth: this.registryFormGroup.get('dateFormContol')?.value ?? 'sfasfa',
-        education: this.registryFormGroup.get('educationFormContol')?.value ?? 'sfasfa',
-        work: this.registryFormGroup.get('workFormContol')?.value ?? 'sfasfa',
-        aboutMe: this.registryFormGroup.get('aboutMeFormContol')?.value ?? 'sfasfa'
-      });
+        dateOfBirth: this.registryFormGroup.get('dateFormControl')?.value ?? '',
+        education: this.registryFormGroup.get('educationFormControl')?.value ?? '',
+        work: this.registryFormGroup.get('workFormControl')?.value ?? '',
+        aboutMe: this.registryFormGroup.get('aboutMeFormControl')?.value ?? ''
     }
+    console.log(user);
+    //post to database
+    alert("Registration successfull");
+    this.router.navigate(['']);
+
     
   }
 
@@ -56,7 +59,6 @@ export class RegistrationComponent {
   }
 
   addSelectedOption(){
-    //this.sportsSelected.push(option);
     const chosenSport = this.registryFormGroup.get('selectedSportFormControl')?.value ?? '';
     if(chosenSport){
       if(!this.sportsSelected.find( (sport) => sport === chosenSport)){
@@ -69,7 +71,10 @@ export class RegistrationComponent {
 
   removeSport(sport: string){
     this.sportsSelected = this.sportsSelected.filter( sportSel => sportSel !== sport);
+    if(this.sportsSelected.length < 1){
+      this.registryFormGroup.controls.selectedSportFormControl.setValue('');
+    }
+    else this.registryFormGroup.controls.selectedSportFormControl.setValue(this.sportsSelected[0]);
     console.log(this.sportsSelected);
-    //this.registryFormGroup.setValue({...this.registryFormGroup, selectedSportFormControl: ''})
   }
 }
