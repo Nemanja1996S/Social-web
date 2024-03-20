@@ -22,7 +22,7 @@ export class SportSocialService {
   private errorHandler = (error: HttpErrorResponse) => {
     const errorMessage =
       error.status === 0
-        ? `Cant connetvt to API ${error.error}`
+        ? `Cant connect to API ${error.error}`
         : `Backend return code ${error.status}`
     return throwError(errorMessage);
   };
@@ -35,7 +35,13 @@ export class SportSocialService {
 
   getUserById(id: number){
     return this.httpClient
-    .get<User[]>(`${environment.apiUrl}/users/${id}`)
+    .get<User>(`${environment.apiUrl}/users/${id}`)
+    .pipe(catchError(this.errorHandler));
+  }
+
+  getUser(email: string){
+    return this.httpClient
+    .get<User>(`${environment.apiUrl}/users?email=${email}`)
     .pipe(catchError(this.errorHandler));
   }
 

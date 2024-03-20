@@ -8,19 +8,35 @@
 
 
 <h3>Please log in:</h3>
-<form class="reg-form mt-3">
+<form class="reg-form mt-3" [formGroup]="logInFormGroup" (ngSubmit)="$event.preventDefault(); submitForm()">
     <div class="mb-3">
       <label class="form-label">Your email address</label>
-      <input type="email" class="form-control" >
-      <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+      <input type="email" class="form-control" placeholder="Enter email" name="email" formControlName="emailFormControl">
+      <div *ngIf="this.logInFormGroup.get('emailFormControl')?.invalid && 
+        this.logInFormGroup.get('emailFormControl')?.touched ">
+            <small class="text-danger" 
+            *ngIf="this.logInFormGroup.get('emailFormControl')?.hasError('required')">Email is required</small>
+            <small class="text-danger" 
+            *ngIf="this.logInFormGroup.get('emailFormControl')?.hasError('email')">Email is not valid</small>
+      </div>
     </div>
     <div class="mb-3">
       <label class="form-label">Password</label>
-      <input type="password" class="form-control" >
+      <div class="input-password">
+        <input [type]="this.visiblePassword? 'text' : 'password'" class="form-control input-password" placeholder="Enter password" name="pswd" formControlName="passwordFormControl">
+        <div class="d-flex" *ngIf="!this.visiblePassword else crossEye">
+        <i class="fa-solid fa-eye fa-align" (click)="togglePasswordText()"></i>
+        </div>
+        <ng-template #crossEye>
+            <div class="d-flex">
+                <i class="fa-solid fa-eye-slash fa-align" (click)="togglePasswordText()"></i>
+            </div>
+        </ng-template>
+    </div>
     </div>
     <!-- <div class="mb-3 form-check">
       <input type="checkbox" class="form-check-input" >x    
       <label class="form-check-label" >Check me out</label>
     </div> -->
-    <button type="submit" class="btn btn-primary">Log in</button>
+    <button type="submit" class="btn btn-primary" [disabled]="this.logInFormGroup.invalid">Log in</button>
   </form>

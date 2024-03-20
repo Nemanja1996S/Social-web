@@ -55,7 +55,6 @@ export class RegistrationComponent {
 
   togglePasswordText(){
     this.visiblePassword = !this.visiblePassword;
-    
   }
 
   addSelectedOption(){
