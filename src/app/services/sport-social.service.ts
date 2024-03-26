@@ -39,9 +39,9 @@ export class SportSocialService {
     .pipe(catchError(this.errorHandler));
   }
 
-  getUser(email: string){
+  getUser(email: string, password: string){
     return this.httpClient
-    .get<User>(`${environment.apiUrl}/users?email=${email}`)
+    .get<User>(`${environment.apiUrl}/users?email=${email}&&password=${password}`)
     .pipe(catchError(this.errorHandler));
   }
 
