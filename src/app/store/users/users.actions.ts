@@ -1,6 +1,8 @@
 import { createAction, props } from "@ngrx/store";
 import { User } from "../../../models/User";
 
+export const start = createAction("[LogIn Component] Set isLoading");
+
 export const setUser = createAction(		//akcija ima id i parametre
 	"[App Componet] Set user in state",			//ovo je id akcije
 	props<{					//ovo su parametri akcije

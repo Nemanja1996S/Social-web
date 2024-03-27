@@ -4,9 +4,11 @@ import * as Actions from './users.actions'
 
 export interface UserState{
     user : User;
-    loadSuccessfull: boolean;
+    isLoading: boolean;
     friends: ReadonlyArray<User>;
     selectedSport: string;
+    error: string | null;
+    
 }
 
  const initialUser: User = {
@@ -24,15 +26,19 @@ export interface UserState{
 
 export const initialState: UserState = {
     user : initialUser,
-    loadSuccessfull: false,
+    isLoading: false,
     friends: [],
-    selectedSport: ""
+    selectedSport: "",
+    error: null
 }
 
 export const userReducer = createReducer(
     initialState,
+    on(Actions.start, (state) => {
+        return ({...state, isLoading: true })
+    }),
     on(Actions.setUser, (state, {user}) =>  {
-        return {...state, user: user }
+        return ({...state, user: user })
     }
 
     )

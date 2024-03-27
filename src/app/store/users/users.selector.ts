@@ -1,6 +1,12 @@
+import { createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
 
 export const selectUserFeature = (state: AppState) => state.user;		
+
+export const IsLoadingSelector = createSelector(
+    selectUserFeature,
+    (state) => state.isLoading
+)
 
 // export const selectAllMovies = createSelector(
 // 		selectMoviesFeature,
