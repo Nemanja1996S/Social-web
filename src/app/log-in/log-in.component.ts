@@ -4,9 +4,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { SportSocialService } from '../services/sport-social.service';
 import { AppState } from '../store/app.state';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as Actions from '../store/users/users.actions'
-import { IsLoadingSelector } from '../store/users/users.selector';
+import { isLoadingSelector } from '../store/users/users.selector';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -28,11 +28,11 @@ export class LogInComponent implements OnInit {
   isLoading$ : Observable<boolean> = of(false); 
 
   constructor(private router: Router, private service: SportSocialService, private store : Store<AppState> ){
-    this.isLoading$ = this.store.pipe(select(IsLoadingSelector));
+    this.isLoading$ = this.store.select(isLoadingSelector);
    }
 
   ngOnInit(): void {
-    this.store.dispatch(Actions.start());
+   
   }
 
   goToRegistry(){
@@ -41,9 +41,11 @@ export class LogInComponent implements OnInit {
 
   togglePasswordText(){
     this.visiblePassword = !this.visiblePassword;
+    this.store.subscribe(state => console.log({ state }));
   }
 
   submitForm(){
+    this.store.dispatch(Actions.setIsLoading());
     this.store.dispatch(Actions.loadUser({
       email: this.logInFormGroup.get('emailFormControl')?.value ?? '',
       password: this.logInFormGroup.get('passwordFormControl')?.value ?? '',}))

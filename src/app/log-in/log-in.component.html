@@ -38,11 +38,8 @@
       <input type="checkbox" class="form-check-input" >x    
       <label class="form-check-label" >Check me out</label>
     </div> -->
-    <button type="submit" class="btn btn-primary" [disabled]="this.logInFormGroup.invalid"
-    ><div *ngIf="this.isLoading$ | async">Loading...</div>
-    <ng-template #loading>
-      Loading...
-    </ng-template>
+    <button type="submit" class="btn btn-primary" [disabled]="this.logInFormGroup.invalid || (isLoading$ | async)"
+    ><div *ngIf="isLoading$ | async; else notLoading">Loging in...</div>
     <ng-template #notLoading>
       Log in
     </ng-template>

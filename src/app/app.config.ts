@@ -12,7 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideStore({
-      userState: userReducer
+      user: userReducer
     }),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
@@ -22,4 +22,17 @@ export const appConfig: ApplicationConfig = {
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true // If set to true, the connection is established within the Angular zone
     })]
+
+    // bootstrapApplication(AppComponent, {
+    //   providers: [
+    //     // alternative to `StoreModule.forRoot`
+    //     provideStore({ router: routerReducer, auth: AuthReducer }),
+    //     // alternative to `StoreRouterConnectingModule.forRoot`
+    //     provideRouterStore(),
+    //     // alternative to `StoreDevtoolsModule.instrument`
+    //     provideStoreDevtools(),
+    //     // alternative to `EffectsModule.forRoot`
+    //     provideEffects([RouterEffects, AuthEffects]),
+    //   ),
+    // });
 };

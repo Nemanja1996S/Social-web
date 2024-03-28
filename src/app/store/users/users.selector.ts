@@ -1,12 +1,20 @@
-import { createSelector } from "@ngrx/store";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
+import { UserState } from "./users.reducer";
 
-export const selectUserFeature = (state: AppState) => state.user;		
+// const somethingFeatureKey = 'userReducer'; // Should match with what you pass to .forRoot 
 
-export const IsLoadingSelector = createSelector(
+
+// const selectSomething = createFeatureSelector<UserState>(somethingFeatureKey)
+
+export const selectUserFeature = (state: AppState) => state.user;	
+
+export const isLoadingSelector = createSelector(
     selectUserFeature,
     (state) => state.isLoading
 )
+
+
 
 // export const selectAllMovies = createSelector(
 // 		selectMoviesFeature,

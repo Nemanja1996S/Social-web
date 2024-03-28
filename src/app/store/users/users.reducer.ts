@@ -11,7 +11,7 @@ export interface UserState{
     
 }
 
- const initialUser: User = {
+export const initialUser: User = {
     id: -1,
     name: '',
     surname: '',
@@ -34,7 +34,7 @@ export const initialState: UserState = {
 
 export const userReducer = createReducer(
     initialState,
-    on(Actions.start, (state) => {
+    on(Actions.setIsLoading, (state) => {
         return ({...state, isLoading: true })
     }),
     on(Actions.setUser, (state, {user}) =>  {
