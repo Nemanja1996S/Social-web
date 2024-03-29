@@ -25,6 +25,8 @@ export class SportSocialService {
         ? `Cant connect to API ${error.error}`
         : `Backend return code ${error.status}`
     return throwError(errorMessage);
+    // const err = new Error(errorMessage);
+    // return throwError(() => err);
   };
 
   getAllUsers(){

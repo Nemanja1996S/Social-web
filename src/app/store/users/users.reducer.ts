@@ -37,11 +37,15 @@ export const userReducer = createReducer(
     on(Actions.setIsLoading, (state) => {
         return ({...state, isLoading: true })
     }),
-    on(Actions.setUser, (state, {user}) =>  {
-        return ({...state, user: user })
-    }
-
-    )
+    on(Actions.loadUser, (state, {email, password}) => {
+        return ({...state, isLoading: true })
+    }),
+    on(Actions.loadUserSuccess, (state, {user}) =>  {
+        return ({...state, isLoading: false, user: user })
+    }),
+    on(Actions.loadUserFailure, (state, {error}) =>  {
+        return ({...state, isLoading: false, error: error })
+    })
     
 )
 

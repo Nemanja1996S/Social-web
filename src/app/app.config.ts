@@ -6,14 +6,17 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { userReducer } from './store/users/users.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { UsersEffect } from './store/users/users.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
     provideStore({
-      user: userReducer
+      userState: userReducer
     }),
+    provideEffects([UsersEffect]),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
