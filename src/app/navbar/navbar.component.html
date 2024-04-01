@@ -24,8 +24,8 @@
         
         <form class="d-flex" role="search">
             <select class="form-select form-select-sm me-2" aria-label=".form-select-sm example" [formControl]="selectedSportFormControl" (change)="pickSport()">
-              <option selected>Select sports to see</option>
-              <option value={{sportColor.sport}} *ngFor="let sportColor of usersSportsColor" class={{sportColor.color}}>{{sportColor.sport}} </option>
+              <option selected disabled>Select sports to see</option>
+              <option *ngFor="let sportColor of usersSportsColor" class={{sportColor.color}}>{{sportColor.sport}} </option>
             </select>
             <!-- <div class="nav-item dropdown me-2">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

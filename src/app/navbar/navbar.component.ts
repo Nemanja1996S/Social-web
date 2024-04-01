@@ -1,11 +1,16 @@
 import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 
 interface SportColor{
   sport: string,
   color: string
 }
+
+const green = 'bg-success bg-gradient';
+const white = 'bg-light';
+
 @Component({
   selector: 'navbar',
   standalone: true,
@@ -17,13 +22,13 @@ export class NavbarComponent {
   
   usersSports : string[] = ['football', 'basketball', 'table tennis', 'voleyball', 'swiming', 'bodybuilding'];
   
-  usersSportsColor: SportColor[] = [];
+  usersSportsColor: SportColor[] = [];//Observable<SportColor[]> = of([]);
   selectedSports: string[] = [];
 
   selectedSportFormControl = new FormControl('');
 
   ngOnInit(): void {
-    this.usersSportsColor = this.usersSports.map((sport) => ({sport: sport, color: 'bg-light'}))
+    this.usersSportsColor = this.usersSports.map((sport) => ({sport: sport, color: white}))
   }
   constructor(){
     
@@ -35,12 +40,22 @@ export class NavbarComponent {
     if(!this.selectedSports.find((sport) => sport === chosenSport)){
       this.selectedSports.push(chosenSport);
       this.usersSportsColor = this.usersSportsColor.map((sportColor) => 
-      sportColor.sport === chosenSport ?
-       ({sport: sportColor.sport, color: 'bg-success bg-gradient'})
-       :sportColor)
+      sportColor.sport === chosenSport?
+       ({sport: sportColor.sport, color: green})
+       :sportColor);
 
     }
+    else{
+      this.selectedSports = this.selectedSports.filter((sport) => sport !== chosenSport);
+      this.usersSportsColor = this.usersSportsColor.map((sportColor) => 
+      sportColor.sport === chosenSport?
+       ({sport: sportColor.sport, color: white})
+       :sportColor);
+    }
+    this.selectedSportFormControl.setValue('');
+    console.log(chosenSport)
     console.log(this.usersSportsColor);
+    console.log(this.selectedSports);
   }
 
 }
