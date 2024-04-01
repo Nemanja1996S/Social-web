@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-sm bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Profile" width="30" height="24">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Friends</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Groups</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li> -->
+        </ul>
+        
+        <form class="d-flex" role="search">
+            <select class="form-select form-select-sm me-2" aria-label=".form-select-sm example" [formControl]="selectedSportFormControl" (change)="pickSport()">
+              <option selected>Select sports to see</option>
+              <option value={{sportColor.sport}} *ngFor="let sportColor of usersSportsColor" class={{sportColor.color}}>{{sportColor.sport}} </option>
+            </select>
+            <!-- <div class="nav-item dropdown me-2">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div> -->
+          <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+          
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
