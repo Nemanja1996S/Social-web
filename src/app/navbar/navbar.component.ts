@@ -25,7 +25,9 @@ export class NavbarComponent {
   usersSportsColor: SportColor[] = [];//Observable<SportColor[]> = of([]);
   selectedSports: string[] = [];
 
-  selectedSportFormControl = new FormControl('');
+  lastPickedSport: string = ''
+
+  selectedSportFormControl = new FormControl('Select sports to see');
 
   ngOnInit(): void {
     this.usersSportsColor = this.usersSports.map((sport) => ({sport: sport, color: white}))
@@ -35,6 +37,7 @@ export class NavbarComponent {
   }
 
   pickSport(){
+    console.log('Poziv event funkcije')
     const chosenSport = this.selectedSportFormControl.value;
     if(!chosenSport) return;
     if(!this.selectedSports.find((sport) => sport === chosenSport)){
@@ -52,10 +55,11 @@ export class NavbarComponent {
        ({sport: sportColor.sport, color: white})
        :sportColor);
     }
-    this.selectedSportFormControl.setValue('');
-    console.log(chosenSport)
-    console.log(this.usersSportsColor);
-    console.log(this.selectedSports);
+    //this.selectedSportFormControl.setValue('Select sport to see');
+    //this.lastPickedSport = chosenSport;
+    //console.log("sport cosen:" + chosenSport)
+    // console.log(this.usersSportsColor);
+    // console.log(this.selectedSports);
   }
 
 }

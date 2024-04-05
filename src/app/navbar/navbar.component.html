@@ -1,13 +1,14 @@
 <nav class="navbar navbar-expand-sm bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Profile" width="30" height="24">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGDkNHwbJRMJoAug_9L-OzUdy5t3DcXWpXzg&s"
+         alt="Profile" width="30" height="24">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
@@ -23,9 +24,11 @@
         </ul>
         
         <form class="d-flex" role="search">
-            <select class="form-select form-select-sm me-2" aria-label=".form-select-sm example" [formControl]="selectedSportFormControl" (change)="pickSport()">
+            <select class="form-select form-select-sm me-2 select" aria-label=".form-select-sm example" [formControl]="selectedSportFormControl" (change)="pickSport()">
               <option selected disabled>Select sports to see</option>
-              <option *ngFor="let sportColor of usersSportsColor" class={{sportColor.color}}>{{sportColor.sport}} </option>
+              <option *ngFor="let sportColor of usersSportsColor" class="{{sportColor.color}} option" value={{sportColor.sport}}>{{sportColor.sport}} 
+              <button class="x">X</button>
+              </option>
             </select>
             <!-- <div class="nav-item dropdown me-2">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
