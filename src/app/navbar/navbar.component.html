@@ -1,50 +1,41 @@
-<nav class="navbar navbar-expand-sm bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGDkNHwbJRMJoAug_9L-OzUdy5t3DcXWpXzg&s"
-         alt="Profile" width="30" height="24">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Friends</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Groups</a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li> -->
-        </ul>
-        
-        <form class="d-flex" role="search">
-            <select class="form-select form-select-sm me-2 select" aria-label=".form-select-sm example" [formControl]="selectedSportFormControl" (change)="pickSport()">
-              <option selected disabled>Select sports to see</option>
-              <option *ngFor="let sportColor of usersSportsColor" class="{{sportColor.color}} option" value={{sportColor.sport}}>{{sportColor.sport}} 
-              <button class="x">X</button>
-              </option>
-            </select>
-            <!-- <div class="nav-item dropdown me-2">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div> -->
-          <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
-          
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+
+  <nav mat-tab-nav-bar [backgroundColor]="'primary'" [tabPanel]="tabPanel">
+    <a mat-tab-link
+    (click)="activeLink = 'Profile'"
+    [active]="activeLink == 'profile'">
+    <div class="picture">
+      <img src="https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=FebKqSJ0GCEAb6PGJyO&_nc_ht=scontent.fbeg10-1.fna&oh=00_AfCzsW-JtFqhPTYBCdJsMVb0rkXzzuHJP-nkgadbgmEnRQ&oe=663FC960"/>
+    </div>
+    </a>
+    @for (linkIcon of linksIcons; track linkIcon) {
+      <a mat-tab-link
+        (click)="activeLink = linkIcon.link"
+        [active]="activeLink == linkIcon.link"> {{linkIcon.link}}
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="{{linkIcon.icon}}"></mat-icon> </a>
+    }
+    <!-- <a mat-tab-link disabled>Disabled Link</a> -->
+    <mat-form-field [color]="'primary'">
+      <mat-label>Sports:</mat-label>
+      <mat-select [formControl]="selectedSportFormControl" multiple>
+        <mat-select-trigger>
+          {{selectedSportFormControl.value?.[0] || ''}}
+          @if ((selectedSportFormControl.value?.length || 0) > 1) {
+            <span class="example-additional-selection">
+              (+{{(selectedSportFormControl.value?.length || 0) - 1}} {{selectedSportFormControl.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          }
+        </mat-select-trigger>
+        @for (sport of usersSports; track sport) {
+      <mat-option [value]="sport">{{sport}}</mat-option>
+    }
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button color='accent' class="navbutton" (click)="this.searchSports();">Search</button>
     </div>
   </nav>
+  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+  
+  
+
+  

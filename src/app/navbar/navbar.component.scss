@@ -13,3 +13,24 @@
 .select {
     display: flex;
 }
+
+mat-form-field {
+    height: var(--mdc-secondary-navigation-tab-container-height);;
+    display: block;
+}
+
+.navbutton {
+    height: 100%;
+}
+
+.picture{
+    display: flex;
+    width: 48px;
+    height: 48px;
+}
+
+img {
+    flex-shrink: 1;
+    border-radius: 50%;
+}
+

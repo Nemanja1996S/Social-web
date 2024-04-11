@@ -1,65 +1,57 @@
 import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
-interface SportColor{
-  sport: string,
-  color: string
-}
-
-const green = 'bg-success bg-gradient';
-const white = 'bg-light';
 
 @Component({
   selector: 'navbar',
   standalone: true,
-  imports: [NgFor, ReactiveFormsModule],
+  imports: [
+    MatFormFieldModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTabsModule,
+    MatButtonModule,
+    NgFor,
+    ReactiveFormsModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
   
   usersSports : string[] = ['football', 'basketball', 'table tennis', 'voleyball', 'swiming', 'bodybuilding'];
-  
-  usersSportsColor: SportColor[] = [];//Observable<SportColor[]> = of([]);
-  selectedSports: string[] = [];
 
-  lastPickedSport: string = ''
+  linksIcons = [{link: 'Home', icon: 'home'}, {link: 'Friends', icon: 'group'}, {link:'Groups', icon: 'groups'}];
+  activeLink = this.linksIcons[0].link;
 
-  selectedSportFormControl = new FormControl('Select sports to see');
+
+  selectedSportFormControl = new FormControl([],Validators.required);
 
   ngOnInit(): void {
-    this.usersSportsColor = this.usersSports.map((sport) => ({sport: sport, color: white}))
   }
-  constructor(){
+
+  constructor(private snackBar: MatSnackBar){
     
   }
 
-  pickSport(){
-    console.log('Poziv event funkcije')
-    const chosenSport = this.selectedSportFormControl.value;
-    if(!chosenSport) return;
-    if(!this.selectedSports.find((sport) => sport === chosenSport)){
-      this.selectedSports.push(chosenSport);
-      this.usersSportsColor = this.usersSportsColor.map((sportColor) => 
-      sportColor.sport === chosenSport?
-       ({sport: sportColor.sport, color: green})
-       :sportColor);
-
+  searchSports(){
+    if(this.selectedSportFormControl.valid){
+      console.log(this.selectedSportFormControl.value);
     }
-    else{
-      this.selectedSports = this.selectedSports.filter((sport) => sport !== chosenSport);
-      this.usersSportsColor = this.usersSportsColor.map((sportColor) => 
-      sportColor.sport === chosenSport?
-       ({sport: sportColor.sport, color: white})
-       :sportColor);
+    else {
+      this.selectedSportFormControl.markAsTouched();
+      let snackBarRef = this.snackBar.open('Selection of at least 1 sport is needed', 'OK');
     }
-    //this.selectedSportFormControl.setValue('Select sport to see');
-    //this.lastPickedSport = chosenSport;
-    //console.log("sport cosen:" + chosenSport)
-    // console.log(this.usersSportsColor);
-    // console.log(this.selectedSports);
   }
+  
 
 }
