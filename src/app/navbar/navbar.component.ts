@@ -9,6 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { PostComponent } from '../post/post.component';
 
 
 @Component({
@@ -22,7 +23,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     MatTabsModule,
     MatButtonModule,
     NgFor,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    PostComponent ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

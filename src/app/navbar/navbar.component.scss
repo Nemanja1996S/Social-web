@@ -1,21 +1,6 @@
-.x {
-    
-    align-self: flex-end;
-}
-
-.option {
-    display: flex;
-
-    
-    
-}
-
-.select {
-    display: flex;
-}
 
 mat-form-field {
-    height: var(--mdc-secondary-navigation-tab-container-height);;
+    height: var(--mdc-secondary-navigation-tab-container-height);
     display: block;
 }
 
@@ -25,8 +10,9 @@ mat-form-field {
 
 .picture{
     display: flex;
-    width: 48px;
-    height: 48px;
+    width: var(--mdc-secondary-navigation-tab-container-height);
+    height: var(--mdc-secondary-navigation-tab-container-height);
+    
 }
 
 img {
