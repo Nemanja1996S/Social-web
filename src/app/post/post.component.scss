@@ -1,6 +1,7 @@
 mat-card-title {
     padding-top: 1em;
     padding-left: 1em;
+    padding-bottom: 0.5em;
 }
 
 mat-card {
@@ -9,4 +10,33 @@ mat-card {
 
 .mdc-card__media:first-child {
     border-radius: 50%;
+}
+
+.mat-mdc-card-title {
+    display: flex;
+}
+
+.titleNameAndDate {
+    padding-left: 0.5em;
+    align-content: center;
+}
+
+mat-card-footer{
+    margin-left: 1em;
+    margin-right: 1em;
+    display: flex;
+    align-content: center;
+}
+
+.interaction_numbers{
+    margin-right: 1.75em;
+    padding-left: 1em;
+    align-content: center;
+    display: flex;
+    
+}
+
+.interaction_numbers p {
+    padding-right: 0.3em;
+    
 }

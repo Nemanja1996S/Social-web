@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../../models/User';
 import { catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { Post } from '../../models/Post';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,12 @@ export class SportSocialService {
   getUser(email: string, password: string){
     return this.httpClient
     .get<User>(`${environment.apiUrl}/users?email=${email}&&password=${password}`)
+    .pipe(catchError(this.errorHandler));
+  }
+
+  getPostsForUser(id: number){
+    return this.httpClient
+    .get<Post[]>(`${environment.apiUrl}/posts`)
     .pipe(catchError(this.errorHandler));
   }
 
