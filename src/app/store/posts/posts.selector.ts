@@ -8,6 +8,15 @@ export const postsSelector = createSelector(
     (state) => state.posts
 )
 
+// export const sortPostsSelector = createSelector(
+//     selectPostsFeature,
+//     postsSelector,
+//     (postState, posts) => {
+        
+//         return
+//     }
+// )
+
 export const errorSelector = createSelector(
     selectPostsFeature,
     (state) => state.error

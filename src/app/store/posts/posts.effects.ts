@@ -13,7 +13,7 @@ export class PostsEffect {
 			ofType(PostsActions.loadPosts),
 			exhaustMap( ({id}) =>
 				this.service.getPostsForUser(id).pipe(
-					map((posts) => PostsActions.loadPostsSuccess({posts})),
+					map((posts) => PostsActions.loadPostsSuccess({posts: posts.sort((a, b) => b.date.localeCompare(a.date))})),
 					catchError(error => of(PostsActions.loadPostsFailure({error})))
 				)
 			)

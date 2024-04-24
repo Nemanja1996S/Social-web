@@ -26,6 +26,7 @@ mat-card-footer{
     margin-right: 1em;
     display: flex;
     align-content: center;
+    border-top: 1px solid white;
 }
 
 .interaction_numbers{
@@ -33,10 +34,14 @@ mat-card-footer{
     padding-left: 1em;
     align-content: center;
     display: flex;
-    
+    padding-top: 0.5em;
 }
 
 .interaction_numbers p {
     padding-right: 0.3em;
-    
+    padding-top: 0.3em;
+}
+
+mat-card-content {
+    padding-bottom: 1em;
 }
