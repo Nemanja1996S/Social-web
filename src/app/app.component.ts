@@ -4,6 +4,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PersonsProfileComponent } from './persons-profile/persons-profile.component';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     RegistrationComponent,
     LogInComponent,
     NavbarComponent,
+    PersonsProfileComponent,
     HttpClientModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

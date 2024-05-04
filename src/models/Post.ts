@@ -7,6 +7,7 @@ export interface Post {
     image?: string,
     video?: string,
     numberOfLikes: number,
+    numberOfDislikes: number,
     numberOfComments: number,
     numberOfShares: number
 }

@@ -28,6 +28,7 @@
             "image": "https://material.angular.io/assets/img/examples/shiba2.jpg",
             "video": "",
             "numberOfLikes": 120,
+            "numberOfDislikes": 20,
             "numberOfComments": 34,
             "numberOfShares": 11
                     
@@ -41,6 +42,7 @@
             "image": "",
             "video": "",
             "numberOfLikes": 20,
+            "numberOfDislikes": 3,
             "numberOfComments": 3,
             "numberOfShares": 1
         },
@@ -53,6 +55,7 @@
             "image": "https://material.angular.io/assets/img/examples/shiba2.jpg",
             "video": "",
             "numberOfLikes": 24,
+            "numberOfDislikes": 2,
             "numberOfComments": 5,
             "numberOfShares": 3
         },
@@ -65,6 +68,7 @@
             "image": "",
             "video": "",
             "numberOfLikes": 35,
+            "numberOfDislikes": 5,
             "numberOfComments": 7,
             "numberOfShares": 7
         },
@@ -77,6 +81,7 @@
             "image": "https://material.angular.io/assets/img/examples/shiba2.jpg",
             "video": "",
             "numberOfLikes": 40,
+            "numberOfDislikes": 6,
             "numberOfComments": 3,
             "numberOfShares": 3
         }              
