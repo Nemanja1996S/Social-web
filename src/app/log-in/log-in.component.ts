@@ -49,6 +49,7 @@ export class LogInComponent implements OnInit {
     this.store.dispatch(Actions.loadUser({
       email: this.logInFormGroup.get('emailFormControl')?.value ?? '',
       password: this.logInFormGroup.get('passwordFormControl')?.value ?? '',}))
+     this.router.navigate(['home'])
   }
 
   // tryToLogIn(): boolean {

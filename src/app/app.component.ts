@@ -5,6 +5,7 @@ import { LogInComponent } from './log-in/log-in.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PersonsProfileComponent } from './persons-profile/persons-profile.component';
+import { HomeComponent } from './home/home.component';
 
 
 @Component({
@@ -12,10 +13,11 @@ import { PersonsProfileComponent } from './persons-profile/persons-profile.compo
   standalone: true,
   imports: [
     RouterOutlet,
-    RegistrationComponent,
-    LogInComponent,
-    NavbarComponent,
-    PersonsProfileComponent,
+    // RegistrationComponent,
+    // LogInComponent,
+    // NavbarComponent,
+    // PersonsProfileComponent,
+    HomeComponent,
     HttpClientModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
