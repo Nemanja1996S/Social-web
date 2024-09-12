@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -10,6 +10,10 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { PostComponent } from '../post/post.component';
+import { AppState } from '../store/app.state';
+import { Store } from '@ngrx/store';
+import { pictureSelector, selectedSportsSelector, selSportsSelector, userSelector } from '../store/users/users.selector';
+import { postsSelector } from '../store/posts/posts.selector';
 
 
 @Component({
@@ -24,25 +28,29 @@ import { PostComponent } from '../post/post.component';
     MatButtonModule,
     NgFor,
     ReactiveFormsModule,
-    PostComponent ],
+    PostComponent,
+    CommonModule
+   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   
-  usersSports : string[] = ['football', 'basketball', 'table tennis', 'voleyball', 'swiming', 'bodybuilding'];
-
+  //usersSports : string[] = ['football', 'basketball', 'table tennis', 'voleyball', 'swiming', 'bodybuilding'];
+  //usersSport$: Observable<string[]> = of([]);
+  usersSports : string[] = []
   linksIcons = [{link: 'Home', icon: 'home'}, {link: 'Friends', icon: 'group'}, {link:'Groups', icon: 'groups'}];
   activeLink = this.linksIcons[0].link;
 
 
   selectedSportFormControl = new FormControl([],Validators.required);
 
-  ngOnInit(): void {
+  
+  constructor(private snackBar: MatSnackBar, private store: Store<AppState>){
+    this.store.select(pictureSelector).subscribe(userSports => console.log(userSports))
   }
-
-  constructor(private snackBar: MatSnackBar){
-    
+  ngOnInit(): void {
+    // this.store.select(selectedSportsSelector).subscribe((usersSportss) => console.log(usersSportss))
   }
 
   searchSports(){

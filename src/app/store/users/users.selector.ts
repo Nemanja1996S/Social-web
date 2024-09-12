@@ -24,6 +24,21 @@ export const errorSelector = createSelector(
     (state) => state.error
 )
 
+export const pictureSelector = createSelector(
+    userSelector,
+    (user) => user.picture
+)
+
+export const selectedSportsSelector = createSelector(
+    userSelector,
+    (user) => user.selectedSports
+)
+
+export const selSportsSelector = createSelector(
+    selectUserFeature,
+    (userState) => userState.user.selectedSports
+)
+
 
 
 // export const selectAllMovies = createSelector(

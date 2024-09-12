@@ -39,11 +39,14 @@ export class RegistrationComponent {
         surname: this.registryFormGroup.get('surnameFormControl')?.value ?? '',
         email: this.registryFormGroup.get('emailFormControl')?.value ?? '',
         password: this.registryFormGroup.get('passwordFormControl')?.value ?? '',
+        picture: '',
+        friendsIds: [],
         selectedSports: this.sportsSelected,
         dateOfBirth: this.registryFormGroup.get('dateFormControl')?.value ?? '',
         education: this.registryFormGroup.get('educationFormControl')?.value ?? '',
         work: this.registryFormGroup.get('workFormControl')?.value ?? '',
-        aboutMe: this.registryFormGroup.get('aboutMeFormControl')?.value ?? ''
+        aboutMe: this.registryFormGroup.get('aboutMeFormControl')?.value ?? '',
+
     }
     console.log(user);
     //post to database

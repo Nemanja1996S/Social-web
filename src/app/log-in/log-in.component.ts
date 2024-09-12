@@ -41,7 +41,7 @@ export class LogInComponent implements OnInit {
 
   togglePasswordText(){
     this.visiblePassword = !this.visiblePassword;
-    this.store.subscribe(state => console.log({ state }));
+    //this.store.subscribe(state => console.log({ state }));
   }
 
   submitForm(){

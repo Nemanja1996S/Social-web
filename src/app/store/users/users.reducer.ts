@@ -6,7 +6,7 @@ export interface UserState{
     user : User;
     isLoading: boolean;
     friends: ReadonlyArray<User>;
-    selectedSport: string[];
+    // selectedSport: string[];
     error: string | null;
     
 }
@@ -16,6 +16,8 @@ export const initialUser: User = {
     name: '',
     surname: '',
     email: '',
+    picture: '',
+    friendsIds: [],
     password: '',
     selectedSports: [],
     dateOfBirth: '',
@@ -28,7 +30,7 @@ export const initialState: UserState = {
     user : initialUser,
     isLoading: false,
     friends: [],
-    selectedSport: [],
+    // selectedSport: [],
     error: null
 }
 
