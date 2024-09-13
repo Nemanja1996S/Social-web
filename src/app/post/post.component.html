@@ -1,3 +1,9 @@
+<!-- <form>
+<mat-form-field class="example-full-width">
+    <mat-label>Leave a comment</mat-label>
+    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+</mat-form-field>
+</form> -->
 <mat-card *ngFor="let post of this.posts$ | async">
     <mat-card-title>
         <img mat-card-sm-image src={{post.userImage}}/>

@@ -10,12 +10,13 @@ import { Observable, of } from 'rxjs';
 import { Post } from '../../models/Post';
 import { loadPosts } from '../store/posts/posts.actions';
 import { CommonModule, NgFor } from '@angular/common';
+import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 
 
 @Component({
   selector: 'post',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, NgFor, CommonModule],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, NgFor, CommonModule, MatFormFieldModule],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })

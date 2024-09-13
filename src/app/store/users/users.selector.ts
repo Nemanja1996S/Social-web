@@ -9,19 +9,21 @@ import { UserState } from "./users.reducer";
 
 export const selectUserFeature = (state: AppState) => state.userState;	
 
-export const isLoadingSelector = createSelector(
-    selectUserFeature,
-    (state) => state.isLoading
-)
-
 export const userSelector = createSelector(
     selectUserFeature,
-    (state) => state.user
+    (userState) => userState.user
 )
+
+export const isLoadingSelector = createSelector(
+    selectUserFeature,
+    (userState) => userState.isLoading
+)
+
+
 
 export const errorSelector = createSelector(
     selectUserFeature,
-    (state) => state.error
+    (userState) => userState.error
 )
 
 export const pictureSelector = createSelector(

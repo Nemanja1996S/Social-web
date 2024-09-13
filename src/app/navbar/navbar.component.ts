@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit {
 
   
   constructor(private snackBar: MatSnackBar, private store: Store<AppState>){
-    this.store.select(pictureSelector).subscribe(userSports => console.log(userSports))
+    this.store.select(selectedSportsSelector).subscribe(userSports => console.log(userSports))
   }
   ngOnInit(): void {
     // this.store.select(selectedSportsSelector).subscribe((usersSportss) => console.log(usersSportss))

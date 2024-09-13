@@ -5,11 +5,10 @@ import * as Actions from './users.actions'
 export interface UserState{
     user : User;
     isLoading: boolean;
-    friends: ReadonlyArray<User>;
-    // selectedSport: string[];
-    error: string | null;
-    
+    error: string | null;    
 }
+// friends: ReadonlyArray<User>;
+    // selectedSport: string[];
 
 export const initialUser: User = {
     id: -1,
@@ -29,7 +28,7 @@ export const initialUser: User = {
 export const initialState: UserState = {
     user : initialUser,
     isLoading: false,
-    friends: [],
+    // friends: [],
     // selectedSport: [],
     error: null
 }
