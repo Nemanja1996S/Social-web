@@ -1,9 +1,27 @@
-<!-- <form>
-<mat-form-field class="example-full-width">
-    <mat-label>Leave a comment</mat-label>
-    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+<form>
+<mat-form-field class="userPostContainer">
+    <mat-label>What are you thinking about?</mat-label>
+    <div class="input-container">
+        <textarea matInput cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                [formControl]="postTextFormControl" ></textarea>
+        <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput>
+        <img [src]="this.userPostImg" class="imgInput">
+        <div style="display: flex;">
+            <mat-checkbox *ngFor="let sport of this.userSelectedSports" [formControl]="postCheckListFormControl">{{sport}}</mat-checkbox>
+        </div>
+        <div>
+            <button mat-flat-button (click)="$event.preventDefault(); fileInput.click()">Pick photo</button>
+            <button mat-stroked-button (click)="$event.preventDefault(); onPost()" 
+            [disabled]="!this.postTextFormControl.dirty ||
+            this.postTextFormControl.invalid || 
+            this.postCheckListFormControl.invalid" >POST</button>
+        </div>
+    </div>
 </mat-form-field>
-</form> -->
+</form>
 <mat-card *ngFor="let post of this.posts$ | async">
     <mat-card-title>
         <img mat-card-sm-image src={{post.userImage}}/>
