@@ -30,12 +30,12 @@ export class PostComponent implements OnInit {
 
   posts$: Observable<Post[]> = of([])
   postTextFormControl = new FormControl('', Validators.required);
-  postCheckListFormControl = new FormControl(null, Validators.required);
+  postCheckListFormControl = new FormControl('', Validators.required);
   selectedImageFile = null;
   userPostImg : string = '';
   //userSelectedSport$ : Observable<string[]> = of([])
   userSelectedSports = ['football', 'basketball', 'table tennis', 'bodybuilding'];
-  userCheckedSports = []
+  userCheckedSports : string[] = []
 
   constructor(private store: Store<AppState>) {
     //this.postCheckListFormControl.setValue(null);
@@ -53,12 +53,20 @@ export class PostComponent implements OnInit {
     this.userPostImg = URL.createObjectURL(event.target.files[0]);
   }
 
+  onSportChecked(checkedSport: string){
+    if(this.userCheckedSports.find(sport => sport === checkedSport)){
+      this.userCheckedSports = this.userCheckedSports.filter(sport => sport !== checkedSport)
+    }
+    else{
+      this.userCheckedSports.push(checkedSport)
+    }
+  }
+
   onPost(){
     console.log(this.selectedImageFile)
     console.log(this.userPostImg)
     console.log(this.postTextFormControl.value)
-    console.log(this.postCheckListFormControl.value)
-
+    console.log(this.userCheckedSports)
   }
 
 

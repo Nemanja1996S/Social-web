@@ -61,11 +61,14 @@ mat-card-content {
 .imgInput{
     justify-self: center;
     align-self: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     max-width: 75%;
     max-height: auto;
     min-width: 75%;
     min-height: auto;
-    
+}
+
+mat-checkbox {
+    // margin-top: 1em;
 }
