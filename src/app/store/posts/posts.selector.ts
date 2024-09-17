@@ -1,20 +1,21 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
+import { Post, Reaction } from "../../../models/Post";
+import { Dictionary } from "@ngrx/entity";
 
 export const selectPostsFeature = (state: AppState) => state.postsState;	
 
 export const postsSelector = createSelector(
     selectPostsFeature,
-    (state) => state.posts
+    (state) => Object
+    .values(state.entities).filter(post => post != null)
+    .map(post => <Post>post).sort((a, b) => b.date.localeCompare(a.date))
 )
 
-// export const sortPostsSelector = createSelector(
+
+// export const userReactonToPostDictSelector = createSelector(
 //     selectPostsFeature,
-//     postsSelector,
-//     (postState, posts) => {
-        
-//         return
-//     }
+//     (postState) => Object.values(postState.entities).filter(post => post != null).map(post => post?.usersReactionToPostDict)
 // )
 
 export const errorSelector = createSelector(

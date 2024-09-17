@@ -2,27 +2,27 @@ import { createAction, props } from "@ngrx/store";
 import { User } from "../../../models/User";
 
 
-export const setIsLoading = createAction("[LogIn Component] Set isLoading");
+export const setIsLoading = createAction("Set isLoading to userState");
 
-export const loadUser = createAction(		//akcija ima id i parametre
-	"[App Component] Load user from database",			//ovo je id akcije
-	props<{					//ovo su parametri akcije
+export const loadUser = createAction(		
+	"Load user from database and set user to userState",			
+	props<{					
 		email: string,
 		password: string
 	}>()
 );
 
-export const loadUserSuccess = createAction(		//akcija ima id i parametre
-	"[App Component] Load user success",			//ovo je id akcije
-	props<{					//ovo su parametri akcije
+export const loadUserSuccess = createAction(		
+	"Load user from database and set user to userState success",			
+	props<{					
 		user: User
 	}>()
 );
 
 
-export const loadUserFailure = createAction(		//akcija ima id i parametre
-	"[App Component] Load user failure",			//ovo je id akcije
-	props<{					//ovo su parametri akcije
+export const loadUserFailure = createAction(		
+	"Load user from database and set user to userState failure",			
+	props<{					
 		error: string
 	}>()
 );

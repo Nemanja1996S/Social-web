@@ -16,11 +16,16 @@
         }
     ],
     "userFriends": [ 
-            {
+        {
                 "0": [1, 3, 4] 
-            } ],
+        } ],
+    "usersReactionToPost":
+        [{
+            "0": [{"0" : "liked"}, {"1" : "disliked"}]  
+        }],     
     "posts": [
         {
+            "id": 0,
             "userId": 0,
             "userFullname": "Nemanja Savic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=312bcd&_nc_ohc=AYQcGVtt09QQ7kNvgEPWl6J&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYAiqX-zih0ndWA239uG0Vv8Zzhvp00_L8KtYt1Lk1HZ3A&oe=67097EE0",
@@ -31,10 +36,12 @@
             "numberOfLikes": 120,
             "numberOfDislikes": 20,
             "numberOfComments": 34,
-            "numberOfShares": 11
+            "numberOfShares": 11,
+            "usersReactionToPostDict" : [{"0" : "liked"}, {"1" : "disliked"}]
                     
         },
         {
+            "id": 1,
             "userId": 1,
             "userFullname": "Marko Stoijljkovic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=2EntqmsTtnkQ7kNvgF-JwGW&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYB5v-5jGQckdABA0X6puJuE_KRSCNpaayafKn1ifgYeOQ&oe=66E7B680",
@@ -48,6 +55,7 @@
             "numberOfShares": 1
         },
         {
+            "id": 2,
             "userId": 2,
             "userFullname": "Bogdan Randjelovic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=dst-jpg_s200x200&_nc_cat=103&ccb=1-7&_nc_sid=e4545e&_nc_ohc=CF_XUumXkz0Q7kNvgE_yN5G&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=A1Nr9ArtthRpv0U4fqLiHP_&oh=00_AYB_RC2EWbHSIGZhoxajxZ8XQsl7vNVYbW6B9WQbX3C1tg&oe=67095FC2",
@@ -61,6 +69,7 @@
             "numberOfShares": 3
         },
         {
+            "id": 3,
             "userId": 3,
             "userFullname": "Aleksandar Mitic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=50d2ac&_nc_ohc=qT_EMNE65p0Q7kNvgFLSB7o&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=ANyiRufOR7EA7q5L7aoKBOR&oh=00_AYAD7x753DbPknKs3Gwd0ldSX2sk_BKEUQTZXCbz0I3pYA&oe=66E7CFC6",
@@ -74,6 +83,7 @@
             "numberOfShares": 7
         },
         {
+            "id": 4,
             "userId": 4,
             "userFullname": "Aleksandar Grujic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/441966548_25618684077778063_3715518659927830927_n.jpg?stp=cp0_dst-jpg_s60x60&_nc_cat=104&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=WfUhMmK4yL8Q7kNvgGtXl2K&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=AVRIwbuMdYWyWC60SQ9CNge&oh=00_AYDcQLG99z3t4JMCSswp5XqRblOV2qRhgwfUxoNuzcNRCw&oe=66E7E4E5",

@@ -7,14 +7,15 @@ import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import { postsSelector } from '../store/posts/posts.selector';
 import { Observable, of } from 'rxjs';
-import { Post } from '../../models/Post';
+import { Post, Reaction } from '../../models/Post';
 import { loadPosts } from '../store/posts/posts.actions';
 import { CommonModule, NgFor } from '@angular/common';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { selectedSportsSelector } from '../store/users/users.selector';
+import { selectedSportsSelector, userIdSelector } from '../store/users/users.selector';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { Dictionary } from '@ngrx/entity';
 
 
 @Component({
@@ -36,15 +37,18 @@ export class PostComponent implements OnInit {
   //userSelectedSport$ : Observable<string[]> = of([])
   userSelectedSports = ['football', 'basketball', 'table tennis', 'bodybuilding'];
   userCheckedSports : string[] = []
+  userReactionToPostDict$: Observable<Dictionary<Reaction>[]> = of([])
 
   constructor(private store: Store<AppState>) {
     //this.postCheckListFormControl.setValue(null);
     this.posts$ = this.store.select(postsSelector);
     //this.userSelectedSport$ = this.store.select(selectedSportsSelector);
+    // this.userReactionToPostDict$ = this.store.select(userReactonToPostDictSelector);
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadPosts({id: 0}));
+    //this.store.select(userIdSelector).subscribe(id => console.log(id));  //ne radi
+    this.store.dispatch(loadPosts({userId: 0}));
     
   }
 
@@ -69,5 +73,9 @@ export class PostComponent implements OnInit {
     console.log(this.userCheckedSports)
   }
 
+  like(event: any){
+    console.log(event)
+    // this.store.select(userReactonToPostDictSelector).subscribe(dict => console.log(dict))
+  }
 
 }

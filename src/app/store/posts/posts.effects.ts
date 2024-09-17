@@ -11,9 +11,9 @@ export class PostsEffect {
 	loadPostsEffect$ = createEffect( () =>
 		this.actions$.pipe(
 			ofType(PostsActions.loadPosts),
-			exhaustMap( ({id}) =>
-				this.service.getPostsForUser(id).pipe(
-					map((posts) => PostsActions.loadPostsSuccess({posts: posts.sort((a, b) => b.date.localeCompare(a.date))})),
+			exhaustMap( ({userId}) =>
+				this.service.getPostsForUser(userId).pipe(
+					map((posts) => PostsActions.loadPostsSuccess({posts: posts})),
 					catchError(error => of(PostsActions.loadPostsFailure({error})))
 				)
 			)

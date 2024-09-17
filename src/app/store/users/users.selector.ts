@@ -14,6 +14,11 @@ export const userSelector = createSelector(
     (userState) => userState.user
 )
 
+export const userIdSelector = createSelector(
+    userSelector,
+    (user) => user.id
+)
+
 export const isLoadingSelector = createSelector(
     selectUserFeature,
     (userState) => userState.isLoading

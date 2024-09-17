@@ -2,24 +2,28 @@ import { createAction, props } from "@ngrx/store";
 import { Post } from "../../../models/Post"
 
 export const loadPosts = createAction(
-    "[Post Component] Loading post",
+    "Loading posts to state",
     props<{
-        id: number
+        userId: number
     }>()
 );
 
 export const loadPostsSuccess = createAction(
-    "[Post Component] Load post success",
+    "Loading post to state success",
     props<{
         posts: Post[]
     }>()
 );
 
 export const loadPostsFailure = createAction(
-    "[Post Component] Load post failure",
+    "Loading post to state failure",
     props<{
         error: string
     }>()
 );
+
+export const likePost = createAction(
+    "Changing "
+)
 
 
