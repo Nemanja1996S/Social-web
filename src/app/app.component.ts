@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PersonsProfileComponent } from './persons-profile/persons-profile.component';
 import { HomeComponent } from './home/home.component';
+import { CommentComponent } from './comment/comment.component';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { HomeComponent } from './home/home.component';
     // LogInComponent,
     // NavbarComponent,
     // PersonsProfileComponent,
+    CommentComponent,
     HomeComponent,
     HttpClientModule ],
   templateUrl: './app.component.html',

@@ -1,6 +1,6 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
-import { Post, Reaction } from "../../../models/Post";
+import { Post } from "../../../models/Post";
 import { Dictionary } from "@ngrx/entity";
 
 export const selectPostsFeature = (state: AppState) => state.postsState;	

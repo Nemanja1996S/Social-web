@@ -1,0 +1,30 @@
+.mdc-card__media:first-child {
+    border-radius: 50%;
+}
+
+.mat-mdc-card-title {
+    display: flex;
+}
+
+.titleNameAndDate {
+    padding-left: 0.5em;
+    align-content: center;
+}
+
+p  {
+    margin-left: 1em;
+    margin-top: 1em;
+    color: white;
+    font-size: medium;
+}
+
+.commentPic{
+    max-width: 50%;
+}
+
+.contextContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}

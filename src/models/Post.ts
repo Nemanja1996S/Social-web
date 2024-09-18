@@ -1,10 +1,10 @@
 import { Dictionary } from "@ngrx/entity"
 
-export enum Reaction {
-    "dislike" = -1,
-    "neutral" = 0,
-    "like" = 1
-}
+// export enum Reaction {
+//     "dislike" = -1,
+//     "neutral" = 0,
+//     "like" = 1
+// }
 
 export interface Post {
     id: number,
@@ -18,7 +18,7 @@ export interface Post {
     numberOfLikes: number,
     // userLiked: boolean,
     // userDislike: boolean,
-    usersReactionToPostDict : Dictionary<Reaction>,
+    //usersReactionToPostDict : Dictionary<Reaction>,
     // idsOfLikes: number[],
     // idsofDislikes: Number[],
     numberOfDislikes: number,

@@ -1,0 +1,34 @@
+<mat-card *ngFor="let comment of this.userComments">
+    <mat-card-title>
+        <img mat-card-sm-image src={{comment.userPicSrc}}/>
+        <div class="titleNameAndDate">
+        <div>
+            {{comment.userFullName}}
+        </div>
+            <span mat-card-subtitle>{{comment.commentDate}}</span>
+            <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
+        </div>
+            
+    </mat-card-title>
+     <mat-card-content>
+    <div class="contextContainer">
+        <p>
+            {{comment.commentText}}
+        </p>
+        <img mat-card-image src={{comment.userPicSrc}} class="commentPic">
+    </div>
+    </mat-card-content>
+    
+    <!-- <mat-card-actions>
+        <button mat-button (click)="like($event)" [color]="color"><mat-icon>thumb_up</mat-icon>Like </button>
+        <button mat-button><mat-icon>thumb_down</mat-icon>Dislike </button>
+        <button mat-button><mat-icon>comment</mat-icon>Comment </button>
+        <button mat-button><mat-icon>share</mat-icon>Share </button>
+    </mat-card-actions>
+    <mat-card-footer>
+        <span class="interaction_numbers"><p>{{post.numberOfLikes}}</p><mat-icon>thumb_up</mat-icon></span>
+        <span class="interaction_numbers"><p>{{post.numberOfDislikes}}</p><mat-icon>thumb_down</mat-icon></span>
+        <span class="interaction_numbers"><p>{{post.numberOfComments}}</p><mat-icon>comment</mat-icon></span>
+        <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span>
+    </mat-card-footer> -->
+</mat-card>

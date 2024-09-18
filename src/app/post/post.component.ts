@@ -7,7 +7,7 @@ import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import { postsSelector } from '../store/posts/posts.selector';
 import { Observable, of } from 'rxjs';
-import { Post, Reaction } from '../../models/Post';
+import { Post } from '../../models/Post';
 import { loadPosts } from '../store/posts/posts.actions';
 import { CommonModule, NgFor } from '@angular/common';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
@@ -37,7 +37,9 @@ export class PostComponent implements OnInit {
   //userSelectedSport$ : Observable<string[]> = of([])
   userSelectedSports = ['football', 'basketball', 'table tennis', 'bodybuilding'];
   userCheckedSports : string[] = []
-  userReactionToPostDict$: Observable<Dictionary<Reaction>[]> = of([])
+  //userReactionToPostDict$: Observable<Dictionary<Reaction>[]> = of([])
+  clicked: boolean = false
+  color = 'accent';
 
   constructor(private store: Store<AppState>) {
     //this.postCheckListFormControl.setValue(null);
@@ -73,8 +75,9 @@ export class PostComponent implements OnInit {
     console.log(this.userCheckedSports)
   }
 
-  like(event: any){
-    console.log(event)
+  like(event: MouseEvent){
+    this.color = 'primary'
+    //console.log(event.target)
     // this.store.select(userReactonToPostDictSelector).subscribe(dict => console.log(dict))
   }
 
