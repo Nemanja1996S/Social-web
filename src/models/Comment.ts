@@ -1,6 +1,6 @@
-export interface Comment{
+export interface Comments{
     postId: number,
-    usersComments: UserComment[]
+    userComments: UserComment[]
 }
 
 export interface UserComment{
@@ -8,5 +8,6 @@ export interface UserComment{
     userFullName: string,
     userPicSrc: string,
     commentDate: string,
-    commentText: string
+    commentText: string,
+    commentPic: string
 }

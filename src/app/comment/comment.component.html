@@ -1,4 +1,4 @@
-<mat-card *ngFor="let comment of this.userComments">
+<mat-card *ngFor="let comment of this.usersComment$ | async">
     <mat-card-title>
         <img mat-card-sm-image src={{comment.userPicSrc}}/>
         <div class="titleNameAndDate">
@@ -12,10 +12,18 @@
     </mat-card-title>
      <mat-card-content>
     <div class="contextContainer">
-        <p>
+        <p class="textConainer">
             {{comment.commentText}}
         </p>
-        <img mat-card-image src={{comment.userPicSrc}} class="commentPic">
+        <!-- <img mat-card-image src={{comment.userPicSrc}} class="commentPic"> -->
+         <!-- "https://primefaces.org/cdn/primeng/images/galleria/galleria10.jpg" -->
+        <p-image 
+            src={{comment.commentPic}} 
+            alt="Image" 
+            
+            class="commentPic"
+            [preview]="true"
+        />
     </div>
     </mat-card-content>
     

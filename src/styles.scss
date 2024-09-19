@@ -2,3 +2,17 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import "primeng/resources/primeng.css";
+
+span .p-component, .p-component * {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 5%;
+}
+
+// span.p-component.p-image.p-image-preview-container {
+//     box-sizing: border-box;
+//     width: 100% !important;
+//     border-radius: 50% !important;
+// }

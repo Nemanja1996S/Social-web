@@ -4,6 +4,7 @@ import { User } from '../../models/User';
 import { catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { Post } from '../../models/Post';
+import { Comments } from '../../models/Comment';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,12 @@ export class SportSocialService {
     return this.httpClient
     .get<Post[]>(`${environment.apiUrl}/posts`)
     .pipe(catchError(this.errorHandler));
+  }
+
+  getCommentsForPost(id: number){
+    return this.httpClient
+      .get<Comments>(`${environment.apiUrl}/comments/${id}`)
+      .pipe(catchError(this.errorHandler));
   }
 
   addUser(user: User){

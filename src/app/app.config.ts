@@ -11,6 +11,8 @@ import { UsersEffect } from './store/users/users.effects';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { postsReducer } from './store/posts/posts.reducer';
 import { PostsEffect } from './store/posts/posts.effects';
+import { commentsReducer } from './store/comments/comments.reducer';
+import { CommentsEffect } from './store/comments/comments.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,9 +20,10 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore({
       userState: userReducer,
-      postsState: postsReducer
+      postsState: postsReducer,
+      commentsState: commentsReducer
     }),
-    provideEffects([UsersEffect, PostsEffect]),
+    provideEffects([UsersEffect, PostsEffect, CommentsEffect]),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
