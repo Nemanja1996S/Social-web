@@ -7,8 +7,7 @@ export interface UserState{
     isLoading: boolean;
     error: string | null;    
 }
-// friends: ReadonlyArray<User>;
-    // selectedSport: string[];
+
 
 export const initialUser: User = {
     id: -1,

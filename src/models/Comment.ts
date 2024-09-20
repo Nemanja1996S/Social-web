@@ -1,4 +1,5 @@
 export interface Comments{
+    id: number
     postId: number,
     userComments: UserComment[]
 }

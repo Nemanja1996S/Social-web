@@ -7,7 +7,7 @@ import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import { loadComments } from '../store/comments/comments.actions';
 import { Observable, of } from 'rxjs';
-import { userCommentsSelector } from '../store/comments/comments.selectors';
+import { userCommentsSelector } from '../store/comments/comments.selector';
 
 @Component({
   selector: 'comment',
@@ -32,12 +32,13 @@ export class CommentComponent implements OnInit{
       {'userId' : 2, 'userFullName': 'Bogdan Randjelovic', 'userPicSrc' : 'https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=dst-jpg_s200x200&_nc_cat=103&ccb=1-7&_nc_sid=e4545e&_nc_ohc=CF_XUumXkz0Q7kNvgE_yN5G&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=A1Nr9ArtthRpv0U4fqLiHP_&oh=00_AYB_RC2EWbHSIGZhoxajxZ8XQsl7vNVYbW6B9WQbX3C1tg&oe=67095FC2',
         'commentDate' : '1/6/2024', 'commentText' : 'neki komentarkdjkldjakld jdaskljd sadnjkaskdaks  jsahdjkhw hwjhkah ah awjhk jhawd', 'commentPic': 'https://media.istockphoto.com/id/2148242778/photo/the-champion-cup-stands-on-a-green-field-at-a-football-stadium-with-the-light-of-spotlights.webp?a=1&b=1&s=612x612&w=0&k=20&c=Q2m3C9MSfyudDe2fvubvfTRQAg1jEWsM5oWd8QBGfKk='}]
 
-  usersComment$ : Observable<UserComment[] | undefined> = of([])
+  usersComment$ : Observable<UserComment[]> = of([])
   constructor(private store: Store<AppState>){
-   this.usersComment$ = this.store.select(userCommentsSelector);
+  //  this.usersComment$ = this.store.select(userCommentsSelector);
   }
   ngOnInit(): void {
     this.store.dispatch(loadComments({postId: 0}))
+    this.usersComment$ = this.store.select(userCommentsSelector);
     this.usersComment$.subscribe((comments) => console.log(comments));
   }
   }

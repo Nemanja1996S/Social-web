@@ -10,7 +10,7 @@
         <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput>
         <img [src]="this.userPostImg" class="imgInput">
         <div style="display: flex;">
-            <mat-checkbox *ngFor="let sport of this.userSelectedSports" [formControl]="postCheckListFormControl" (change)="onSportChecked(sport)">{{sport}}</mat-checkbox>
+            <mat-checkbox *ngFor="let sport of this.userSelectedSport$ | async" [formControl]="postCheckListFormControl" (change)="onSportChecked(sport)">{{sport}}</mat-checkbox>
         </div>
         <div>
             <button mat-flat-button (click)="$event.preventDefault(); fileInput.click()">Pick photo</button>

@@ -14,6 +14,11 @@ export const userSelector = createSelector(
     (userState) => userState.user
 )
 
+export const selectedSportsSelector = createSelector(
+    userSelector,
+    (user) => user.selectedSports
+)
+
 export const userIdSelector = createSelector(
     userSelector,
     (user) => user.id
@@ -36,10 +41,7 @@ export const pictureSelector = createSelector(
     (user) => user.picture
 )
 
-export const selectedSportsSelector = createSelector(
-    userSelector,
-    (user) => user.selectedSports
-)
+
 
 export const selSportsSelector = createSelector(
     selectUserFeature,

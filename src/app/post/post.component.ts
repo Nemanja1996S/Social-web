@@ -34,8 +34,8 @@ export class PostComponent implements OnInit {
   postCheckListFormControl = new FormControl('', Validators.required);
   selectedImageFile = null;
   userPostImg : string = '';
-  //userSelectedSport$ : Observable<string[]> = of([])
-  userSelectedSports = ['football', 'basketball', 'table tennis', 'bodybuilding'];
+  userSelectedSport$ : Observable<string[]> = of([])
+  // userSelectedSports = ['football', 'basketball', 'table tennis', 'bodybuilding'];
   userCheckedSports : string[] = []
   //userReactionToPostDict$: Observable<Dictionary<Reaction>[]> = of([])
   clicked: boolean = false
@@ -43,13 +43,14 @@ export class PostComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {
     //this.postCheckListFormControl.setValue(null);
-    this.posts$ = this.store.select(postsSelector);
+    
     //this.userSelectedSport$ = this.store.select(selectedSportsSelector);
-    // this.userReactionToPostDict$ = this.store.select(userReactonToPostDictSelector);
+    // this.userReactionToPostDict$ = this.store.select(userReactonToPostDictSelector);//ovde ne treba selektovanje
   }
 
   ngOnInit(): void {
-    //this.store.select(userIdSelector).subscribe(id => console.log(id));  //ne radi
+    this.posts$ = this.store.select(postsSelector);
+    this.userSelectedSport$ = this.store.select(selectedSportsSelector);
     this.store.dispatch(loadPosts({userId: 0}));
     
   }

@@ -25,7 +25,7 @@
             </span>
           }
         </mat-select-trigger>
-        @for (sport of usersSports; track sport) {
+        @for (sport of usersSport$ | async; track sport) {
       <mat-option [value]="sport">{{sport}}</mat-option>
     }
       </mat-select>

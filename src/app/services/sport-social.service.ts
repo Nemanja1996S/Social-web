@@ -43,9 +43,9 @@ export class SportSocialService {
     .pipe(catchError(this.errorHandler));
   }
 
-  getUser(email: string, password: string){
+  getUser(email: string, password: string){   //treba da se vrati id ciji je mejl i pasvord ovo
     return this.httpClient
-    .get<User>(`${environment.apiUrl}/users?email=${email}&&password=${password}`)
+    .get<User>(environment.apiUrl + "/users/0")  ///users?email=${email}&&password=${password}
     .pipe(catchError(this.errorHandler));
   }
 

@@ -37,7 +37,7 @@ import { postsSelector } from '../store/posts/posts.selector';
 export class NavbarComponent implements OnInit {
   
   //usersSports : string[] = ['football', 'basketball', 'table tennis', 'voleyball', 'swiming', 'bodybuilding'];
-  //usersSport$: Observable<string[]> = of([]);
+  usersSport$: Observable<string[]> = of([]);
   usersSports : string[] = []
   linksIcons = [{link: 'Home', icon: 'home'}, {link: 'Friends', icon: 'group'}, {link:'Groups', icon: 'groups'}];
   activeLink = this.linksIcons[0].link;
@@ -47,10 +47,10 @@ export class NavbarComponent implements OnInit {
 
   
   constructor(private snackBar: MatSnackBar, private store: Store<AppState>){
-    this.store.select(selectedSportsSelector).subscribe(userSports => console.log(userSports))
+    // this.store.select(selectedSportsSelector).subscribe(userSports => console.log(userSports)) ovo se rekli da ne valja
   }
   ngOnInit(): void {
-    // this.store.select(selectedSportsSelector).subscribe((usersSportss) => console.log(usersSportss))
+    this.usersSport$ = this.store.select(selectedSportsSelector);
   }
 
   searchSports(){
