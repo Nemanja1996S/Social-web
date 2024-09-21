@@ -1,3 +1,27 @@
+<form>
+<mat-form-field class="userCommentContainer">
+    <mat-label>What are you thinking about?</mat-label>
+    <div class="input-container">
+        <textarea matInput cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                [formControl]="commentTextFormControl" ></textarea>
+        <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput>
+        <img [src]="this.userCommentImg" class="imgInput">
+        <!-- <div style="display: flex;">
+            <mat-checkbox *ngFor="let sport of this.userSelectedSport$ | async" [formControl]="postCheckListFormControl" (change)="onSportChecked(sport)">{{sport}}</mat-checkbox>
+        </div> -->
+        <div>
+            <button mat-flat-button (click)="$event.preventDefault(); fileInput.click()">Pick photo</button>
+            <button mat-flat-button (click)="$event.preventDefault();" 
+            [disabled]="!this.commentTextFormControl.dirty ||
+            this.commentTextFormControl.invalid" >Comment</button>
+        </div>
+    </div>
+</mat-form-field>
+</form>
+
 <mat-card *ngFor="let comment of this.usersComment$ | async">
     <mat-card-title>
         <img mat-card-sm-image src={{comment.userPicSrc}}/>

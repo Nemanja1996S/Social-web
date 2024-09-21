@@ -11,6 +11,7 @@ export interface Post {
     userId: number,
     userFullname: string,
     userImage: string,
+    forSports: string[],
     date: string,
     text?: string,
     image?: string,

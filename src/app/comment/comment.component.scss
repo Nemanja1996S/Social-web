@@ -22,31 +22,6 @@ p  {
     border-radius: 25%;
 }
 
-// .mdc-card__media:last-child {   //.commentPic
-//     max-width: 50%;
-//     height: auto;
-//     border-radius: 5%;
-// }
-
-// p-image, button {
-//         border: 1px;
-//         border-radius: 25%;
-// }
-
-// .commentPic {   //.commentPic
-//     width: 250;
-//     height: auto;
-// }
-
-// p-image > span .p-component {
-//     width: 100%;
-// }
-//  span.p-component.p-image.p-image-preview-container {
-//     box-sizing: border-box;
-//     width: 100% !important;
-//     border-radius: 50% !important;
-// }
-
 .contextContainer {
     display: flex;
     flex-direction: column;
@@ -62,4 +37,34 @@ mat-card {
     width: 75%;
     border-radius: 5%;
     margin-bottom: 1em;
+}
+
+form {
+    width: 75%;
+}
+
+.userCommentContainer {
+    width: 100%;
+    border-radius: 5%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.input-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.imgInput{
+    justify-self: center;
+    align-self: center;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    max-width: 75%;
+    max-height: auto;
+    min-width: 75%;
+    min-height: auto;
 }
