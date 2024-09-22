@@ -16,6 +16,7 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { selectedSportsSelector, userIdSelector } from '../store/users/users.selector';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { Dictionary } from '@ngrx/entity';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,7 @@ import { Dictionary } from '@ngrx/entity';
   standalone: true,
   imports: [MatCardModule, MatButtonModule, MatIconModule,
             NgFor, CommonModule, ReactiveFormsModule, MatFormFieldModule,
-            MatInputModule, MatCheckboxModule],
+            MatInputModule, MatCheckboxModule, RouterLink],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })

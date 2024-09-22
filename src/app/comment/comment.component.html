@@ -1,6 +1,6 @@
 <form>
 <mat-form-field class="userCommentContainer">
-    <mat-label>What are you thinking about?</mat-label>
+    <mat-label>Write your comment here</mat-label>
     <div class="input-container">
         <textarea matInput cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
@@ -14,7 +14,7 @@
         </div> -->
         <div>
             <button mat-flat-button (click)="$event.preventDefault(); fileInput.click()">Pick photo</button>
-            <button mat-flat-button (click)="$event.preventDefault();" 
+            <button mat-flat-button (click)="$event.preventDefault(); onComment()" 
             [disabled]="!this.commentTextFormControl.dirty ||
             this.commentTextFormControl.invalid" >Comment</button>
         </div>
@@ -22,17 +22,18 @@
 </mat-form-field>
 </form>
 
-<mat-card *ngFor="let comment of this.usersComment$ | async">
-    <mat-card-title>
+<div *ngIf="!(this.error$ | async) else noComments">
+    <mat-card *ngFor="let comment of this.usersComment$ | async">
+    <mat-card-title style="position: relative;">
         <img mat-card-sm-image src={{comment.userPicSrc}}/>
         <div class="titleNameAndDate">
-        <div>
-            {{comment.userFullName}}
-        </div>
+            <div>
+                {{comment.userFullName}}
+            </div>
             <span mat-card-subtitle>{{comment.commentDate}}</span>
             <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
         </div>
-            
+        <mat-icon class="Xbutton">close</mat-icon>
     </mat-card-title>
      <mat-card-content>
     <div class="contextContainer">
@@ -63,4 +64,16 @@
         <span class="interaction_numbers"><p>{{post.numberOfComments}}</p><mat-icon>comment</mat-icon></span>
         <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span>
     </mat-card-footer> -->
-</mat-card>
+    </mat-card>
+</div>
+<ng-template #noComments>
+    <mat-card>
+        <mat-card-content>
+            <div class="noComments">
+                No comments 
+            </div>    
+        </mat-card-content>
+    </mat-card>
+</ng-template>
+
+

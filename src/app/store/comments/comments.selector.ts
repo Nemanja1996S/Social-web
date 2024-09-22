@@ -18,13 +18,10 @@ export const userCommentsSelector = createSelector(
     (comments) => comments.userComments
 )
 
-// export const commentsDictSelector = createSelector(
-//     selectCommentsFeature,
-//     (commentsState: CommentsState) => commentsState.entities
-// )
+export const errorCommentsSelector = createSelector(
+    selectCommentsFeature,
+    (commentsState) => commentsState.error
+)
 
-// export const postIdSelector = createSelector(
-//     commentsSelector,
-//     (commentsArray) => { let id = commentsArray.pop()?.postId; if(id) {return id} else return 0 }
-// )
+
 

@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { UserComment } from '../../models/Comment';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ImageModule } from 'primeng/image';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import { loadComments } from '../store/comments/comments.actions';
 import { Observable, of } from 'rxjs';
-import { userCommentsSelector } from '../store/comments/comments.selector';
+import { errorCommentsSelector, userCommentsSelector } from '../store/comments/comments.selector';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { User } from '../../models/User';
+import { userIdSelector, userSelector } from '../store/users/users.selector';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'comment',
   standalone: true,
-  imports: [MatCardModule,NgFor, ReactiveFormsModule, ImageModule, CommonModule, MatFormFieldModule,
-    MatInputModule, MatButtonModule],
+  imports: [MatCardModule,NgFor, NgIf, ReactiveFormsModule, ImageModule, CommonModule, MatFormFieldModule,
+    MatInputModule, MatButtonModule, MatIcon, RouterLink],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.scss'
   // MatButtonModule, MatIconModule,
@@ -41,18 +45,38 @@ export class CommentComponent implements OnInit{
   commentTextFormControl = new FormControl('', Validators.required);
   selectedImageFile = null;
   userCommentImg : string = '';
+  currentUser$: Observable<User> = of();
+  currentPostId: number = -1;
+  currentUserId$: Observable<number> = of();
+  error$: Observable<string | null> = of();
 
-  constructor(private store: Store<AppState>){
+  constructor(private store: Store<AppState>, private route: ActivatedRoute){
   }
   ngOnInit(): void {
-    this.store.dispatch(loadComments({postId: 0}))
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('postId');
+      if(id){
+        this.currentPostId = parseInt(id)
+      }
+    })
+    this.store.dispatch(loadComments({postId: this.currentPostId})) //u json api se ne trazi po postId, nego id, al sam su id i post jednaki
+    this.error$ = this.store.select(errorCommentsSelector);
     this.usersComment$ = this.store.select(userCommentsSelector);
+    this.currentUser$ = this.store.select(userSelector);
+    this.currentUserId$ = this.store.select(userIdSelector);
     // this.usersComment$.subscribe((comments) => console.log(comments));
   }
 
   onFileSelected( event: any) : void{
     this.selectedImageFile = event.target.files[0];
     this.userCommentImg = URL.createObjectURL(event.target.files[0]);
+  }
+
+  onComment(){  //post comment
+    console.log(this.currentPostId)
+    console.log(this.commentTextFormControl.value)
+    console.log(this.userCommentImg)
+    this.currentUser$.subscribe(currentUser => console.log(currentUser))
   }
   }
 
