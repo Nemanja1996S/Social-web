@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { UserComment } from '../../models/Comment';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
@@ -16,12 +16,20 @@ import { User } from '../../models/User';
 import { userIdSelector, userSelector } from '../store/users/users.selector';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'comment',
   standalone: true,
   imports: [MatCardModule,NgFor, NgIf, ReactiveFormsModule, ImageModule, CommonModule, MatFormFieldModule,
-    MatInputModule, MatButtonModule, MatIcon, RouterLink],
+    MatInputModule, MatButtonModule, MatIcon, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, RouterLink],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.scss'
   // MatButtonModule, MatIconModule,
@@ -49,6 +57,7 @@ export class CommentComponent implements OnInit{
   currentPostId: number = -1;
   currentUserId$: Observable<number> = of();
   error$: Observable<string | null> = of();
+  readonly dialog = inject(MatDialog);
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute){
   }
