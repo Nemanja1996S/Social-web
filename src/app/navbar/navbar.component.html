@@ -9,7 +9,7 @@
     </a>
     @for (linkIcon of linksIcons; track linkIcon) {
       <a mat-tab-link
-        (click)="activeLink = linkIcon.link"
+        (click)="changeLink(linkIcon)"
         [active]="activeLink == linkIcon.link"> {{linkIcon.link}}
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="{{linkIcon.icon}}"></mat-icon> </a>
     }
@@ -35,7 +35,7 @@
     </div>
   </nav>
   <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
-  <post></post>
+  <!-- <post></post> -->
   
   
 

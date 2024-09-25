@@ -23,20 +23,20 @@
 </form>
 
 <div *ngIf="!(this.error$ | async) else noComments">
-    <mat-card *ngFor="let comment of this.usersComment$ | async">
+    <mat-card *ngFor="let userComment of this.usersComment$ | async">
     <mat-card-title style="position: relative;">
-        <img mat-card-sm-image src={{comment.userPicSrc}}/>
+        <img mat-card-sm-image src={{userComment.userPicSrc}}/>
         <div class="titleNameAndDate">
             <div>
-                {{comment.userFullName}}
+                {{userComment.userFullName}}
             </div>
-            <span mat-card-subtitle>{{comment.commentDate}}</span>
+            <span mat-card-subtitle>{{userComment.commentDate}}</span>
             <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
             
         </div>
         @if(this.currentUserId$ | async; as data){
-            @if(data == comment.userId){   
-                <button mat-icon-button class="XbuttonContainer" ><mat-icon class="Xbutton">close</mat-icon></button> (click)="openDialog('0ms', '0ms')
+            @if(data == userComment.userId){   
+                <button mat-icon-button class="XbuttonContainer" (click)="openDialog('0ms', '0ms', userComment)" ><mat-icon class="Xbutton">close</mat-icon></button>
                 <!-- treba u if ===, al zato sto je jedno string, a drugo number, ne moze -->
             }
         }
@@ -45,12 +45,12 @@
      <mat-card-content>
     <div class="contextContainer">
         <p class="textConainer">
-            {{comment.commentText}}
+            {{userComment.commentText}}
         </p>
-        <!-- <img mat-card-image src={{comment.userPicSrc}} class="commentPic"> -->
+        <!-- <img mat-card-image src={{userComment.userPicSrc}} class="commentPic"> -->
          <!-- "https://primefaces.org/cdn/primeng/images/galleria/galleria10.jpg" -->
         <p-image 
-            src={{comment.commentPic}} 
+            src={{userComment.commentPic}} 
             alt="Image" 
             
             class="commentPic"

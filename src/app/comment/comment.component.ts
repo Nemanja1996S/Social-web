@@ -5,7 +5,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ImageModule } from 'primeng/image';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
-import { loadComments } from '../store/comments/comments.actions';
+import { deleteUserComment, loadComments } from '../store/comments/comments.actions';
 import { Observable, of } from 'rxjs';
 import { errorCommentsSelector, userCommentsSelector } from '../store/comments/comments.selector';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,6 +24,8 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
+
 
 @Component({
   selector: 'comment',
@@ -87,5 +89,22 @@ export class CommentComponent implements OnInit{
     console.log(this.userCommentImg)
     this.currentUser$.subscribe(currentUser => console.log(currentUser))
   }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, userComm: UserComment): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.store.dispatch(deleteUserComment({userComment: userComm}))           //delete comment
+      }
+    });
+    
+    
   }
+
+}
+  
 

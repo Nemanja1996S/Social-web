@@ -1,0 +1,18 @@
+<navbar [activeLink]="activeLink"></navbar>
+<mat-card *ngFor="let friend of this.userFriend$ | async">
+    <div style="width: 100%;">
+        <mat-card-title>
+            <img mat-card-sm-image src={{friend.userImage}}/>
+            <div class="titleNameAndDate">
+            <div>
+                {{friend.userFullname}}
+            </div>
+                <span mat-card-subtitle>{{friend.friendsIds}}</span>
+                <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
+                <span mat-card-subtitle>{{friend.selectedSports}}</span>
+            </div>     
+        </mat-card-title>
+    </div>
+    
+
+</mat-card>

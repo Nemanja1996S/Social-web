@@ -18,9 +18,10 @@ import { CommentComponent } from './comment/comment.component';
     // LogInComponent,
     // NavbarComponent,
     // PersonsProfileComponent,
-    CommentComponent,
+    // CommentComponent,
     HomeComponent,
-    PersonsProfileComponent,
+    // PersonsProfileComponent,
+    // NavbarComponent,
     HttpClientModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

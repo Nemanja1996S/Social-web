@@ -1,0 +1,19 @@
+.mdc-card__media:first-child {
+    border-radius: 50%;
+}
+
+.mat-mdc-card-title {
+    display: flex;
+    position: relative;
+}
+
+.titleNameAndDate {
+    padding-left: 0.5em;
+    align-content: center;
+}
+
+
+mat-card {
+    border-radius: 15%;
+    margin-bottom: 1em;
+}

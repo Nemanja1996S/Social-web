@@ -17,6 +17,7 @@ import { selectedSportsSelector, userIdSelector } from '../store/users/users.sel
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { Dictionary } from '@ngrx/entity';
 import { RouterLink } from '@angular/router';
+import { loadUserFriends } from '../store/userFriends/userFiends.actions';
 
 
 @Component({
@@ -53,6 +54,7 @@ export class PostComponent implements OnInit {
     this.posts$ = this.store.select(postsSelector);
     this.userSelectedSport$ = this.store.select(selectedSportsSelector);
     this.store.dispatch(loadPosts({userId: 0}));
+    this.store.dispatch(loadUserFriends({userId: 0}));
     
   }
 

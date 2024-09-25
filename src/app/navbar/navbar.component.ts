@@ -1,5 +1,5 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import {MatSelectModule} from '@angular/material/select';
@@ -14,7 +14,13 @@ import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import { pictureSelector, selectedSportsSelector, selSportsSelector, userSelector } from '../store/users/users.selector';
 import { postsSelector } from '../store/posts/posts.selector';
+import { Router } from '@angular/router';
 
+interface LinkIconsPath{
+  link: string,
+  icon: string,
+  path: string
+}
 
 @Component({
   selector: 'navbar',
@@ -39,14 +45,15 @@ export class NavbarComponent implements OnInit {
   //usersSports : string[] = ['football', 'basketball', 'table tennis', 'voleyball', 'swiming', 'bodybuilding'];
   usersSport$: Observable<string[]> = of([]);
   usersSports : string[] = []
-  linksIcons = [{link: 'Home', icon: 'home'}, {link: 'Friends', icon: 'group'}, {link:'Groups', icon: 'groups'}];
-  activeLink = this.linksIcons[0].link;
+  linksIcons: LinkIconsPath[] = [{link: 'Home', icon: 'home', path: 'home'}, {link: 'Friends', icon: 'group', path: 'home/friends'}, {link:'Groups', icon: 'groups', path: 'home'}];
+  // activeLink = this.linksIcons[0].link;
+  @Input() activeLink: string = 'Home';
 
 
   selectedSportFormControl = new FormControl([],Validators.required);
 
   
-  constructor(private snackBar: MatSnackBar, private store: Store<AppState>){
+  constructor(private snackBar: MatSnackBar, private store: Store<AppState>, private router: Router){
     // this.store.select(selectedSportsSelector).subscribe(userSports => console.log(userSports)) ovo se rekli da ne valja
   }
   ngOnInit(): void {
@@ -61,6 +68,15 @@ export class NavbarComponent implements OnInit {
       this.selectedSportFormControl.markAsTouched();
       let snackBarRef = this.snackBar.open('Selection of at least 1 sport is needed', 'OK');
     }
+  }
+
+  changeLink(linkIconPath : LinkIconsPath){
+    this.activeLink = linkIconPath.link
+    console.log(linkIconPath.path)
+    if(linkIconPath.path){
+      this.router.navigate([linkIconPath.path])
+    }
+    this.router.navigate([linkIconPath.path])
   }
   
 

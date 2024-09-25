@@ -17,7 +17,34 @@
     ],
     "userFriends": [ 
         {
-                "0": [1, 3, 4] 
+            "id": 0,
+            "friends": [
+                {
+                    "id": 1,
+                    "userId": 1,
+                    "userFullname": "Marko Stoijljkovic",
+                    "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=LsXS8GvKl4IQ7kNvgFIDoAY&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=ARUXtCxLCCwMpGRbuROAgAv&oh=00_AYD_GuvYiFOA19xvYLOk37dpDZz4laiYAbziWgYmO6qo5w&oe=66FA2B80",
+                    "selectedSports": ["football", "table tennis"],
+                    "friendsIds": [0, 2, 3]
+                },
+                {
+                    "id": 2,
+                    "userId": 2,
+                    "userFullname": "Bogdan Randjelovic",
+                    "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=dst-jpg_s200x200&_nc_cat=103&ccb=1-7&_nc_sid=e4545e&_nc_ohc=CF_XUumXkz0Q7kNvgE_yN5G&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=A1Nr9ArtthRpv0U4fqLiHP_&oh=00_AYB_RC2EWbHSIGZhoxajxZ8XQsl7vNVYbW6B9WQbX3C1tg&oe=67095FC2",
+                    "selectedSports": ["football"],
+                    "friendsIds": [0]
+                },
+                {
+                    "id": 3,
+                    "userId": 3,
+                    "userFullname": "Aleksandar Mitic",
+                    "userImage": "https://scontent.fbeg3-2.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=50d2ac&_nc_ohc=TmzAgMmrecYQ7kNvgF2dRn8&_nc_ht=scontent.fbeg3-2.fna&_nc_gid=AZYHfSvabo9LR_wL3nzl2uB&oh=00_AYBPNiyFjJbPRrfWrJ4MEeCzUKcrPjt4BM1TJJZSJVIwSQ&oe=66FA44C6",
+                    "selectedSports": ["bodybuilding"],
+                    "friendsIds": [0, 2]
+                }
+
+            ] 
         } ],
     "usersReactionToPost":
         [{
@@ -45,7 +72,7 @@
             "id": 1,
             "userId": 1,
             "userFullname": "Marko Stoijljkovic",
-            "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=2EntqmsTtnkQ7kNvgF-JwGW&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYB5v-5jGQckdABA0X6puJuE_KRSCNpaayafKn1ifgYeOQ&oe=66E7B680",
+            "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=LsXS8GvKl4IQ7kNvgFIDoAY&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=ARUXtCxLCCwMpGRbuROAgAv&oh=00_AYD_GuvYiFOA19xvYLOk37dpDZz4laiYAbziWgYmO6qo5w&oe=66FA2B80",
             "forSports": ["football", "table tennis"],
             "date": "23/4/2024",
             "text": "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue",
@@ -75,7 +102,7 @@
             "id": 3,
             "userId": 3,
             "userFullname": "Aleksandar Mitic",
-            "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=50d2ac&_nc_ohc=qT_EMNE65p0Q7kNvgFLSB7o&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=ANyiRufOR7EA7q5L7aoKBOR&oh=00_AYAD7x753DbPknKs3Gwd0ldSX2sk_BKEUQTZXCbz0I3pYA&oe=66E7CFC6",
+            "userImage": "https://scontent.fbeg3-2.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=50d2ac&_nc_ohc=TmzAgMmrecYQ7kNvgF2dRn8&_nc_ht=scontent.fbeg3-2.fna&_nc_gid=AZYHfSvabo9LR_wL3nzl2uB&oh=00_AYBPNiyFjJbPRrfWrJ4MEeCzUKcrPjt4BM1TJJZSJVIwSQ&oe=66FA44C6",
             "forSports": ["bodybuilding"],
             "date": "25/4/2024",
             "text": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
@@ -90,7 +117,7 @@
             "id": 4,
             "userId": 4,
             "userFullname": "Aleksandar Grujic",
-            "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/441966548_25618684077778063_3715518659927830927_n.jpg?stp=cp0_dst-jpg_s60x60&_nc_cat=104&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=WfUhMmK4yL8Q7kNvgGtXl2K&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=AVRIwbuMdYWyWC60SQ9CNge&oh=00_AYDcQLG99z3t4JMCSswp5XqRblOV2qRhgwfUxoNuzcNRCw&oe=66E7E4E5",
+            "userImage": "https://scontent.fbeg3-2.fna.fbcdn.net/v/t39.30808-1/441966548_25618684077778063_3715518659927830927_n.jpg?stp=cp0_dst-jpg_s60x60&_nc_cat=104&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=QvVgFio5rq4Q7kNvgHaB9PE&_nc_ht=scontent.fbeg3-2.fna&oh=00_AYB07BQdPZO4YLhsiyGDduJ6iDocC-it9i88FlgQXvnnzg&oe=66FA59E5",
             "forSports": ["ragby"],
             "date": "10/4/2024",
             "text": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
@@ -107,7 +134,7 @@
         "postId": 0,
         "userComments": [{"userId" : 0, "userFullName": "Nemanja Savic", "userPicSrc" : "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=312bcd&_nc_ohc=AYQcGVtt09QQ7kNvgEPWl6J&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYAiqX-zih0ndWA239uG0Vv8Zzhvp00_L8KtYt1Lk1HZ3A&oe=67097EE0",
         "commentDate" : "12/2/2024", "commentText" : "neki komentarkdjkldjakld jdaskljd","commentPic" : "https://images.unsplash.com/photo-1459865264687-595d652de67e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8N3x8fGVufDB8fHx8fA%3D%3D" },
-        {"userId" : 1, "userFullName": "Marko Stoiljkovic", "userPicSrc" : "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=2EntqmsTtnkQ7kNvgF-JwGW&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYB5v-5jGQckdABA0X6puJuE_KRSCNpaayafKn1ifgYeOQ&oe=66E7B680",
+        {"userId" : 1, "userFullName": "Marko Stoiljkovic", "userPicSrc" : "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=LsXS8GvKl4IQ7kNvgFIDoAY&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=ARUXtCxLCCwMpGRbuROAgAv&oh=00_AYD_GuvYiFOA19xvYLOk37dpDZz4laiYAbziWgYmO6qo5w&oe=66FA2B80",
           "commentDate" : "15/3/2024", "commentText" : "neki komentarkdjkldjakld jdaskljd asdhashdkh sahdjha sdh ak hasjdj hasdha asd ", "commentPic": "https://images.unsplash.com/photo-1511204338744-5d4e9b3ffee0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTJ8fHxlbnwwfHx8fHw%3D"},
           {"userId" : 2, "userFullName": "Bogdan Randjelovic", "userPicSrc" : "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=dst-jpg_s200x200&_nc_cat=103&ccb=1-7&_nc_sid=e4545e&_nc_ohc=CF_XUumXkz0Q7kNvgE_yN5G&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=A1Nr9ArtthRpv0U4fqLiHP_&oh=00_AYB_RC2EWbHSIGZhoxajxZ8XQsl7vNVYbW6B9WQbX3C1tg&oe=67095FC2",
             "commentDate" : "1/6/2024", "commentText" : "neki komentarkdjkldjakld jdaskljd sadnjkaskdaks  jsahdjkhw hwjhkah ah awjhk jhawd", "commentPic": "https://media.istockphoto.com/id/2148242778/photo/the-champion-cup-stands-on-a-green-field-at-a-football-stadium-with-the-light-of-spotlights.webp?a=1&b=1&s=612x612&w=0&k=20&c=Q2m3C9MSfyudDe2fvubvfTRQAg1jEWsM5oWd8QBGfKk="

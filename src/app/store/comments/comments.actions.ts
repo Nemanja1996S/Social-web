@@ -22,6 +22,9 @@ export const loadPostsFailure = createAction(
     }>()
 );
 
-export const unsetIsLoaidng = createAction(
-    "Loading complete"
-)
+export const deleteUserComment = createAction(
+    "Deleting user comment",
+    props<{
+        userComment: UserComment
+    }>()
+);

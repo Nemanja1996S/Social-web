@@ -37,7 +37,7 @@ export const initialState: CommentsState = {
 export const commentsReducer = createReducer(
     initialState,
     on(Actions.loadComments, (state, {postId}) => {
-    let coms : Comments = {...state.comments, postId: postId}
+    const coms : Comments = {...state.comments, postId: postId}
     return {...state, isLoading: true, comments: coms }
     }),
     on(Actions.loadCommentsSuccess, (state, {comments}) => {
@@ -47,6 +47,11 @@ export const commentsReducer = createReducer(
     on(Actions.loadPostsFailure, (state, {error}) => {
         return {...state, isLoading: false, error: error}
     }),
+    on(Actions.deleteUserComment, (state, {userComment}) => {
+        const userComms : UserComment[] = state.comments.userComments.filter(userComm => userComm !== userComment)
+        const comms : Comments = {...state.comments, userComments: userComms}
+        return {...state, comments: comms }
+    })
     // on(Actions.unsetIsLoaidng, (state) => {
     //     return {...state, isLoading: false}
     // })
