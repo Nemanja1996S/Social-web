@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { User } from '../../models/User';
-import { userIdSelector, userSelector } from '../store/users/users.selector';
+import { userIdSelector, userSelector } from '../store/user/user.selector';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import {

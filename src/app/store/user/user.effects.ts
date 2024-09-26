@@ -1,11 +1,11 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { SportSocialService } from "../../services/sport-social.service";
 import { catchError, exhaustMap, map, mergeMap, of, pipe, switchMap, switchMapTo } from "rxjs";
-import * as UserActions from './users.actions'
+import * as UserActions from './user.actions'
 import { Injectable } from "@angular/core";
 
 @Injectable()
-export class UsersEffect {
+export class UserEffect {
 	constructor(private service: SportSocialService, private actions$: Actions) {}
 	
 	loadUserEffect$ = createEffect( () =>

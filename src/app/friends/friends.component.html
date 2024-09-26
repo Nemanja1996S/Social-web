@@ -1,15 +1,55 @@
 <navbar [activeLink]="activeLink"></navbar>
-<mat-card *ngFor="let friend of this.userFriend$ | async">
+<mat-card appearance="outlined">
+    <mat-card-content>
+        <form class="example-form">
+            Search for new friend: {{myControl.value || 'empty'}}
+            <mat-form-field class="example-full-width">
+              <mat-label></mat-label>
+              <input #input
+                     type="text"
+                     placeholder="Enter fullname"
+                     matInput
+                     [formControl]="myControl"
+                     [matAutocomplete]="auto"
+                     (input)="filter()"
+                     (focus)="filter()"
+                     placeholder="Name Surname">
+              <mat-autocomplete requireSelection #auto="matAutocomplete">
+                @for (peopleOption of this.peopleOptions; track peopleOption) {
+           
+                  <mat-option *ngIf="this.filteredOptions.includes(peopleOption.userFullname)" [value]="peopleOption.userFullname" style="margin-bottom: 1em;" (onSelectionChange)="clicked(peopleOption.userId)">
+                    
+                        <div style="width: 100%;" >
+                            <mat-card-title>
+                                <img mat-card-sm-image src={{peopleOption.userPicture}}/>
+                                <div class="titleNameAndNumber">
+                                <div>
+                                    {{peopleOption.userFullname}}
+                                </div>
+                                    <span mat-card-subtitle>Number of mutural friends: {{peopleOption.numberOfMuturalFriends}} </span>
+                                </div>     
+                            </mat-card-title>
+                        </div>
+                    
+                  </mat-option>
+            
+                }
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+    </mat-card-content>
+</mat-card>
+<mat-card *ngFor="let friendsAndNumberOfMuturalFriends of this.userFriendsAndNumberOfMuturalFriend$| async">
     <div style="width: 100%;">
         <mat-card-title>
-            <img mat-card-sm-image src={{friend.userImage}}/>
+            <img mat-card-sm-image src={{friendsAndNumberOfMuturalFriends.friend.userImage}}/>
             <div class="titleNameAndDate">
             <div>
-                {{friend.userFullname}}
+                {{friendsAndNumberOfMuturalFriends.friend.userFullname}}
             </div>
-                <span mat-card-subtitle>{{friend.friendsIds}}</span>
+                <span mat-card-subtitle>Number of mutural friends: {{friendsAndNumberOfMuturalFriends.numberOfMuturalFriends}} </span>
                 <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
-                <span mat-card-subtitle>{{friend.selectedSports}}</span>
+                <span mat-card-subtitle>Friends selected sports: {{friendsAndNumberOfMuturalFriends.friend.selectedSports}} </span>
             </div>     
         </mat-card-title>
     </div>

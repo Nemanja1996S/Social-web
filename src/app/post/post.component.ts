@@ -13,7 +13,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { selectedSportsSelector, userIdSelector } from '../store/users/users.selector';
+import { selectedSportsSelector, userIdSelector } from '../store/user/user.selector';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { Dictionary } from '@ngrx/entity';
 import { RouterLink } from '@angular/router';

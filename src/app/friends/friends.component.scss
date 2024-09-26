@@ -7,13 +7,26 @@
     position: relative;
 }
 
-.titleNameAndDate {
+.titleNameAndNumber {
     padding-left: 0.5em;
     align-content: center;
 }
 
 
 mat-card {
-    border-radius: 15%;
+    border-radius: 5%;
     margin-bottom: 1em;
+    width: 100%;
 }
+
+.example-form {
+    min-width: 150px;
+    // max-width: 500px;
+    width: 100%;
+    margin-top: 16px;
+    font-size: larger;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }

@@ -12,7 +12,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { PostComponent } from '../post/post.component';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
-import { pictureSelector, selectedSportsSelector, selSportsSelector, userSelector } from '../store/users/users.selector';
+import { pictureSelector, selectedSportsSelector, selSportsSelector, userSelector } from '../store/user/user.selector';
 import { postsSelector } from '../store/posts/posts.selector';
 import { Router } from '@angular/router';
 

@@ -1,6 +1,7 @@
 export interface UserFriends{
     id: number,
     friends: Friend[]
+    userFriendsIds: number[]
 }
 
 export interface Friend

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
-import { UserState } from "./users.reducer";
+import { UserState } from "./user.reducer";
 
 // const somethingFeatureKey = 'userReducer'; // Should match with what you pass to .forRoot 
 

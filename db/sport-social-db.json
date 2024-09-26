@@ -18,6 +18,7 @@
     "userFriends": [ 
         {
             "id": 0,
+            "userFriendsIds": [1, 2, 3],
             "friends": [
                 {
                     "id": 1,

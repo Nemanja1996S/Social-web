@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { SportSocialService } from '../services/sport-social.service';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
-import * as Actions from '../store/users/users.actions'
-import { isLoadingSelector } from '../store/users/users.selector';
+import * as Actions from '../store/user/user.actions'
+import { isLoadingSelector } from '../store/user/user.selector';
 import { Observable, of } from 'rxjs';
 
 @Component({

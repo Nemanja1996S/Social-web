@@ -38,6 +38,12 @@ export class SportSocialService {
     .pipe(catchError(this.errorHandler));
   }
 
+  getAllUsersWithNameStartingWithString(startingString: string){
+    return this.httpClient
+    .get<User[]>(environment.apiUrl + "/users?name_like=^" + startingString +".*")
+    .pipe(catchError(this.errorHandler));
+  }
+
   getUserById(id: number){
     return this.httpClient
     .get<User>(`${environment.apiUrl}/users/${id}`)

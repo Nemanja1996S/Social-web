@@ -5,9 +5,9 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { userReducer } from './store/users/users.reducer';
+import { userReducer } from './store/user/user.reducer';
 import { provideEffects } from '@ngrx/effects';
-import { UsersEffect } from './store/users/users.effects';
+import { UserEffect } from './store/user/user.effects';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { postsReducer } from './store/posts/posts.reducer';
 import { PostsEffect } from './store/posts/posts.effects';
@@ -26,7 +26,7 @@ export const appConfig: ApplicationConfig = {
       commentsState: commentsReducer,
       userFriendsState : userFriendsReducer
     }),
-    provideEffects([UsersEffect, PostsEffect, CommentsEffect, UserFriendsEffect]),
+    provideEffects([UserEffect, PostsEffect, CommentsEffect, UserFriendsEffect]),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
