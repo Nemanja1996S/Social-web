@@ -7,26 +7,27 @@
               <mat-label></mat-label>
               <input #input
                      type="text"
-                     placeholder="Enter fullname"
+                     placeholder="Enter name"
                      matInput
                      [formControl]="myControl"
                      [matAutocomplete]="auto"
                      (input)="filter()"
                      (focus)="filter()"
-                     placeholder="Name Surname">
+                     id="searchPeopleInput">
               <mat-autocomplete requireSelection #auto="matAutocomplete">
-                @for (peopleOption of this.peopleOptions; track peopleOption) {
+                @for (user of this.users$ | async; track user) {
            
-                  <mat-option *ngIf="this.filteredOptions.includes(peopleOption.userFullname)" [value]="peopleOption.userFullname" style="margin-bottom: 1em;" (onSelectionChange)="clicked(peopleOption.userId)">
+                  <mat-option *ngIf="this.filteredOptions.includes(user.name + user.surname)" [routerLink]="['/home/user']" [state]="user"
+                   [value]="user.name + user.surname" style="margin-bottom: 1em;" >
                     
                         <div style="width: 100%;" >
                             <mat-card-title>
-                                <img mat-card-sm-image src={{peopleOption.userPicture}}/>
+                                <img mat-card-sm-image src={{user.picture}}/>
                                 <div class="titleNameAndNumber">
                                 <div>
-                                    {{peopleOption.userFullname}}
+                                    {{user.name + user.surname}}
                                 </div>
-                                    <span mat-card-subtitle>Number of mutural friends: {{peopleOption.numberOfMuturalFriends}} </span>
+                                    <span mat-card-subtitle>Selected Sports: {{user.selectedSports}} </span>
                                 </div>     
                             </mat-card-title>
                         </div>

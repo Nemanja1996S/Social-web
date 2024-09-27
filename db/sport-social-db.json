@@ -13,7 +13,55 @@
             "work": "Nowhere",
             "aboutMe": "Something"
 
-        }
+        },
+        {
+            "id": 1,
+            "name": "Marko",
+            "surname": "Stoiljkovic",
+            "email" : "marko@gmai.com",
+            "password": "1234",
+            "picture": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=LsXS8GvKl4IQ7kNvgFIDoAY&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=ARUXtCxLCCwMpGRbuROAgAv&oh=00_AYD_GuvYiFOA19xvYLOk37dpDZz4laiYAbziWgYmO6qo5w&oe=66FA2B80",
+            "selectedSports": [ "tenis", "basketball"],
+            "dateOfBirth": "08.10.1996",
+            "education": "Privatni pravni",
+            "work": "Police",
+            "aboutMe": "Something"
+        },
+        {
+            "id": 2,
+            "name": "Aleksandar",
+            "surname": "Mitic",
+            "email" : "archibald@gmail.com",
+            "password": "12354",
+            "picture": "https://scontent.fbeg3-2.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=50d2ac&_nc_ohc=TmzAgMmrecYQ7kNvgF2dRn8&_nc_ht=scontent.fbeg3-2.fna&_nc_gid=AZYHfSvabo9LR_wL3nzl2uB&oh=00_AYBPNiyFjJbPRrfWrJ4MEeCzUKcrPjt4BM1TJJZSJVIwSQ&oe=66FA44C6",
+            "selectedSports": [ "bodybuilding"],
+            "dateOfBirth": "05.12.1996",
+            "education": "High tehnical school",
+            "work": "Freelancer",
+            "aboutMe": "Something"
+        },
+        {
+            "id": 3,
+            "name": "Bogdan",
+            "surname": "Randjelovic",
+            "picture": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=dst-jpg_s200x200&_nc_cat=103&ccb=1-7&_nc_sid=e4545e&_nc_ohc=CF_XUumXkz0Q7kNvgE_yN5G&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=A1Nr9ArtthRpv0U4fqLiHP_&oh=00_AYB_RC2EWbHSIGZhoxajxZ8XQsl7vNVYbW6B9WQbX3C1tg&oe=67095FC2",
+            "selectedSports": ["football"],
+            "dateOfBirth": "18.05.1996",
+            "education": "High tehnical school",
+            "work": "Warehouseman",
+            "aboutMe": "Something"
+        },
+        {
+            "id": 4,
+            "name": "Aleksandar",
+            "surname": "Grujic",
+            "picture": "https://scontent.fbeg3-2.fna.fbcdn.net/v/t39.30808-1/441966548_25618684077778063_3715518659927830927_n.jpg?stp=cp0_dst-jpg_s60x60&_nc_cat=104&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=QvVgFio5rq4Q7kNvgHaB9PE&_nc_ht=scontent.fbeg3-2.fna&oh=00_AYB07BQdPZO4YLhsiyGDduJ6iDocC-it9i88FlgQXvnnzg&oe=66FA59E5",
+            "selectedSports": ["ragby"],
+            "dateOfBirth": "10.2.1996",
+            "education": "High tehnical school",
+            "work": "Grillman",
+            "aboutMe": "Something"
+        }             
     ],
     "userFriends": [ 
         {

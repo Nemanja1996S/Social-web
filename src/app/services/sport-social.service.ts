@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment.development';
 import { Post } from '../../models/Post';
 import { Comments } from '../../models/Comment';
 import { UserFriends } from '../../models/UserFriends';
+import { PeopleOption } from '../friends/friends.component';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class SportSocialService {
 
   getAllUsersWithNameStartingWithString(startingString: string){
     return this.httpClient
-    .get<User[]>(environment.apiUrl + "/users?name_like=^" + startingString +".*")
+    .get<User[]>(`${environment.apiUrl}/users?name_like=^${startingString}.*`)// .get<User[]>(environment.apiUrl + "/users?name_like=^" + startingString +".*")
     .pipe(catchError(this.errorHandler));
   }
 

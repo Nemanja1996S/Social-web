@@ -4,7 +4,6 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PersonsProfileComponent } from './persons-profile/persons-profile.component';
 import { HomeComponent } from './home/home.component';
 import { CommentComponent } from './comment/comment.component';
 
@@ -17,10 +16,10 @@ import { CommentComponent } from './comment/comment.component';
     // RegistrationComponent,
     // LogInComponent,
     // NavbarComponent,
-    // PersonsProfileComponent,
+
     // CommentComponent,
     HomeComponent,
-    // PersonsProfileComponent,
+
     // NavbarComponent,
     HttpClientModule ],
   templateUrl: './app.component.html',

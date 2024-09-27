@@ -1,0 +1,39 @@
+<navbar activeLink=""></navbar>
+<!-- <p>person-profile works!</p> -->
+<mat-card>
+    <div class="contextContainer">
+        <div class="listContainer">
+            <mat-list>
+                <mat-list-item>
+                  <span matListItemTitle>{{this.user.name + " " + this.user.surname}}</span>
+                </mat-list-item>
+                <mat-list-item>
+                  <span matListItemTitle>Folowing sports: </span>
+                  <span matListItemLine>{{this.user.selectedSports}}</span>
+                </mat-list-item>
+                <mat-list-item>
+                  <span matListItemTitle>Date of birth</span>
+                  <span matListItemLine>{{this.user.dateOfBirth}}</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span matListItemTitle>Education</span>
+                    <span matListItemLine>{{this.user.education}}</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span matListItemTitle>Work:</span>
+                    <span matListItemLine>{{this.user.work}}</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span matListItemTitle>About me:</span>
+                    <span matListItemLine>{{this.user.aboutMe}}</span>
+                </mat-list-item>
+              </mat-list>
+        </div>
+        <div class="imageContainer">
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+            <button mat-raised-button class="width50%">Send Request</button>
+            <button mat-raised-button class="width50%">Delete from friends</button>
+        </div>
+        
+    </div>
+</mat-card>
