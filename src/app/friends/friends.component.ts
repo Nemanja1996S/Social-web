@@ -89,7 +89,7 @@ export class FriendsComponent implements OnInit{
     if(input)
     {
       return fromEvent(input, "input").pipe(
-        debounceTime(500),
+        debounceTime(300),
         map((ev) => (<HTMLInputElement>ev.target).value),
         filter(text => text.length >= 3),
         switchMap(startingLetters => this.service.getAllUsersWithNameStartingWithString(startingLetters))

@@ -63,6 +63,12 @@ export class SportSocialService {
     .pipe(catchError(this.errorHandler));
   }
 
+  getPostsOfUser(id: number){
+    return this.httpClient
+    .get<Post[]>(`${environment.apiUrl}/posts?userId=${id}&_limit=20&_sort=date&_order=desc`) //sortiranje po datum _sort=date&_order=desc, limit i range _start and _end or _limit (an X-Total-Count header is included in the response)
+    .pipe(catchError(this.errorHandler));
+  }
+
   getCommentsForPost(id: number){
     return this.httpClient
       .get<Comments>(`${environment.apiUrl}/comments/${id}`)

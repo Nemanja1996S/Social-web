@@ -2,7 +2,7 @@
     display: flex;
 }
 
-img{
+div>.imageContainer img{
     width: 100%;
     border-radius: 5%;
     margin-bottom: 0.5em;
@@ -10,4 +10,69 @@ img{
 
 .width50 {
     width: 50%;
+    position: relative;
+    right: 15px;
+}
+
+.listContainer{
+    width: 40%;
+}
+
+.imageContainer{
+    width: 60%;
+}
+
+.mat-mdc-button>.mat-icon.mIcon, .mat-mdc-unelevated-button>.mat-icon.mIcon, .mat-mdc-raised-button>.mat-icon.mIcon, .mat-mdc-outlined-button>.mIcon{
+    position: absolute;
+    right: 5px;
+}
+
+//from post.scss
+
+mat-card-title {
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 0.5em;
+}
+
+mat-card {
+    margin-bottom: 1em;
+}
+
+.mdc-card__media:first-child {
+    border-radius: 50%;
+}
+
+.mat-mdc-card-title {
+    display: flex;
+}
+
+.titleNameAndDate {
+    padding-left: 0.5em;
+    align-content: center;
+}
+
+mat-card-footer{
+    margin-left: 1em;
+    margin-right: 1em;
+    display: flex;
+    align-content: center;
+    border-top: 1px solid white;
+}
+
+.interaction_numbers{
+    margin-right: 1.75em;
+    padding-left: 1em;
+    align-content: center;
+    display: flex;
+    padding-top: 0.5em;
+}
+
+.interaction_numbers p {
+    padding-right: 0.3em;
+    padding-top: 0.3em;
+}
+
+mat-card-content {
+    padding-bottom: 1em;
 }

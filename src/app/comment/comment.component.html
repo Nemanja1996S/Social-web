@@ -34,12 +34,11 @@
             <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
             
         </div>
-        @if(this.currentUserId$ | async; as data){
-            @if(data == userComment.userId){   
-                <button mat-icon-button class="XbuttonContainer" (click)="openDialog('0ms', '0ms', userComment)" ><mat-icon class="Xbutton">close</mat-icon></button>
-                <!-- treba u if ===, al zato sto je jedno string, a drugo number, ne moze -->
-            }
+        @if(this.currentUserId == userComment.userId){  
+            <button mat-icon-button class="XbuttonContainer" (click)="openDialog('0ms', '0ms', userComment)" ><mat-icon class="Xbutton">close</mat-icon></button>
+        <!-- treba u if ===, al zato sto je jedno string, a drugo number, ne moze -->
         }
+        
        
     </mat-card-title>
      <mat-card-content>

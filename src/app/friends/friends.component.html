@@ -2,7 +2,7 @@
 <mat-card appearance="outlined">
     <mat-card-content>
         <form class="example-form">
-            Search for new friend: {{myControl.value || 'empty'}}
+            Search for people, or your friend:<!--  {{myControl.value || 'empty'}} -->
             <mat-form-field class="example-full-width">
               <mat-label></mat-label>
               <input #input
@@ -43,14 +43,14 @@
 <mat-card *ngFor="let friendsAndNumberOfMuturalFriends of this.userFriendsAndNumberOfMuturalFriend$| async">
     <div style="width: 100%;">
         <mat-card-title>
-            <img mat-card-sm-image src={{friendsAndNumberOfMuturalFriends.friend.userImage}}/>
+            <img mat-card-sm-image style="margin-right: 1em;" src={{friendsAndNumberOfMuturalFriends.friend.userImage}}/>
             <div class="titleNameAndDate">
-            <div>
-                {{friendsAndNumberOfMuturalFriends.friend.userFullname}}
-            </div>
-                <span mat-card-subtitle>Number of mutural friends: {{friendsAndNumberOfMuturalFriends.numberOfMuturalFriends}} </span>
-                <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
-                <span mat-card-subtitle>Friends selected sports: {{friendsAndNumberOfMuturalFriends.friend.selectedSports}} </span>
+                <div>
+                    {{friendsAndNumberOfMuturalFriends.friend.userFullname}}
+                </div>
+                    <span mat-card-subtitle>Number of mutural friends: {{friendsAndNumberOfMuturalFriends.numberOfMuturalFriends}} </span>
+                    <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
+                    <span mat-card-subtitle>Friends selected sports: {{friendsAndNumberOfMuturalFriends.friend.selectedSports}} </span>
             </div>     
         </mat-card-title>
     </div>

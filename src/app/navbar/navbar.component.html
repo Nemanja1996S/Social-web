@@ -1,11 +1,14 @@
 
   <nav mat-tab-nav-bar [backgroundColor]="'primary'" [tabPanel]="tabPanel">
     <a mat-tab-link
-    (click)="activeLink = 'Profile'"
-    [active]="activeLink == 'profile'"> 
-    <div class="picture">
-      <img src="https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=312bcd&_nc_ohc=AYQcGVtt09QQ7kNvgEPWl6J&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYAiqX-zih0ndWA239uG0Vv8Zzhvp00_L8KtYt1Lk1HZ3A&oe=67097EE0"/>
-    </div>
+      (click)="activeLink = 'Profile'"
+      [active]="activeLink == 'profile'"
+      [routerLink]="['/home/user']"
+      [state]="this.user">
+      
+      <div class="picture">
+        <img src="https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=312bcd&_nc_ohc=AYQcGVtt09QQ7kNvgEPWl6J&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYAiqX-zih0ndWA239uG0Vv8Zzhvp00_L8KtYt1Lk1HZ3A&oe=67097EE0"/>
+      </div>
     </a>
     @for (linkIcon of linksIcons; track linkIcon) {
       <a mat-tab-link

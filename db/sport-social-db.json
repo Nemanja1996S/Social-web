@@ -77,16 +77,16 @@
                     "friendsIds": [0, 2, 3]
                 },
                 {
-                    "id": 2,
-                    "userId": 2,
+                    "id": 3,
+                    "userId": 3,
                     "userFullname": "Bogdan Randjelovic",
                     "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=dst-jpg_s200x200&_nc_cat=103&ccb=1-7&_nc_sid=e4545e&_nc_ohc=CF_XUumXkz0Q7kNvgE_yN5G&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=A1Nr9ArtthRpv0U4fqLiHP_&oh=00_AYB_RC2EWbHSIGZhoxajxZ8XQsl7vNVYbW6B9WQbX3C1tg&oe=67095FC2",
                     "selectedSports": ["football"],
                     "friendsIds": [0]
                 },
                 {
-                    "id": 3,
-                    "userId": 3,
+                    "id": 2,
+                    "userId": 2,
                     "userFullname": "Aleksandar Mitic",
                     "userImage": "https://scontent.fbeg3-2.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=50d2ac&_nc_ohc=TmzAgMmrecYQ7kNvgF2dRn8&_nc_ht=scontent.fbeg3-2.fna&_nc_gid=AZYHfSvabo9LR_wL3nzl2uB&oh=00_AYBPNiyFjJbPRrfWrJ4MEeCzUKcrPjt4BM1TJJZSJVIwSQ&oe=66FA44C6",
                     "selectedSports": ["bodybuilding"],
@@ -118,6 +118,23 @@
                     
         },
         {
+            "id": 32,
+            "userId": 0,
+            "userFullname": "Nemanja Savic",
+            "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=312bcd&_nc_ohc=AYQcGVtt09QQ7kNvgEPWl6J&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYAiqX-zih0ndWA239uG0Vv8Zzhvp00_L8KtYt1Lk1HZ3A&oe=67097EE0",
+            "forSports": ["basketball", "football", "table tennis"],
+            "date": "24/4/2024",
+            "text": "Post numero 2",
+            "image": "https://material.angular.io/assets/img/examples/shiba2.jpg",
+            "video": "",
+            "numberOfLikes": 120,
+            "numberOfDislikes": 20,
+            "numberOfComments": 34,
+            "numberOfShares": 11,
+            "usersReactionToPostDict" : [{"0" : "liked"}, {"1" : "disliked"}]
+                    
+        },
+        {
             "id": 1,
             "userId": 1,
             "userFullname": "Marko Stoijljkovic",
@@ -133,8 +150,8 @@
             "numberOfShares": 1
         },
         {
-            "id": 2,
-            "userId": 2,
+            "id": 3,
+            "userId": 3,
             "userFullname": "Bogdan Randjelovic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=dst-jpg_s200x200&_nc_cat=103&ccb=1-7&_nc_sid=e4545e&_nc_ohc=CF_XUumXkz0Q7kNvgE_yN5G&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=A1Nr9ArtthRpv0U4fqLiHP_&oh=00_AYB_RC2EWbHSIGZhoxajxZ8XQsl7vNVYbW6B9WQbX3C1tg&oe=67095FC2",
             "forSports": ["football"],
@@ -148,8 +165,8 @@
             "numberOfShares": 3
         },
         {
-            "id": 3,
-            "userId": 3,
+            "id": 2,
+            "userId": 2,
             "userFullname": "Aleksandar Mitic",
             "userImage": "https://scontent.fbeg3-2.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=dst-jpg_s200x200&_nc_cat=100&ccb=1-7&_nc_sid=50d2ac&_nc_ohc=TmzAgMmrecYQ7kNvgF2dRn8&_nc_ht=scontent.fbeg3-2.fna&_nc_gid=AZYHfSvabo9LR_wL3nzl2uB&oh=00_AYBPNiyFjJbPRrfWrJ4MEeCzUKcrPjt4BM1TJJZSJVIwSQ&oe=66FA44C6",
             "forSports": ["bodybuilding"],

@@ -30,10 +30,46 @@
               </mat-list>
         </div>
         <div class="imageContainer">
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-            <button mat-raised-button class="width50" (click)="isMe()">Send Request</button>
-            <button mat-raised-button class="width50">Delete from friends</button>
+            <img mat-card-image src={{this.user.picture}} >
+            @if (this.isMe()){
+              <button mat-raised-button class="width50"><span class="mdc-button__label" >Edit</span><mat-icon class="mIcon">edit</mat-icon></button><!--style="position: relative; right: 15px;"-->
+              <button mat-raised-button class="width50" (click)="this.openDialog('0ms','0ms')"><span class="mdc-button__label" >Delete</span><mat-icon class="mIcon">delete</mat-icon></button>
+            }
+            @else {
+              <button mat-raised-button class="width50"><span class="mdc-button__label" >Send request</span><mat-icon class="mIcon">send</mat-icon></button>
+              <button mat-raised-button class="width50"><span class="mdc-button__label" >Remove from friends</span><mat-icon class="mIcon">person_remove</mat-icon></button>
+              
+            }    
         </div>
-        
-    </div>
+      </div>
+</mat-card>
+<mat-card *ngFor="let post of this.userPosts$ | async">
+  <mat-card-title>
+      <img mat-card-sm-image src={{post.userImage}}/>
+      <div class="titleNameAndDate">
+        <div>
+            {{post.userFullname}}
+        </div>
+        <span mat-card-subtitle>{{post.date}}</span>
+        <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
+      </div>     
+  </mat-card-title>
+   <mat-card-content>
+      <p>
+          {{post.text}}
+      </p>
+  </mat-card-content>
+  <img mat-card-image src={{post.image}}>
+  <mat-card-actions>
+      <button mat-button ><mat-icon>thumb_up</mat-icon>Like </button><!--[color]="color" (click)="like($event)"-->
+      <button mat-button><mat-icon>thumb_down</mat-icon>Dislike </button>
+      <button mat-button [routerLink]="['./', post.id]"><mat-icon>comment</mat-icon>Comment </button><!--[routerLink]="['./', post.id]"-->
+      <button mat-button><mat-icon>share</mat-icon>Share </button>
+  </mat-card-actions>
+  <mat-card-footer>
+      <span class="interaction_numbers"><p>{{post.numberOfLikes}}</p><mat-icon>thumb_up</mat-icon></span>
+      <span class="interaction_numbers"><p>{{post.numberOfDislikes}}</p><mat-icon>thumb_down</mat-icon></span>
+      <span class="interaction_numbers"><p>{{post.numberOfComments}}</p><mat-icon>comment</mat-icon></span>
+      <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span>
+  </mat-card-footer>
 </mat-card>

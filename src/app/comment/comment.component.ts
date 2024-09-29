@@ -58,6 +58,7 @@ export class CommentComponent implements OnInit{
   currentUser$: Observable<User> = of();
   currentPostId: number = -1;
   currentUserId$: Observable<number> = of();
+  currentUserId: number = -1;
   error$: Observable<string | null> = of();
   readonly dialog = inject(MatDialog);
 
@@ -75,7 +76,8 @@ export class CommentComponent implements OnInit{
     this.usersComment$ = this.store.select(userCommentsSelector);
     this.currentUser$ = this.store.select(userSelector);
     this.currentUserId$ = this.store.select(userIdSelector);
-    // this.usersComment$.subscribe((comments) => console.log(comments));
+    this.usersComment$.subscribe((comments) => console.log(comments));
+    this.currentUserId$.subscribe((userId) => {this.currentUserId = userId})
   }
 
   onFileSelected( event: any) : void{
@@ -95,6 +97,7 @@ export class CommentComponent implements OnInit{
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
+      data: {isConfirmed: false, title: "Delete comment", content: "Would you like to delete this comment?", confirmString: "Yes", cancelString: "No"}
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result){

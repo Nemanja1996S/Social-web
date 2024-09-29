@@ -14,7 +14,9 @@ import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import { pictureSelector, selectedSportsSelector, selSportsSelector, userSelector } from '../store/user/user.selector';
 import { postsSelector } from '../store/posts/posts.selector';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { User } from '../../models/User';
+import { initialUser } from '../store/user/user.reducer';
 
 interface LinkIconsPath{
   link: string,
@@ -35,7 +37,8 @@ interface LinkIconsPath{
     NgFor,
     ReactiveFormsModule,
     PostComponent,
-    CommonModule
+    CommonModule,
+    RouterLink
    ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
@@ -44,7 +47,8 @@ export class NavbarComponent implements OnInit {
   
   //usersSports : string[] = ['football', 'basketball', 'table tennis', 'voleyball', 'swiming', 'bodybuilding'];
   usersSport$: Observable<string[]> = of([]);
-  usersSports : string[] = []
+  user: User = initialUser;
+  // usersSports : string[] = []
   linksIcons: LinkIconsPath[] = [{link: 'Home', icon: 'home', path: 'home'}, {link: 'Friends', icon: 'group', path: 'home/friends'}, {link:'Groups', icon: 'groups', path: 'home'}];
   // activeLink = this.linksIcons[0].link;
   @Input() activeLink: string = 'Home';
@@ -55,6 +59,9 @@ export class NavbarComponent implements OnInit {
   
   constructor(private snackBar: MatSnackBar, private store: Store<AppState>, private router: Router){
     // this.store.select(selectedSportsSelector).subscribe(userSports => console.log(userSports)) ovo se rekli da ne valja
+    const user$ = this.store.select(userSelector);
+    user$.subscribe(user => this.user = user )
+
   }
   ngOnInit(): void {
     this.usersSport$ = this.store.select(selectedSportsSelector);
