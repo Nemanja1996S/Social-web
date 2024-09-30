@@ -1,5 +1,6 @@
 .contextContainer{
     display: flex;
+    justify-content: space-evenly;
 }
 
 div>.imageContainer img{
@@ -15,11 +16,14 @@ div>.imageContainer img{
 }
 
 .listContainer{
-    width: 40%;
+    max-width: 40%;
 }
 
 .imageContainer{
-    width: 60%;
+    max-width: 60%;
+
+    // display: flex;
+    // flex-direction: column;
 }
 
 .mat-mdc-button>.mat-icon.mIcon, .mat-mdc-unelevated-button>.mat-icon.mIcon, .mat-mdc-raised-button>.mat-icon.mIcon, .mat-mdc-outlined-button>.mIcon{

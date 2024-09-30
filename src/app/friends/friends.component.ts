@@ -59,7 +59,7 @@ export class FriendsComponent implements OnInit{
 
   filteredOptions: string[] = [];
 
-  constructor(private store: Store<AppState>, private service: SportSocialService, private route: Router){
+  constructor(private store: Store<AppState>, private service: SportSocialService, private router: Router){
     // this.filteredOptions = this.options.slice();
     
   }
@@ -81,7 +81,7 @@ export class FriendsComponent implements OnInit{
   }
 
   clicked(user: User){
-    this.route.navigateByUrl('/home/user', {state: user})
+    this.router.navigateByUrl('/home/user', {state: user})
   }
 
   getUsersObservable(): Observable<User[]> {
@@ -102,6 +102,10 @@ export class FriendsComponent implements OnInit{
     this.usersFullNames = peopleFullnames.map(names => names)//map(peopleOption => peopleOption.userFullname);
     this.filteredOptions = this.usersFullNames.slice()
     this.users$.subscribe(people => console.log(people))
+  }
+
+  getUser(userId: number): void{
+    this.service.getUserById(userId).subscribe(user => {this.clicked(user)})
   }
 
 }

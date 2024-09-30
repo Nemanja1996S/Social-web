@@ -24,9 +24,9 @@
 </form>
 <mat-card *ngFor="let post of this.posts$ | async">
     <mat-card-title>
-        <img mat-card-sm-image src={{post.userImage}}/>
+        <img mat-card-sm-image src={{post.userImage}} (click)="this.getUser(post.userId)"/>
         <div class="titleNameAndDate">
-            <div>
+            <div class="divFullname" (click)="this.getUser(post.userId)">
                 {{post.userFullname}}
             </div>
                 <span mat-card-subtitle>{{post.date}}</span>

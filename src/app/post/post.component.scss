@@ -12,6 +12,14 @@ mat-card {
     border-radius: 50%;
 }
 
+.mdc-card__media:first-child:hover {
+    cursor: pointer;
+}
+
+.divFullname:hover{
+    cursor: pointer;
+}
+
 .mat-mdc-card-title {
     display: flex;
 }

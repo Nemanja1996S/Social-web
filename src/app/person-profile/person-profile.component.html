@@ -3,7 +3,7 @@
 <mat-card style="border-radius: 5%;">
     <div class="contextContainer">
         <div class="listContainer">
-            <mat-list>
+            <mat-list >
                 <mat-list-item>
                   <h4>{{this.user.name + " " + this.user.surname}}</h4>
                 </mat-list-item>
@@ -11,6 +11,12 @@
                   <span matListItemTitle>Folowing sports: </span>
                   <span matListItemLine>{{this.user.selectedSports}}</span>
                 </mat-list-item>
+                @if(!this.isMe()){
+                  <mat-list-item>
+                    <span matListItemTitle >Number of mutural friends: </span>
+                    <span matListItemLine>{{this.calculateNumberOfmuturalFriends()}}</span>
+                  </mat-list-item>
+                }
                 <mat-list-item>
                   <span matListItemTitle>Date of birth</span>
                   <span matListItemLine>{{this.user.dateOfBirth}}</span>
@@ -32,13 +38,24 @@
         <div class="imageContainer">
             <img mat-card-image src={{this.user.picture}} >
             @if (this.isMe()){
-              <button mat-raised-button class="width50"><span class="mdc-button__label" >Edit</span><mat-icon class="mIcon">edit</mat-icon></button><!--style="position: relative; right: 15px;"-->
-              <button mat-raised-button class="width50" (click)="this.openDialog('0ms','0ms')"><span class="mdc-button__label" >Delete</span><mat-icon class="mIcon">delete</mat-icon></button>
+              <button mat-raised-button class="width50" ><span class="mdc-button__label" >Edit</span><mat-icon class="mIcon">edit</mat-icon></button><!--style="position: relative; right: 15px;"-->
+              <button mat-raised-button class="width50" (click)="this.openDeleteProfileDialog('0ms','0ms')"><span class="mdc-button__label" >Delete</span><mat-icon class="mIcon">delete</mat-icon></button>
             }
             @else {
-              <button mat-raised-button class="width50"><span class="mdc-button__label" >Send request</span><mat-icon class="mIcon">send</mat-icon></button>
-              <button mat-raised-button class="width50"><span class="mdc-button__label" >Remove from friends</span><mat-icon class="mIcon">person_remove</mat-icon></button>
-              
+              @if(this.loggedInUserFriendsIds.includes(this.user.id)){
+                <button mat-icon-button disabled class="width50" style="font-size: 25px;">
+                  <span class="mdc-button__label">Friends:</span>
+                  <mat-icon style="font-size: 30px;">check</mat-icon>
+                </button>
+                <button mat-raised-button class="width50"><span class="mdc-button__label" (click)="this.openRemoveFriendDialog('0ms','0ms')">Remove from friends</span><mat-icon class="mIcon">person_remove</mat-icon></button>
+              }
+              @else{
+                <button mat-icon-button disabled class="width50" style="font-size: 25px;">
+                  <span class="mdc-button__label">Friends:</span>
+                  <mat-icon style="font-size: 30px;">close</mat-icon>
+                </button>
+                <button mat-raised-button class="width50" ><span class="mdc-button__label" style="margin-right: 1em;">Send request</span><mat-icon class="mIcon">send</mat-icon></button>
+              }
             }    
         </div>
       </div>

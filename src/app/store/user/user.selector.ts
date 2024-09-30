@@ -19,6 +19,11 @@ export const selectedSportsSelector = createSelector(
     (user) => user.selectedSports
 )
 
+export const userFriendsIdsArraySelector = createSelector(
+    userSelector,
+    (user) => user.friendsIds
+)
+
 export const userIdSelector = createSelector(
     userSelector,
     (user) => user.id

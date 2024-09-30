@@ -16,8 +16,10 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { selectedSportsSelector, userIdSelector } from '../store/user/user.selector';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { Dictionary } from '@ngrx/entity';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { loadUserFriends } from '../store/userFriends/userFiends.actions';
+import { initialUser } from '../store/user/user.reducer';
+import { User } from '../../models/User';
 
 
 @Component({
@@ -37,13 +39,14 @@ export class PostComponent implements OnInit {
   selectedImageFile = null;
   userPostImg : string = '';
   userSelectedSport$ : Observable<string[]> = of([])
+  user: User = initialUser;
   // userSelectedSports = ['football', 'basketball', 'table tennis', 'bodybuilding'];
   userCheckedSports : string[] = []
   //userReactionToPostDict$: Observable<Dictionary<Reaction>[]> = of([])
   clicked: boolean = false
   color = 'accent';
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private service: SportSocialService, private router: Router) {
     //this.postCheckListFormControl.setValue(null);
     
     //this.userSelectedSport$ = this.store.select(selectedSportsSelector);
@@ -84,5 +87,10 @@ export class PostComponent implements OnInit {
     //console.log(event.target)
     // this.store.select(userReactonToPostDictSelector).subscribe(dict => console.log(dict))
   }
+
+  getUser(userId: number): void{
+    this.service.getUserById(userId).subscribe(user => {this.router.navigateByUrl('/home/user', {state: user})})
+  }
+
 
 }
