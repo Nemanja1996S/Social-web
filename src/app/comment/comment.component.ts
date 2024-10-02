@@ -5,7 +5,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ImageModule } from 'primeng/image';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
-import { deleteUserComment, loadComments } from '../store/comments/comments.actions';
+import { deleteUserComment, editUserComment, loadComments } from '../store/comments/comments.actions';
 import { Observable, of } from 'rxjs';
 import { errorCommentsSelector, userCommentsSelector } from '../store/comments/comments.selector';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,7 +25,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-import { EditUserCommentDialogComponent } from '../edit-user-comment-dialog/edit-user-comment-dialog.component';
+import { EditUserCommentDialogComponent, EditUserCommentDialogOutputData } from '../edit-user-comment-dialog/edit-user-comment-dialog.component';
 
 
 @Component({
@@ -115,8 +115,11 @@ export class CommentComponent implements OnInit{
       data: {title: "Edit comment:", userComment: userComm, confirmString: "Save", cancelString: "Cancel"}
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        console.log(result);          //delete comment
+      if(result as EditUserCommentDialogOutputData){
+        const imgUrl = URL.createObjectURL(result.selectedImage)
+        let editUC: UserComment = result.userComment
+        editUC = {...editUC, commentPic: imgUrl}
+        this.store.dispatch(editUserComment({userComment: editUC}));
       }
     });
   }

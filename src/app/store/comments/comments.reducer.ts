@@ -51,6 +51,24 @@ export const commentsReducer = createReducer(
         const userComms : UserComment[] = state.comments.userComments.filter(userComm => userComm !== userComment)
         const comms : Comments = {...state.comments, userComments: userComms}
         return {...state, comments: comms }
+    }),
+    on(Actions.editUserComment, (state, { userComment}) => {
+        const comms: Comments = state.comments
+        const userComms: UserComment[] = state.comments.userComments;
+        const userComm: UserComment | undefined = userComms.find(userComm => userComm.commentDate === userComment.commentDate);
+        if(userComm){
+            let date: Date = new Date();
+            const editedUserComm: UserComment = {...userComm, commentText: userComment.commentText, commentPic: userComment.commentPic, commentDate: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`}
+            //return {...state, comments: ({...comments, userComments: ({...userComments, commentText: userComment.commentText, commentPic: userComment.commentPic, commentDate: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`}) }) }
+            // const editedUserComms: UserComment[] = {...userComms, userComm}
+            let editedUserComms: UserComment[] = userComms.filter(userC => userC !== userComm);
+            editedUserComms.push(editedUserComm)
+            const comms : Comments = {...state.comments, userComments: editedUserComms}
+            return {...state, comments: comms }
+        }
+        else{
+            return {...state}
+        }
     })
     // on(Actions.unsetIsLoaidng, (state) => {
     //     return {...state, isLoading: false}

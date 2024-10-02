@@ -51,25 +51,13 @@ export class EditUserCommentDialogComponent {
     this.inputData = this.data
     if(this.inputData.userComment){
       this.editCommentFormGroup.setValue({commentTextFormControl : (this.inputData.userComment.commentText),
-        commentPicFormControl : (this.inputData.userComment.commentPic)})
+        commentPicFormControl : ('')})
     }
   }
 
   onYes(){
-    const controls = this.editCommentFormGroup.controls;
-    let userComment: UserComment = this.inputData.userComment;
-    
-    Object.entries(controls).forEach(([formControlName, formControl]) => {
-      if(formControl.dirty){
-        const userCommentProperty = formControlName.split('FormControl')
-        Object.keys(userComment).filter(property => property !== 'commentPic')
-        .map(property => property === userCommentProperty[0] ? Object.assign(userComment, userComment,
-           {[property]: formControl.value}) : null)
-        // console.log(user)
-      }
-      
-    });
-    const output : EditUserCommentDialogOutputData = {userComment: userComment, selectedImage: this.selectedImageFile ?? null}
+    const userC : UserComment = {...this.inputData.userComment, commentText: this.editCommentFormGroup.controls.commentTextFormControl.value ?? ''}
+    const output : EditUserCommentDialogOutputData = {userComment: userC, selectedImage: this.selectedImageFile ?? null}
     this.dialogRef.close(output);
   }
 
