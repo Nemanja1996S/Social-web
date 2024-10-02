@@ -2,57 +2,68 @@
 <div class="content">
 
     <mat-dialog-content>
-        <form>
-            <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput>
-            <img [src]="this.userPostImg ? this.userPostImg : this.inputData.user.picture" class="imgInput">
+        <form [formGroup]="getFormGroup()" (ngSubmit)="onYes()">
+            <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput formControlName="pictureFormControl">
+            <img [src]="this.userInputImg ? this.userInputImg : this.inputData.user.picture" class="imgInput">
             <button mat-flat-button (click)="$event.preventDefault(); fileInput.click()">Change photo</button>
             <mat-form-field >
                 <mat-label>Name:</mat-label>
-                <input matInput [placeholder]="this.inputData.user.name" [value]="this.inputData.user.name">
+                <input matInput [placeholder]="this.inputData.user.name" [value]="this.inputData.user.name" formControlName="nameFormControl">
             </mat-form-field>
             <mat-form-field >
                 <mat-label>Surname:</mat-label>
-                <input matInput [placeholder]="this.inputData.user.surname" [value]="this.inputData.user.surname">
+                <input matInput [placeholder]="this.inputData.user.surname" [value]="this.inputData.user.surname" formControlName="surnameFormControl">
             </mat-form-field>
             <mat-form-field >
                 <mat-label>Email:</mat-label>
-                <input matInput [placeholder]="this.inputData.user.email" [value]="this.inputData.user.email" type="email">
+                <input matInput [placeholder]="this.inputData.user.email" [value]="this.inputData.user.email" type="email" formControlName="emailFormControl">
             </mat-form-field>
             <mat-form-field >
                 <mat-label>Password:</mat-label>
-                <input matInput placeholder="********" [value]="" type="password">
+                <input matInput placeholder="********" [value]="" type="password" formControlName="passwordFormControl"> >
             </mat-form-field>
+            <div class="dateContainer">
+                <mat-form-field>
+                    <mat-label>Date of birth</mat-label>
+                    <input matInput [matDatepicker]="picker" [placeholder]="this.inputData.user.dateOfBirth" class="imgInput" formControlName="dateOfBirthFormControl"> <!--[value]="this.inputData.user.dateOfBirth"-->
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
             <mat-form-field>
-                <mat-label>Date of birth</mat-label>
-                <input matInput [matDatepicker]="picker" [placeholder]="this.inputData.user.dateOfBirth" class="imgInput"> <!--[value]="this.inputData.user.dateOfBirth"-->
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
+                <mat-label>Selected sports:</mat-label>
+                <mat-select formControlName="selectedSportsFormControl" multiple>
+                  @for (sport of this.sportsList | async; track sport) {
+                    <mat-option [value]="sport">{{sport}}</mat-option>
+                  }
+                </mat-select>
+            </mat-form-field>
+            
             <!-- <mat-form-field >
                 <mat-label>Date of birth:</mat-label>
                 <input matInput [placeholder]="this.inputData.user.dateOfBirth" [value]="this.inputData.user.dateOfBirth" type="date">
             </mat-form-field> -->
             <mat-form-field >
                 <mat-label>Education:</mat-label>
-                <input matInput [placeholder]="this.inputData.user.education" [value]="this.inputData.user.education">
+                <input matInput [placeholder]="this.inputData.user.education" [value]="this.inputData.user.education" formControlName="educationFormControl">
             </mat-form-field>
             <mat-form-field >
                 <mat-label>Work:</mat-label>
-                <input matInput [placeholder]="this.inputData.user.work" [value]="this.inputData.user.work">
+                <input matInput [placeholder]="this.inputData.user.work" [value]="this.inputData.user.work" formControlName="workFormControl">
             </mat-form-field>
             <mat-form-field >
                 <mat-label>About me:</mat-label>
-                <input matInput [placeholder]="this.inputData.user.aboutMe" [value]="this.inputData.user.aboutMe">
+                <input matInput [placeholder]="this.inputData.user.aboutMe" [value]="this.inputData.user.aboutMe" formControlName="aboutMeFormControl">
             </mat-form-field>
         </form>
     </mat-dialog-content>
 </div>
-<div class="imageContainer">
+<!-- <div class="imageContainer">
     
-</div>
+</div> -->
 
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close cdkFocusInitial (click)="onYes()">{{this.inputData.confirmString}}</button>
+    <button mat-button mat-dialog-close (click)="onYes()" type="submit" [disabled]="!this.editProfileFormGroup.dirty">{{this.inputData.confirmString}}</button>
     <button mat-button mat-dialog-close (click)="onNo()">{{this.inputData.cancelString}}</button>
 </mat-dialog-actions>

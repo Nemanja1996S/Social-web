@@ -4,31 +4,39 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { User } from '../../models/User';
 import { initialUser } from '../store/user/user.reducer';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { SportSocialService } from '../services/sport-social.service';
+import { Observable, of } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 export interface EditProfileDialogInputData{
-  isConfirmed: boolean,
+  // isConfirmed: boolean,
   title: string,
   user: User,
   confirmString: string,
   cancelString: string
 }
 
+export interface EditProfileDialogOutputData{
+  user: User,
+  selectedImage: File | null
+}
+
 @Component({
   selector: 'profile-dialog',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule],
+  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, FormsModule, MatSelectModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatDatepickerModule, CommonModule],
   providers: [provideNativeDateAdapter()],
   templateUrl: './edit-profile-dialog.component.html',
   styleUrl: './edit-profile-dialog.component.scss'
 })
 export class EditProfileDialogComponent {
   inputData: EditProfileDialogInputData = {
-    isConfirmed: false,
     title: '',
     user: initialUser,
     confirmString: '',
@@ -36,15 +44,76 @@ export class EditProfileDialogComponent {
   }
   readonly dialogRef = inject(MatDialogRef<DialogComponent>);
   selectedImageFile = null;
-  userPostImg : string = '';
-  constructor(@Inject(MAT_DIALOG_DATA) public data: EditProfileDialogInputData) { } //data: {isYesClicked: boolean, }
+  userInputImg : string = '';
+  sportsList: Observable<string[]> = of([]);
+
+  editProfileFormGroup = new FormGroup({			
+    nameFormControl : new FormControl(this.inputData.user.name),
+    surnameFormControl : new FormControl(this.inputData.user.surname),
+    emailFormControl : new FormControl(this.inputData.user.email),
+    passwordFormControl : new FormControl(this.inputData.user.password),
+    pictureFormControl : new FormControl(this.inputData.user.picture),
+    selectedSportsFormControl: new FormControl(this.inputData.user.selectedSports),
+    dateOfBirthFormControl : new FormControl(this.inputData.user.dateOfBirth),
+    educationFormControl : new FormControl(this.inputData.user.education),
+    workFormControl : new FormControl(this.inputData.user.work),
+    aboutMeFormControl : new FormControl(this.inputData.user.aboutMe)
+  })
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: EditProfileDialogInputData, private service:SportSocialService) { } //data: {isYesClicked: boolean, }
 
   ngOnInit(): void {
     this.inputData = this.data
+    this.sportsList = this.service.getAllSports();//.subscribe(sports => {this.sportsList = Array.from(sports)})
+    if(this.inputData.user){
+      this.editProfileFormGroup.setValue({nameFormControl : (this.inputData.user.name),
+        surnameFormControl : (this.inputData.user.surname),
+        emailFormControl : (this.inputData.user.email),
+        passwordFormControl : (this.inputData.user.password),
+        pictureFormControl : (''),
+        selectedSportsFormControl: (this.inputData.user.selectedSports),
+        dateOfBirthFormControl : (this.inputData.user.dateOfBirth),
+        educationFormControl : (this.inputData.user.education),
+        workFormControl : (this.inputData.user.work),
+        aboutMeFormControl : (this.inputData.user.aboutMe)})
+    }
+    
   }
 
+  getFormGroup(): FormGroup{
+    return this.editProfileFormGroup
+  }
   onYes(){
-    this.dialogRef.close(true);
+    const controls = this.editProfileFormGroup.controls;
+    // console.log(this.editProfileFormGroup.value)
+    // console.log(fg)
+    let user: User = this.inputData.user;
+  //   function read_prop(obj : any, prop: any, value: any) {
+  //     obj.prop = value;
+  //     console.log(obj)
+  //     console.log(obj.prop);
+  // }
+    // function getValue(key: keyof User) {
+    //   return user[key]
+    // }
+    // function setValue(key: keyof User, value: any) {
+    //   return user[key]
+    // }
+    
+    Object.entries(controls).forEach(([formControlName, formControl]) => {
+      if(formControl.dirty){
+        // console.log(`dirty: formControlName: ${formControlName} value ${formControl.value}`)
+        const userProperty = formControlName.split('FormControl')
+        // read_prop(user, userProperty, formControl.value)
+        // user[userProperty[0].toString()] = formControl.value
+        //this.editProfileFormGroup.controls.pictureFormControl.setValue(this.selectedImageFile)
+        Object.keys(user).filter(property => property !== 'picture').map(property => property === userProperty[0] ? Object.assign(user, user, {[property]: formControl.value}) : null)
+        // console.log(user)
+      }
+      
+    });
+    const output : EditProfileDialogOutputData = {user: user, selectedImage: this.selectedImageFile ?? null}
+    this.dialogRef.close(output);
   }
 
   onNo(){
@@ -53,7 +122,9 @@ export class EditProfileDialogComponent {
 
   onFileSelected( event: any) : void{
     this.selectedImageFile = event.target.files[0];
-    this.userPostImg = URL.createObjectURL(event.target.files[0]);
+    ///const newValue : string = URL.createObjectURL(event.target.files[0]).toString();
+    // this.editProfileFormGroup.controls.pictureFormControl.setValue(newValue);
+    this.userInputImg = URL.createObjectURL(event.target.files[0]);
   }
 }
 

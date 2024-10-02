@@ -16,7 +16,7 @@ import { Post } from '../../models/Post';
 import { SportSocialService } from '../services/sport-social.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-import { EditProfileDialogComponent, EditProfileDialogInputData } from '../edit-profile-dialog/edit-profile-dialog.component';
+import { EditProfileDialogComponent, EditProfileDialogInputData, EditProfileDialogOutputData } from '../edit-profile-dialog/edit-profile-dialog.component';
 
 @Component({
   selector: 'person-profile',
@@ -47,9 +47,8 @@ export class PersonProfileComponent implements OnInit{
     // this.loggedInUser$.subscribe((user) => {u = user; console.log(u.friendsIds) });
     
     this.userPosts$ = this.service.getPostsOfUser(this.user.id);
-    const data : EditProfileDialogInputData = {isConfirmed: false,
-       title: "Edit profile:", user: this.user, confirmString: "Save", cancelString: "Cancel"}
-    this.openEditDialog('0ms','0ms', data, false);
+    // const data : EditProfileDialogInputData = {title: "Edit profile:", user: this.user, confirmString: "Save", cancelString: "Cancel"}
+    // this.openEditDialog('0ms','0ms', data);
   }
 
   isMe(): boolean{
@@ -73,6 +72,11 @@ export class PersonProfileComponent implements OnInit{
     this.openDialog(enterAnimationDuration, exitAnimationDuration, data, false)
   }
 
+  // openEditDialog(enterAnimationDuration: string, exitAnimationDuration: string){
+  //   const data : EditProfileDialogInputData = {title: "Edit profile:", user: this.user, confirmString: "Save", cancelString: "Cancel"}
+  //   this.openEditDialogData(enterAnimationDuration, exitAnimationDuration, data)
+  // }
+
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string, data: any, isDeleteProfile: boolean): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
@@ -87,27 +91,35 @@ export class PersonProfileComponent implements OnInit{
         }
       }
       else{
-                      ///delete friend from user
+                      ///remove friend from user
       }
     });
  }
 
-  openEditDialog(enterAnimationDuration: string, exitAnimationDuration: string, data: any, isDeleteProfile: boolean): void {
+  openEditDialog(): void {
+    const data : EditProfileDialogInputData = {title: "Edit profile:", user: this.user, confirmString: "Save", cancelString: "Cancel"}
     const dialogRef = this.dialog.open(EditProfileDialogComponent, {
       width: '300px',
-      enterAnimationDuration,
-      exitAnimationDuration,
+      // enterAnimationDuration,
+      // exitAnimationDuration,
       data: data
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(isDeleteProfile){
-        if(result){
-          this.router.navigate([''])            //delete profile
-        }
+      // console.log(result)
+      if(result as EditProfileDialogOutputData){
+        //this.user = result;
+        this.user.picture = URL.createObjectURL(result.selectedImage)
+        // console.log(result)
       }
-      else{
-                      ///delete friend from user
-      }
+      
+      // if(isDeleteProfile){
+      //   if(result){
+      //     this.router.navigate([''])            //delete profile
+      //   }
+      // }
+      // else{
+      //                 ///delete friend from user
+      // }
     });
   }
 }

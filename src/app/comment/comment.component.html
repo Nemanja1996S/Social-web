@@ -35,7 +35,8 @@
             
         </div>
         @if(this.currentUserId == userComment.userId){  
-            <button mat-icon-button class="XbuttonContainer" (click)="openDialog('0ms', '0ms', userComment)" ><mat-icon class="Xbutton">close</mat-icon></button>
+            <button mat-icon-button class="editButtonContainer" (click)="openEditDialog('0ms', '0ms', userComment)" ><mat-icon class="editButton">edit_note</mat-icon></button>
+            <button mat-icon-button class="XbuttonContainer" (click)="openDeleteDialog('0ms', '0ms', userComment)" ><mat-icon class="Xbutton">close</mat-icon></button>
         <!-- treba u if ===, al zato sto je jedno string, a drugo number, ne moze -->
         }
         

@@ -8,7 +8,7 @@
             "password": "123",
             "picture": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=312bcd&_nc_ohc=AYQcGVtt09QQ7kNvgEPWl6J&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYAiqX-zih0ndWA239uG0Vv8Zzhvp00_L8KtYt1Lk1HZ3A&oe=67097EE0",
             "friendsIds": [1, 2, 3, 4],
-            "selectedSports": [ "tenis", "basketball"],
+            "selectedSports": [ "Tennis", "Basketball"],
             "dateOfBirth": "12.03.1996",
             "education": "University of Nis",
             "work": "Nowhere",
@@ -23,7 +23,7 @@
             "password": "1234",
             "picture": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=100&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=-Ft0o9YZIfQQ7kNvgHgsoyo&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=AzEnuPxBJu6kr8Kqua_gbWq&oh=00_AYA5a2FuCgU6NZGeyRTaQZ5l9ncLnxkJs42iZgUj9M1MZA&oe=67008AC0",
             "friendsIds": [0, 2, 3, 4],
-            "selectedSports": [ "tenis", "basketball"],
+            "selectedSports": [ "Tennis", "Basketball"],
             "dateOfBirth": "08.10.1996",
             "education": "Privatni pravni",
             "work": "Police",
@@ -37,7 +37,7 @@
             "password": "12354",
             "picture": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=100&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=C5CIt9Ka0GsQ7kNvgG6RIJr&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=ARY_g_QNNRAiTbHjXBBEzbA&oh=00_AYB9hok9wbcGitpf8VeKkdXe_qvBtXp9hVslg6FkBPWVxg&oe=67006BC6",
             "friendsIds": [0, 2, 3, 4],
-            "selectedSports": [ "bodybuilding"],
+            "selectedSports": [ "Bodybuilding"],
             "dateOfBirth": "05.12.1996",
             "education": "High tehnical school",
             "work": "Freelancer",
@@ -49,7 +49,7 @@
             "surname": "Randjelovic",
             "picture": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=103&ccb=1-7&_nc_sid=561af9&_nc_ohc=0NLbUNzFWSIQ7kNvgFjuvx6&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=Al85IfN-VAVLAVzKYvEUTWg&oh=00_AYA8Uh3tWMWqJE276fFTI1MRLiEyy2MTA3V26ZYJqPP_Mw&oe=6721FBC2",
             "friendsIds": [0, 1],
-            "selectedSports": ["football"],
+            "selectedSports": ["Football"],
             "dateOfBirth": "18.05.1996",
             "education": "High tehnical school",
             "work": "Warehouseman",
@@ -61,7 +61,7 @@
             "surname": "Grujic",
             "picture": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/441966548_25618684077778063_3715518659927830927_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=104&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=VtpfDmkz458Q7kNvgG5MtNv&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYCtR17GDdoZr5ry2_b15Orjtuuv_zc_3FfdkNj2GPLziQ&oe=670080E5",
             "friendsIds": [1, 2, 3, 4],
-            "selectedSports": ["ragby"],
+            "selectedSports": ["Rugby"],
             "dateOfBirth": "10.2.1996",
             "education": "High tehnical school",
             "work": "Grillman",
@@ -78,7 +78,7 @@
                     "userId": 1,
                     "userFullname": "Marko Stoijljkovic",
                     "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=100&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=-Ft0o9YZIfQQ7kNvgHgsoyo&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=AzEnuPxBJu6kr8Kqua_gbWq&oh=00_AYA5a2FuCgU6NZGeyRTaQZ5l9ncLnxkJs42iZgUj9M1MZA&oe=67008AC0",
-                    "selectedSports": ["football", "table tennis"],
+                    "selectedSports": ["Football", "Table tennis"],
                     "friendsIds": [0, 2, 3]
                 },
                 {
@@ -86,7 +86,7 @@
                     "userId": 3,
                     "userFullname": "Bogdan Randjelovic",
                     "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=103&ccb=1-7&_nc_sid=561af9&_nc_ohc=0NLbUNzFWSIQ7kNvgFjuvx6&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=Al85IfN-VAVLAVzKYvEUTWg&oh=00_AYA8Uh3tWMWqJE276fFTI1MRLiEyy2MTA3V26ZYJqPP_Mw&oe=6721FBC2",
-                    "selectedSports": ["football"],
+                    "selectedSports": ["Football"],
                     "friendsIds": [0]
                 },
                 {
@@ -94,7 +94,7 @@
                     "userId": 2,
                     "userFullname": "Aleksandar Mitic",
                     "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=100&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=C5CIt9Ka0GsQ7kNvgG6RIJr&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=ARY_g_QNNRAiTbHjXBBEzbA&oh=00_AYB9hok9wbcGitpf8VeKkdXe_qvBtXp9hVslg6FkBPWVxg&oe=67006BC6",
-                    "selectedSports": ["bodybuilding"],
+                    "selectedSports": ["Bodybuilding"],
                     "friendsIds": [0, 2]
                 }
 
@@ -110,7 +110,7 @@
             "userId": 0,
             "userFullname": "Nemanja Savic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=312bcd&_nc_ohc=AYQcGVtt09QQ7kNvgEPWl6J&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYAiqX-zih0ndWA239uG0Vv8Zzhvp00_L8KtYt1Lk1HZ3A&oe=67097EE0",
-            "forSports": ["basketball", "football", "table tennis"],
+            "forSports": ["Basketball", "Football", "Table tennis"],
             "date": "1/4/2024",
             "text": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
             "image": "https://material.angular.io/assets/img/examples/shiba2.jpg",
@@ -127,7 +127,7 @@
             "userId": 0,
             "userFullname": "Nemanja Savic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=312bcd&_nc_ohc=AYQcGVtt09QQ7kNvgEPWl6J&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYAiqX-zih0ndWA239uG0Vv8Zzhvp00_L8KtYt1Lk1HZ3A&oe=67097EE0",
-            "forSports": ["basketball", "football", "table tennis"],
+            "forSports": ["Basketball", "Football", "Table tennis"],
             "date": "24/4/2024",
             "text": "Post numero 2",
             "image": "https://material.angular.io/assets/img/examples/shiba2.jpg",
@@ -144,7 +144,7 @@
             "userId": 1,
             "userFullname": "Marko Stoijljkovic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=100&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=-Ft0o9YZIfQQ7kNvgHgsoyo&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=AzEnuPxBJu6kr8Kqua_gbWq&oh=00_AYA5a2FuCgU6NZGeyRTaQZ5l9ncLnxkJs42iZgUj9M1MZA&oe=67008AC0",
-            "forSports": ["football", "table tennis"],
+            "forSports": ["Football", "Table tennis"],
             "date": "23/4/2024",
             "text": "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue",
             "image": "",
@@ -159,7 +159,7 @@
             "userId": 3,
             "userFullname": "Bogdan Randjelovic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=103&ccb=1-7&_nc_sid=561af9&_nc_ohc=0NLbUNzFWSIQ7kNvgFjuvx6&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=Al85IfN-VAVLAVzKYvEUTWg&oh=00_AYA8Uh3tWMWqJE276fFTI1MRLiEyy2MTA3V26ZYJqPP_Mw&oe=6721FBC2",
-            "forSports": ["football"],
+            "forSports": ["Football"],
             "date": "26/4/2024",
             "text": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
             "image": "https://material.angular.io/assets/img/examples/shiba2.jpg",
@@ -174,7 +174,7 @@
             "userId": 2,
             "userFullname": "Aleksandar Mitic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=100&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=C5CIt9Ka0GsQ7kNvgG6RIJr&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=ARY_g_QNNRAiTbHjXBBEzbA&oh=00_AYB9hok9wbcGitpf8VeKkdXe_qvBtXp9hVslg6FkBPWVxg&oe=67006BC6",
-            "forSports": ["bodybuilding"],
+            "forSports": ["Bodybuilding"],
             "date": "25/4/2024",
             "text": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
             "image": "",
@@ -189,7 +189,7 @@
             "userId": 4,
             "userFullname": "Aleksandar Grujic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/441966548_25618684077778063_3715518659927830927_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=104&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=VtpfDmkz458Q7kNvgG5MtNv&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYCtR17GDdoZr5ry2_b15Orjtuuv_zc_3FfdkNj2GPLziQ&oe=670080E5",
-            "forSports": ["ragby"],
+            "forSports": ["Rugby"],
             "date": "10/4/2024",
             "text": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
             "image": "https://material.angular.io/assets/img/examples/shiba2.jpg",
@@ -208,7 +208,7 @@
         {"userId" : 1, "userFullName": "Marko Stoiljkovic", "userPicSrc" : "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=100&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=-Ft0o9YZIfQQ7kNvgHgsoyo&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=AzEnuPxBJu6kr8Kqua_gbWq&oh=00_AYA5a2FuCgU6NZGeyRTaQZ5l9ncLnxkJs42iZgUj9M1MZA&oe=67008AC0",
           "commentDate" : "15/3/2024", "commentText" : "neki komentarkdjkldjakld jdaskljd asdhashdkh sahdjha sdh ak hasjdj hasdha asd ", "commentPic": "https://images.unsplash.com/photo-1511204338744-5d4e9b3ffee0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTJ8fHxlbnwwfHx8fHw%3D"},
           {"userId" : 2, "userFullName": "Bogdan Randjelovic", "userPicSrc" : "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=103&ccb=1-7&_nc_sid=561af9&_nc_ohc=0NLbUNzFWSIQ7kNvgFjuvx6&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=Al85IfN-VAVLAVzKYvEUTWg&oh=00_AYA8Uh3tWMWqJE276fFTI1MRLiEyy2MTA3V26ZYJqPP_Mw&oe=6721FBC2",
-            "commentDate" : "1/6/2024", "commentText" : "neki komentarkdjkldjakld jdaskljd sadnjkaskdaks  jsahdjkhw hwjhkah ah awjhk jhawd", "commentPic": "https://media.istockphoto.com/id/2148242778/photo/the-champion-cup-stands-on-a-green-field-at-a-football-stadium-with-the-light-of-spotlights.webp?a=1&b=1&s=612x612&w=0&k=20&c=Q2m3C9MSfyudDe2fvubvfTRQAg1jEWsM5oWd8QBGfKk="
+            "commentDate" : "1/6/2024", "commentText" : "neki komentarkdjkldjakld jdaskljd sadnjkaskdaks  jsahdjkhw hwjhkah ah awjhk jhawd", "commentPic": "https://media.istockphoto.com/id/2148242778/photo/the-champion-cup-stands-on-a-green-field-at-a-Football-stadium-with-the-light-of-spotlights.webp?a=1&b=1&s=612x612&w=0&k=20&c=Q2m3C9MSfyudDe2fvubvfTRQAg1jEWsM5oWd8QBGfKk="
             }]
         },
         {
@@ -223,10 +223,11 @@
         "userComments": [{"userId" : 0, "userFullName": "Nemanja Savic", "userPicSrc" : "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=312bcd&_nc_ohc=AYQcGVtt09QQ7kNvgEPWl6J&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYAiqX-zih0ndWA239uG0Vv8Zzhvp00_L8KtYt1Lk1HZ3A&oe=67097EE0",
         "commentDate" : "12/2/2024", "commentText" : "neki komentarkdjkldjakld jdaskljd","commentPic" : "https://images.unsplash.com/photo-1459865264687-595d652de67e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8N3x8fGVufDB8fHx8fA%3D%3D" },
         {"userId" : 2, "userFullName": "Bogdan Randjelovic", "userPicSrc" : "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.6435-1/74662494_2299750623463166_1663064976857759744_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=103&ccb=1-7&_nc_sid=561af9&_nc_ohc=0NLbUNzFWSIQ7kNvgFjuvx6&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=Al85IfN-VAVLAVzKYvEUTWg&oh=00_AYA8Uh3tWMWqJE276fFTI1MRLiEyy2MTA3V26ZYJqPP_Mw&oe=6721FBC2",
-        "commentDate" : "1/6/2024", "commentText" : "neki komentarkdjkldjakld jdaskljd sadnjkaskdaks  jsahdjkhw hwjhkah ah awjhk jhawd", "commentPic": "https://media.istockphoto.com/id/2148242778/photo/the-champion-cup-stands-on-a-green-field-at-a-football-stadium-with-the-light-of-spotlights.webp?a=1&b=1&s=612x612&w=0&k=20&c=Q2m3C9MSfyudDe2fvubvfTRQAg1jEWsM5oWd8QBGfKk="}]
+        "commentDate" : "1/6/2024", "commentText" : "neki komentarkdjkldjakld jdaskljd sadnjkaskdaks  jsahdjkhw hwjhkah ah awjhk jhawd", "commentPic": "https://media.istockphoto.com/id/2148242778/photo/the-champion-cup-stands-on-a-green-field-at-a-Football-stadium-with-the-light-of-spotlights.webp?a=1&b=1&s=612x612&w=0&k=20&c=Q2m3C9MSfyudDe2fvubvfTRQAg1jEWsM5oWd8QBGfKk="}]
         }
 
         
-    ]
+    ],
+    "sports": ["Football", "Basketball", "Table tennis", "Handball", "Volleyball", "Bodybuilding", "Fitness", "Weight lifting", "Swimming", "Atletics", "Rugby"]
 
 }

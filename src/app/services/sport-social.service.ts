@@ -81,6 +81,12 @@ export class SportSocialService {
       .pipe(catchError(this.errorHandler));
   }
 
+  getAllSports(){
+    return this.httpClient
+      .get<string[]>(`${environment.apiUrl}/sports`)
+      .pipe(catchError(this.errorHandler));
+  }
+
   addUser(user: User){
     let options = this.getStandardOption();
     console.log(user);

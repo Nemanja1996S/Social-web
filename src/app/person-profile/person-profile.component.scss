@@ -4,7 +4,10 @@
 }
 
 div>.imageContainer img{
-    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: auto;
+    max-height: auto;
     border-radius: 5%;
     margin-bottom: 0.5em;
 }

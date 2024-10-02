@@ -36,9 +36,9 @@
               </mat-list>
         </div>
         <div class="imageContainer">
-            <img mat-card-image src={{this.user.picture}} >
+            <img mat-card-image [src]="this.user.picture" class="imgInput">
             @if (this.isMe()){
-              <button mat-raised-button class="width50" ><span class="mdc-button__label" >Edit</span><mat-icon class="mIcon">edit</mat-icon></button><!--style="position: relative; right: 15px;"-->
+              <button mat-raised-button class="width50" ><span class="mdc-button__label" (click)="this.openEditDialog()">Edit</span><mat-icon class="mIcon">edit</mat-icon></button><!--style="position: relative; right: 15px;"-->
               <button mat-raised-button class="width50" (click)="this.openDeleteProfileDialog('0ms','0ms')"><span class="mdc-button__label" >Delete</span><mat-icon class="mIcon">delete</mat-icon></button>
             }
             @else {

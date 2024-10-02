@@ -25,6 +25,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { EditUserCommentDialogComponent } from '../edit-user-comment-dialog/edit-user-comment-dialog.component';
 
 
 @Component({
@@ -92,7 +93,7 @@ export class CommentComponent implements OnInit{
     this.currentUser$.subscribe(currentUser => console.log(currentUser))
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, userComm: UserComment): void {
+  openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string, userComm: UserComment): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
       enterAnimationDuration,
@@ -104,8 +105,20 @@ export class CommentComponent implements OnInit{
         this.store.dispatch(deleteUserComment({userComment: userComm}))           //delete comment
       }
     });
-    
-    
+  }
+
+  openEditDialog(enterAnimationDuration: string, exitAnimationDuration: string, userComm: UserComment): void {
+    const dialogRef = this.dialog.open(EditUserCommentDialogComponent, {
+      width: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {title: "Edit comment:", userComment: userComm, confirmString: "Save", cancelString: "Cancel"}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        console.log(result);          //delete comment
+      }
+    });
   }
 
 }
