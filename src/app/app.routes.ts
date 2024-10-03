@@ -10,7 +10,8 @@ import { PersonProfileComponent } from './person-profile/person-profile.componen
 export const routes: Routes = [
     { path: '', component: LogInComponent },
     { path: 'registry', component: RegistrationComponent },
-    { path: 'home', component: HomeComponent  },
+    { path: 'home', component: HomeComponent },
+    { path: 'home/selectedSports', component: HomeComponent},
     { path: 'home/friends', component: FriendsComponent},
     { path: 'home/user', component: PersonProfileComponent},
     { path: 'home/:postId', component: CommentComponent}

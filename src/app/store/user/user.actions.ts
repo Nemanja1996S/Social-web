@@ -26,3 +26,10 @@ export const loadUserFailure = createAction(
 		error: string
 	}>()
 );
+
+export const setSearchSelectedSports = createAction(		
+	"Set search selected sports",			
+	props<{					
+		searchSelectedSports : string[]
+	}>()
+);

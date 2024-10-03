@@ -14,6 +14,11 @@ export const userSelector = createSelector(
     (userState) => userState.user
 )
 
+export const searchSelectedSportsSelector = createSelector(
+    selectUserFeature,
+    (userState) => userState.searchSelectedSports
+)
+
 export const selectedSportsSelector = createSelector(
     userSelector,
     (user) => user.selectedSports

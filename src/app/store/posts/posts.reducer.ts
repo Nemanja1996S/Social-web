@@ -2,6 +2,7 @@ import { createReducer, on } from "@ngrx/store";
 import { Post } from "../../../models/Post";
 import * as Actions from './posts.actions'
 import { createEntityAdapter, EntityState } from "@ngrx/entity";
+import { getCurrentDateAndTime } from "../comments/comments.reducer";
 
 export interface PostsState extends EntityState<Post> {
     isLoading: boolean,
@@ -29,6 +30,34 @@ export const postsReducer = createReducer(
          adapter.setAll(posts, state) //return {...state, isLoading: false, posts: posts
     ),
     on(Actions.loadPostsFailure, (state, {error}) => {
+        return {...state, isLoading: false, error: error}
+    }),
+    on(Actions.deletePost, (state, {postId}) => 
+        adapter.removeOne(postId, state)
+    ),
+    on(Actions.editPost, (state, {postId, postText, postImage}) => {
+        if(postText){
+            if(postImage){
+                return adapter.updateOne({id: postId, changes: {text: postText, image: postImage, date: getCurrentDateAndTime()}}, state)
+            }
+            else{
+                return adapter.updateOne({id: postId, changes: {text: postText, date: getCurrentDateAndTime()}}, state)
+            }
+        }
+        else{
+            return adapter.updateOne({id: postId, changes: {image: postImage, date: getCurrentDateAndTime()}}, state)
+        }
+        
+    }
+        
+    ),
+    on(Actions.loadPostsForSports, (state, {userId, selectedSports}) => {
+        return {...state, isLoading: true}
+    }),
+    on(Actions.loadPostsForSportsSuccess, (state, {posts}) => 
+        adapter.setAll(posts, state)
+    ),
+    on(Actions.loadPostsForSportsFailure, (state, {error}) => {
         return {...state, isLoading: false, error: error}
     }),
 )

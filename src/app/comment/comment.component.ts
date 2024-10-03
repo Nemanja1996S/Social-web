@@ -5,7 +5,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ImageModule } from 'primeng/image';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
-import { deleteUserComment, editUserComment, loadComments } from '../store/comments/comments.actions';
+import { deleteUserComment, editUserComment, loadComments, makeComment } from '../store/comments/comments.actions';
 import { Observable, of } from 'rxjs';
 import { errorCommentsSelector, userCommentsSelector } from '../store/comments/comments.selector';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,6 +26,7 @@ import {
 } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { EditUserCommentDialogComponent, EditUserCommentDialogOutputData } from '../edit-user-comment-dialog/edit-user-comment-dialog.component';
+import { initialUser } from '../store/user/user.reducer';
 
 
 @Component({
@@ -59,6 +60,7 @@ export class CommentComponent implements OnInit{
   currentUser$: Observable<User> = of();
   currentPostId: number = -1;
   currentUserId$: Observable<number> = of();
+  currentUser: User = initialUser;
   currentUserId: number = -1;
   error$: Observable<string | null> = of();
   readonly dialog = inject(MatDialog);
@@ -79,6 +81,7 @@ export class CommentComponent implements OnInit{
     this.currentUserId$ = this.store.select(userIdSelector);
     this.usersComment$.subscribe((comments) => console.log(comments));
     this.currentUserId$.subscribe((userId) => {this.currentUserId = userId})
+    this.currentUser$.subscribe(user => this.currentUser = user)
   }
 
   onFileSelected( event: any) : void{
@@ -91,6 +94,10 @@ export class CommentComponent implements OnInit{
     console.log(this.commentTextFormControl.value)
     console.log(this.userCommentImg)
     this.currentUser$.subscribe(currentUser => console.log(currentUser))
+    let userComment: UserComment = {userId: this.currentUser.id, userFullName: `${this.currentUser.name} ${this.currentUser.surname}`, userPicSrc: this.currentUser.picture, commentDate: '', commentPic: this.userCommentImg, commentText: this.commentTextFormControl.value ?? ''}
+    this.store.dispatch(makeComment({userComment: userComment}));
+    this.userCommentImg = '';
+    this.commentTextFormControl.reset();
   }
 
   openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string, userComm: UserComment): void {
@@ -116,9 +123,11 @@ export class CommentComponent implements OnInit{
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result as EditUserCommentDialogOutputData){
-        const imgUrl = URL.createObjectURL(result.selectedImage)
         let editUC: UserComment = result.userComment
-        editUC = {...editUC, commentPic: imgUrl}
+        if(result.selectedImage){
+          const imgUrl = URL.createObjectURL(result.selectedImage)
+          editUC = {...editUC, commentPic: imgUrl}
+        }
         this.store.dispatch(editUserComment({userComment: editUC}));
       }
     });

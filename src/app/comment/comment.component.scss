@@ -12,16 +12,19 @@
     align-content: center;
 }
 
-p  {
-    // margin-left: 1em;
-    // margin-top: 1em;
-    margin: 1em;
-    color: white;
-    font-size: medium;
-    border: 1px solid rgba(255, 255, 255, 0.486);
-    padding: 0.5em;
-    border-radius: 25%;
-}
+// span.textContainer{
+//     // margin-left: 1em;
+//     // margin-top: 1em;
+//     margin: 1em;
+//     color: white;
+//     font-size: medium;
+//     border: 5px solid white;
+//     padding: 0.5em;
+//     border-radius: 25%;
+//     display: block;
+//     overflow-wrap: break-word;
+    
+// }
 
 .contextContainer {
     display: flex;
@@ -31,7 +34,16 @@ p  {
 }
 
 .textContainer{
-    border: 1px solid white;
+    // border: 5px solid white;
+    width: 80%;
+    // display: flex;
+    // flex-wrap: wrap;
+    color: white;
+    font-size: medium;
+    border: 5px solid white;
+    padding: 0.5em;
+    border-radius: 25%;
+    overflow-wrap: break-word;
 }
 
 mat-card {

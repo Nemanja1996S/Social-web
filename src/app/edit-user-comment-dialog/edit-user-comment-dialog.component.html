@@ -2,7 +2,7 @@
 <div class="content">
     <mat-dialog-content>
         <form [formGroup]="this.editCommentFormGroup" (ngSubmit)="onYes()">
-            <p>{{this.inputData.userComment.userFullName}}</p>
+            <p class="noBottomMargin">{{this.inputData.userComment.userFullName}}</p>
             <p>{{this.inputData.userComment.commentDate}}</p>
             <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput formControlName="commentPicFormControl">
             <img [src]="this.userInputCommentImg ? this.userInputCommentImg : this.inputData.userComment.commentPic" class="imgInput">
@@ -15,6 +15,6 @@
     </mat-dialog-content>
 </div>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="onYes()" type="submit" [disabled]="!this.editCommentFormGroup.dirty">{{this.inputData.confirmString}}</button>
+    <button mat-button mat-dialog-close (click)="onYes()" type="submit" [disabled]="!this.editCommentFormGroup.dirty && !this.selectedImageFile">{{this.inputData.confirmString}}</button>
     <button mat-button mat-dialog-close (click)="onNo()">{{this.inputData.cancelString}}</button>
 </mat-dialog-actions>

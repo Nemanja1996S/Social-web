@@ -27,3 +27,18 @@ export interface Post {
     numberOfShares: number
 }
 
+export const initialPost: Post = {
+    id: -1,
+    userId: -1,
+    userFullname: '',
+    userImage: '',
+    forSports: [],
+    date: '',
+    text: '',
+    image: '',
+    numberOfLikes: -1,
+    numberOfDislikes: -1,
+    numberOfComments: -1,
+    numberOfShares: -1
+}
+

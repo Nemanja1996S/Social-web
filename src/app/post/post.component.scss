@@ -8,7 +8,7 @@ mat-card {
     margin-bottom: 1em;
 }
 
-.mdc-card__media:first-child {
+.mdc-card__media:first-child, .mat-mdc-card-sm-image {
     border-radius: 50%;
 }
 
@@ -85,4 +85,23 @@ mat-card-content {
 .red{
     background-color: red;
     color: red;
+}
+
+.XbuttonContainer{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.Xbutton{
+    color: rgb(150, 19, 19);
+}
+.editButtonContainer{
+    position: absolute;
+    top: 5px;
+    right: 50px;
+}
+
+.positionRelative{
+    position: relative;
 }

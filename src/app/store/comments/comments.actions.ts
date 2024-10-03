@@ -29,6 +29,14 @@ export const deleteUserComment = createAction(
     }>()
 );
 
+export const makeComment = createAction(
+    "Editing user comment",
+    props<{
+        // postId: number,
+        userComment: UserComment
+    }>()
+);
+
 export const editUserComment = createAction(
     "Editing user comment",
     props<{

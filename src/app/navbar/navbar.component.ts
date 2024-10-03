@@ -17,6 +17,7 @@ import { postsSelector } from '../store/posts/posts.selector';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { User } from '../../models/User';
 import { initialUser } from '../store/user/user.reducer';
+import { setSearchSelectedSports } from '../store/user/user.actions';
 
 interface LinkIconsPath{
   link: string,
@@ -69,11 +70,17 @@ export class NavbarComponent implements OnInit {
 
   searchSports(){
     if(this.selectedSportFormControl.valid){
-      console.log(this.selectedSportFormControl.value);
+      //console.log(this.selectedSportFormControl.value);
+      
+      if(this.selectedSportFormControl.value){
+        this.store.dispatch(setSearchSelectedSports({searchSelectedSports: this.selectedSportFormControl.value}))
+        //   this.router.navigateByUrl('/home/selectedSports', {state: this.selectedSportFormControl.value})
+      }
+      
     }
     else {
       this.selectedSportFormControl.markAsTouched();
-      let snackBarRef = this.snackBar.open('Selection of at least 1 sport is needed', 'OK');
+      this.snackBar.open('Selection of at least 1 sport is needed', 'OK');
     }
   }
 

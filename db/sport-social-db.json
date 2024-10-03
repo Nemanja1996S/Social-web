@@ -127,7 +127,7 @@
             "userId": 0,
             "userFullname": "Nemanja Savic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t1.18169-1/969987_488172031277757_895038162_n.jpg?stp=c50.50.620.620a_dst-jpg_s160x160&_nc_cat=107&ccb=1-7&_nc_sid=312bcd&_nc_ohc=AYQcGVtt09QQ7kNvgEPWl6J&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYAiqX-zih0ndWA239uG0Vv8Zzhvp00_L8KtYt1Lk1HZ3A&oe=67097EE0",
-            "forSports": ["Basketball", "Football", "Table tennis"],
+            "forSports": ["Basketball", "Football", "Tennis"],
             "date": "24/4/2024",
             "text": "Post numero 2",
             "image": "https://material.angular.io/assets/img/examples/shiba2.jpg",
@@ -144,7 +144,7 @@
             "userId": 1,
             "userFullname": "Marko Stoijljkovic",
             "userImage": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=100&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=-Ft0o9YZIfQQ7kNvgHgsoyo&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=AzEnuPxBJu6kr8Kqua_gbWq&oh=00_AYA5a2FuCgU6NZGeyRTaQZ5l9ncLnxkJs42iZgUj9M1MZA&oe=67008AC0",
-            "forSports": ["Football", "Table tennis"],
+            "forSports": ["Football", "Tennis"],
             "date": "23/4/2024",
             "text": "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue",
             "image": "",
@@ -228,6 +228,19 @@
 
         
     ],
-    "sports": ["Football", "Basketball", "Table tennis", "Handball", "Volleyball", "Bodybuilding", "Fitness", "Weight lifting", "Swimming", "Atletics", "Rugby"]
-
+    "sports": ["Football", "Basketball", "Table tennis", "Handball", "Volleyball", "Bodybuilding", "Fitness", "Weight lifting", "Swimming", "Atletics", "Rugby"],
+    "postReactions": [
+        {
+            "id": 0,
+            "reactions": [{"postId": 0, "reaction": 1}, {"postId": 1, "reaction": 0}, {"postId": 0, "reaction": -1}]
+        },
+        {
+            "id": 1,
+            "reactions": [{"postId": 0, "reaction": -1}, {"postId": 1, "reaction": 0}, {"postId": 0, "reaction": -1}]
+        },
+        {
+            "id": 2,
+            "reactions": [{"postId": 0, "reaction": 0}, {"postId": 1, "reaction": 1}, {"postId": 0, "reaction": 1}]
+        }
+    ]
 }

@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{this.inputData.title}}</h2>
+<div class="content">
+    <mat-dialog-content>
+        <form>
+            <p class="noBottomMargin">{{this.inputData.user.name + ' ' + this.inputData.user.surname}}</p>
+            <p class="noBottomMargin">{{this.inputData.post.date}}</p>
+            <p>{{getSportsArrayforPost(this.inputData.post)}}</p>
+            <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput >
+            <img [src]="this.userInputCommentImg ? this.userInputCommentImg : this.inputData.post.image" class="imgInput">
+            <button mat-flat-button (click)="$event.preventDefault(); fileInput.click()" class="changeButton">Change image</button>
+            <mat-form-field class="textInput">
+                <mat-label>Text:</mat-label>
+                <textarea matInput cdkTextareaAutosize rows="3" class="width100" [placeholder]="this.inputData.post.text ?? '' " [formControl]="this.postTextFormControl"></textarea>
+            </mat-form-field>
+        </form>
+    </mat-dialog-content>
+</div>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="onYes()" [disabled]="!this.postTextFormControl.dirty && !this.selectedImageFile">{{this.inputData.confirmString}}</button>
+    <button mat-button mat-dialog-close (click)="onNo()">{{this.inputData.cancelString}}</button>
+</mat-dialog-actions>
