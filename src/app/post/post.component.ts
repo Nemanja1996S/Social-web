@@ -6,7 +6,7 @@ import { SportSocialService } from '../services/sport-social.service';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import { postsSelector } from '../store/posts/posts.selector';
-import { Observable, of } from 'rxjs';
+import { find, Observable, of } from 'rxjs';
 import { Post } from '../../models/Post';
 import { deletePost, editPost, loadPosts, loadPostsForSports } from '../store/posts/posts.actions';
 import { CommonModule, NgFor } from '@angular/common';
@@ -31,6 +31,8 @@ import {
 } from '@angular/material/dialog';
 import { EditPostDialogComponent, EditPostDialogOutputData } from '../edit-post-dialog/edit-post-dialog.component';
 import { loadPostReactions } from '../store/postReactions/postReactions.actions';
+import { UserPostReaction } from '../../models/PostReaction';
+import { allUserReactionsSelector } from '../store/postReactions/postReactions.selectors';
 
 
 @Component({
@@ -56,6 +58,7 @@ export class PostComponent implements OnInit {
   //userReactionToPostDict$: Observable<Dictionary<Reaction>[]> = of([])
   clicked: boolean = false
   color = 'accent';
+  userPostReactions$ : Observable<UserPostReaction[]> = of([])
   readonly dialog = inject(MatDialog);
 
   constructor(private store: Store<AppState>, private service: SportSocialService, private router: Router) {
@@ -80,8 +83,14 @@ export class PostComponent implements OnInit {
     this.store.dispatch(loadPosts({userId: 0}));
     this.store.dispatch(loadUserFriends({userId: 0}));
     this.store.dispatch(loadPostReactions({userId: 0}))
+    this.userPostReactions$ = this.store.select(allUserReactionsSelector)
     
   }
+
+  // getUserReactionForPost(postId: number): number{
+  //    this.userPostReactions$.subscribe(reactions => reactions.find(reaction => reaction.postId === postId))
+  //   this.userPostReactions$.pipe(find(reaction => reaction.postId === postId))
+  // }
 
   onFileSelected( event: any) : void{
     this.selectedImageFile = event.target.files[0];

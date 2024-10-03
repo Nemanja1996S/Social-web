@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
       postsState: postsReducer,
       commentsState: commentsReducer,
       userFriendsState : userFriendsReducer,
-      postReactionsState : postReactionsReducer,
+      postReactionsState : postReactionsReducer,//
     }),
     provideEffects([UserEffect, PostsEffect, CommentsEffect, UserFriendsEffect, PostReactionsEffect]),
     provideStoreDevtools({

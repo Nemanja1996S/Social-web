@@ -6,13 +6,15 @@ import { Dictionary, EntityState } from "@ngrx/entity";
 //     postReactions: Reaction[]
 // }
 
-export interface Reaction{
-    postId: number
-    reaction: ReactionEnum
+export interface UserPostReaction{
+    userId: number,
+    postId: number,
+    reaction: number
+    // reactions: ReactionEnum[]
 }
 
-export enum ReactionEnum {        
-    "dislike" = -1,
-    "neutral" = 0,
-    "like" = 1
-}
+// export enum ReactionEnum {        
+//     "dislike" = -1,
+//     "neutral" = 0,
+//     "like" = 1
+// }

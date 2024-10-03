@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Reaction } from "../../../models/PostReaction";
+import { UserPostReaction } from "../../../models/PostReaction";
 
 export const loadPostReactions = createAction(
     "Loading post reactions to state",
@@ -11,7 +11,7 @@ export const loadPostReactions = createAction(
 export const loadPostReactionsSuccess = createAction(
     "Loading post reactions to state success",
     props<{
-        postReactions: Reaction[]
+        userPostReactions: UserPostReaction[]
     }>()
 );
 

@@ -13,8 +13,7 @@ export class PostReactionsEffect {
 			ofType(PostReactionsActions.loadPostReactions),
 			exhaustMap( ({userId}) =>
 				this.service.getPostReactionsForUser(userId).pipe(
-					map((postReactions) => PostReactionsActions.loadPostReactionsSuccess({postReactions: postReactions})),
-					tap(useet => console.log(useet)),
+					map((postReactions) => PostReactionsActions.loadPostReactionsSuccess({userPostReactions: postReactions})),
 					catchError(error => of(PostReactionsActions.loadPostReactionsFailure({error})))
 				)
 			)

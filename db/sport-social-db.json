@@ -232,15 +232,39 @@
     "postReactions": [
         {
             "id": 0,
-            "reactions": [{"postId": 0, "reaction": 1}, {"postId": 1, "reaction": 0}, {"postId": 0, "reaction": -1}]
+            "userId": 0,
+            "postId": 0,
+            "reaction": -1 
         },
         {
             "id": 1,
-            "reactions": [{"postId": 0, "reaction": -1}, {"postId": 1, "reaction": 0}, {"postId": 0, "reaction": -1}]
+            "userId": 0,
+            "postId": 1,
+            "reaction": -1  
         },
         {
             "id": 2,
-            "reactions": [{"postId": 0, "reaction": 0}, {"postId": 1, "reaction": 1}, {"postId": 0, "reaction": 1}]
+            "userId": 0,
+            "postId": 2,
+            "reaction": 1 
+        },
+        {
+            "id": 3,
+            "userId": 0,
+            "postId": 32,
+            "reaction": 0 
+        },
+        {
+            "id": 4,
+            "userId": 0,
+            "postId": 3,
+            "reaction": 1 
+        },
+        {
+            "id": 5,
+            "userId": 1,
+            "postId": 0,
+            "reaction": 1 
         }
     ]
 }
