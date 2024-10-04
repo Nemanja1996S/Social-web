@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
   usersSport$: Observable<string[]> = of([]);
   user: User = initialUser;
   // usersSports : string[] = []
-  linksIcons: LinkIconsPath[] = [{link: 'Home', icon: 'home', path: 'home'}, {link: 'Friends', icon: 'group', path: 'home/friends'}, {link:'Groups', icon: 'groups', path: 'home'}];
+  linksIcons: LinkIconsPath[] = [{link: 'Home', icon: 'home', path: 'home'}, {link: 'Friends', icon: 'group', path: 'home/friends'}, {link:'Requests', icon: 'groups', path: 'home/requests'}];
   // activeLink = this.linksIcons[0].link;
   @Input() activeLink: string = 'Home';
 

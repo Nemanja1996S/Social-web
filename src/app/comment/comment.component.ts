@@ -14,8 +14,9 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { User } from '../../models/User';
 import { userIdSelector, userSelector } from '../store/user/user.selector';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
+import { Location } from '@angular/common';
 import {
   MatDialog,
   MatDialogActions,
@@ -27,6 +28,7 @@ import {
 import { DialogComponent } from '../dialog/dialog.component';
 import { EditUserCommentDialogComponent, EditUserCommentDialogOutputData } from '../edit-user-comment-dialog/edit-user-comment-dialog.component';
 import { initialUser } from '../store/user/user.reducer';
+import { changeNumberOfCommentsOfPost } from '../store/posts/posts.actions';
 
 
 @Component({
@@ -65,7 +67,7 @@ export class CommentComponent implements OnInit{
   error$: Observable<string | null> = of();
   readonly dialog = inject(MatDialog);
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute){
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private router: Router, private location: Location){
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -96,6 +98,7 @@ export class CommentComponent implements OnInit{
     this.currentUser$.subscribe(currentUser => console.log(currentUser))
     let userComment: UserComment = {userId: this.currentUser.id, userFullName: `${this.currentUser.name} ${this.currentUser.surname}`, userPicSrc: this.currentUser.picture, commentDate: '', commentPic: this.userCommentImg, commentText: this.commentTextFormControl.value ?? ''}
     this.store.dispatch(makeComment({userComment: userComment}));
+    this.store.dispatch(changeNumberOfCommentsOfPost({postId: this.currentPostId, amount: 1}));
     this.userCommentImg = '';
     this.commentTextFormControl.reset();
   }
@@ -109,7 +112,8 @@ export class CommentComponent implements OnInit{
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.store.dispatch(deleteUserComment({userComment: userComm}))           //delete comment
+        this.store.dispatch(deleteUserComment({userComment: userComm}))         //delete comment
+        this.store.dispatch(changeNumberOfCommentsOfPost({postId: this.currentPostId, amount: -1}));
       }
     });
   }
@@ -131,6 +135,11 @@ export class CommentComponent implements OnInit{
         this.store.dispatch(editUserComment({userComment: editUC}));
       }
     });
+  }
+
+  goBack(){
+    // this.location.back()
+    this.router.navigate(['/home'])
   }
 
 }

@@ -50,6 +50,11 @@ export const userReducer = createReducer(
     }),
     on(Actions.setSearchSelectedSports, (state, {searchSelectedSports}) => {
         return ({...state, searchSelectedSports: searchSelectedSports})
+    }),
+    on(Actions.addFriend, (state, {friendId}) => {
+        let newFriendsIds = [...state.user.friendsIds]
+        newFriendsIds.push(friendId);
+        return ({...state, user: {...state.user, friendsIds: newFriendsIds}})
     })
     
 )

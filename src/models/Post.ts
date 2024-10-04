@@ -5,6 +5,11 @@ import { Dictionary } from "@ngrx/entity"
 //     "neutral" = 0,
 //     "like" = 1
 // }
+export interface UserReaction{
+    reactedUserId: number,
+    reaction: number
+    // reactions: ReactionEnum[]
+}
 
 export interface Post {
     id: number,
@@ -15,16 +20,16 @@ export interface Post {
     date: string,
     text?: string,
     image?: string,
-    video?: string,
+    // video?: string,
     numberOfLikes: number,
     // userLiked: boolean,
     // userDislike: boolean,
-    //usersReactionToPostDict : Dictionary<Reaction>,
+    usersReactions : UserReaction[]
     // idsOfLikes: number[],
     // idsofDislikes: Number[],
     numberOfDislikes: number,
     numberOfComments: number,
-    numberOfShares: number
+    // numberOfShares: number
 }
 
 export const initialPost: Post = {
@@ -36,9 +41,10 @@ export const initialPost: Post = {
     date: '',
     text: '',
     image: '',
+    usersReactions: [],
     numberOfLikes: -1,
     numberOfDislikes: -1,
     numberOfComments: -1,
-    numberOfShares: -1
+    // numberOfShares: -1
 }
 

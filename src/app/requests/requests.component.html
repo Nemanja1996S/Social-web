@@ -1,0 +1,30 @@
+<navbar [activeLink]="activeLink"></navbar>
+<div *ngIf="this.friendRequests$ | async else noRequests"  >
+    <mat-card *ngFor="let request of this.friendRequests$ | async">
+        <div style="width: 100%;">
+            <mat-card-title>
+                <img mat-card-sm-image style="margin-right: 1em;" src={{request.fromUserImg}} (click)="goTo(request.fromUserId)" /> <!--(click)="" -->
+                <div class="titleNameAndDate">
+                    <div class="divFullname"><!--(click)="this.getUser(request.friend.id)" -->
+                        {{request.fromUserFullName}}
+                    </div>
+                    <span mat-card-subtitle>Following sports: {{this.getSportSelectedString(request.fromUserSelectedSports)}} </span>
+                    <span mat-card-subtitle>Number of mutural friends: {{calculateMuturalFriends(request.fromUserFriendsIds)}} </span>
+                    <div>
+                        <button mat-stroked-button (click)="acceptRequestClick(request)">Accept</button>
+                        <button mat-stroked-button (click)="deleteRequestClick(request)">Delete request</button>
+                    </div>  
+                </div>     
+            </mat-card-title>
+        </div>
+    </mat-card>
+</div>
+<ng-template #noRequests>
+    <mat-card>
+        <mat-card-content>
+            <div class="noRequests">
+                No requests 
+            </div>    
+        </mat-card-content>
+    </mat-card>
+</ng-template>

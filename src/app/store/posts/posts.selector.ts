@@ -2,7 +2,7 @@ import { createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
 import { Post } from "../../../models/Post";
 import { Dictionary } from "@ngrx/entity";
-import { searchSelectedSportsSelector } from "../user/user.selector";
+import { searchSelectedSportsSelector, userIdSelector } from "../user/user.selector";
 
 export const selectPostsFeature = (state: AppState) => state.postsState;	
 
@@ -17,6 +17,22 @@ export const postsSelector = createSelector(
 function isForSports(post: Post, selectedSports: string[]): boolean {
     return post.forSports.some(sport => selectedSports.includes(sport));
 }
+
+export const loggedInUserPostsSelector = createSelector(
+    selectPostsFeature,
+    userIdSelector,
+    (state, userId) => Object
+    .values(state.entities).map(post => <Post>post).filter(post => post.id === userId)
+    .sort((a, b) => b.date.localeCompare(a.date))
+)
+
+
+// export const userReactionSelector = createSelector(
+//     postsSelector,
+//     userIdSelector,
+//     (posts, userId) => posts.map(post => post.usersReactions.map(reaction => reaction.reactedUserId === userId ? reaction : null))
+// )
+
 
 // export const postsSelector = createSelector(
 //     selectPostsFeature,

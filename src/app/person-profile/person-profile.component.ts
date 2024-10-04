@@ -17,6 +17,9 @@ import { SportSocialService } from '../services/sport-social.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { EditProfileDialogComponent, EditProfileDialogInputData, EditProfileDialogOutputData } from '../edit-profile-dialog/edit-profile-dialog.component';
+import { dislikePost, likePost } from '../store/posts/posts.actions';
+import { loggedInUserPostsSelector } from '../store/posts/posts.selector';
+import { idsOfloggedUserSentRequestToSelector } from '../store/requests/requests.selectors';
 
 @Component({
   selector: 'person-profile',
@@ -29,10 +32,13 @@ export class PersonProfileComponent implements OnInit{
 
   user: User = initialUser;
   loggedInUser$ : Observable<User> = of()
+  loggedUserId: number = -1;
   loggedInUserFriendsIds : number[] = []
   isSelfProfile : boolean = false;
   userPosts$: Observable<Post[]> = of([])
   // numberOfMuturalFriends: number = -1;
+  //idsOfUserSentRequstTo$: Observable<number[]> = of([])
+  idsOfUserSentRequstTo: number[] = []
   readonly dialog = inject(MatDialog);
   readonly editDialog = inject(MatDialog)
 
@@ -42,13 +48,11 @@ export class PersonProfileComponent implements OnInit{
   ngOnInit(): void {
     this.user = history.state;
     this.loggedInUser$ = this.store.select(userSelector);
-    this.loggedInUser$.subscribe(user => {if(user.id === this.user.id) { this.isSelfProfile = true}; this.loggedInUserFriendsIds = user.friendsIds.map(id => id)} )
-    // let u: User;
-    // this.loggedInUser$.subscribe((user) => {u = user; console.log(u.friendsIds) });
-    
-    this.userPosts$ = this.service.getPostsOfUser(this.user.id);
-    // const data : EditProfileDialogInputData = {title: "Edit profile:", user: this.user, confirmString: "Save", cancelString: "Cancel"}
-    // this.openEditDialog('0ms','0ms', data);
+    this.loggedInUser$.subscribe(user => {if(user.id === this.user.id) { this.isSelfProfile = true}; this.loggedInUserFriendsIds = user.friendsIds.map(id => id); this.loggedUserId = user.id} )
+
+    //this.userPosts$ = this.service.getPostsOfUser(this.user.id); //iz bazu cita, ne iz state
+    this.userPosts$ = this.store.select(loggedInUserPostsSelector); //ne cita iz bazu
+    this.store.select(idsOfloggedUserSentRequestToSelector).subscribe(ids => this.idsOfUserSentRequstTo = ids);
   }
 
   isMe(): boolean{
@@ -122,4 +126,33 @@ export class PersonProfileComponent implements OnInit{
       // }
     });
   }
+
+  like(post: Post){
+    this.store.dispatch(likePost({post: post, userId: this.loggedUserId}))
+  }
+
+  dislike(post: Post){
+    this.store.dispatch(dislikePost({post: post, userId: this.loggedUserId}))
+  }
+
+  getUserReactionForPost(post: Post): number{
+    const userReaction = post.usersReactions.find(userReaction => userReaction.reactedUserId === this.loggedUserId)
+    if(userReaction)
+      return userReaction.reaction
+    return 0;
+ }
+
+  getColorForLikeButton(post: Post): string{
+    if(this.getUserReactionForPost(post) > 0)
+      return 'primary'
+    else
+      return ''
+ }
+
+ getColorForDislikeButton(post: Post): string{
+  if(this.getUserReactionForPost(post) < 0)
+    return 'accent'
+  else
+    return ''
+}
 }

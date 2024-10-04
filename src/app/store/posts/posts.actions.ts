@@ -29,6 +29,13 @@ export const deletePost = createAction(
     }>()
 );
 
+export const addPost = createAction(
+    "Add post",
+    props<{
+        post: Post;
+    }>()
+)
+
 export const editPost = createAction(
     "Edit post",
     props<{
@@ -61,7 +68,27 @@ export const loadPostsForSportsFailure = createAction(
 );
 
 export const likePost = createAction(
-    "Changing "
+    "Liking post",
+    props<{
+        post: Post,
+        userId: number
+    }>()
+)
+
+export const dislikePost = createAction(
+    "Disliking post",
+    props<{
+        post: Post,
+        userId: number
+    }>()
+)
+
+export const changeNumberOfCommentsOfPost = createAction(
+    "Changing number of comments of post",
+    props<{
+        postId: number,
+        amount: number
+    }>()
 )
 
 

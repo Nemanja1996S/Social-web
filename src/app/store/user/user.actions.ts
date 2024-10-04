@@ -33,3 +33,10 @@ export const setSearchSelectedSports = createAction(
 		searchSelectedSports : string[]
 	}>()
 );
+
+export const addFriend = createAction(		
+	"Add friend to user state",			
+	props<{					
+		friendId: number
+	}>()
+);

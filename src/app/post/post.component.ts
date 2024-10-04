@@ -7,8 +7,8 @@ import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import { postsSelector } from '../store/posts/posts.selector';
 import { find, Observable, of } from 'rxjs';
-import { Post } from '../../models/Post';
-import { deletePost, editPost, loadPosts, loadPostsForSports } from '../store/posts/posts.actions';
+import { Post, UserReaction } from '../../models/Post';
+import { addPost, deletePost, dislikePost, editPost, likePost, loadPosts, loadPostsForSports } from '../store/posts/posts.actions';
 import { CommonModule, NgFor } from '@angular/common';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -31,8 +31,7 @@ import {
 } from '@angular/material/dialog';
 import { EditPostDialogComponent, EditPostDialogOutputData } from '../edit-post-dialog/edit-post-dialog.component';
 import { loadPostReactions } from '../store/postReactions/postReactions.actions';
-import { UserPostReaction } from '../../models/PostReaction';
-import { allUserReactionsSelector } from '../store/postReactions/postReactions.selectors';
+
 
 
 @Component({
@@ -58,7 +57,8 @@ export class PostComponent implements OnInit {
   //userReactionToPostDict$: Observable<Dictionary<Reaction>[]> = of([])
   clicked: boolean = false
   color = 'accent';
-  userPostReactions$ : Observable<UserPostReaction[]> = of([])
+  //userPostReactions$ : Observable<UserPostReaction[]> = of([])
+  userReaction$ : Observable<UserReaction> = of()
   readonly dialog = inject(MatDialog);
 
   constructor(private store: Store<AppState>, private service: SportSocialService, private router: Router) {
@@ -83,7 +83,7 @@ export class PostComponent implements OnInit {
     this.store.dispatch(loadPosts({userId: 0}));
     this.store.dispatch(loadUserFriends({userId: 0}));
     this.store.dispatch(loadPostReactions({userId: 0}))
-    this.userPostReactions$ = this.store.select(allUserReactionsSelector)
+    //this.userPostReactions$ = this.store.select(allUserReactionsSelector)
     
   }
 
@@ -91,6 +91,27 @@ export class PostComponent implements OnInit {
   //    this.userPostReactions$.subscribe(reactions => reactions.find(reaction => reaction.postId === postId))
   //   this.userPostReactions$.pipe(find(reaction => reaction.postId === postId))
   // }
+
+  getUserReactionForPost(post: Post): number{
+    const userReaction = post.usersReactions.find(userReaction => userReaction.reactedUserId === this.user.id)
+    if(userReaction)
+      return userReaction.reaction
+    return 0;
+ }
+
+ getColorForLikeButton(post: Post): string{
+    if(this.getUserReactionForPost(post) > 0)
+      return 'primary'
+    else
+      return ''
+ }
+
+ getColorForDislikeButton(post: Post): string{
+  if(this.getUserReactionForPost(post) < 0)
+    return 'accent'
+  else
+    return ''
+}
 
   onFileSelected( event: any) : void{
     this.selectedImageFile = event.target.files[0];
@@ -107,16 +128,27 @@ export class PostComponent implements OnInit {
   }
 
   onPost(){
-    console.log(this.selectedImageFile)
-    console.log(this.userPostImg)
-    console.log(this.postTextFormControl.value)
-    console.log(this.userCheckedSports)
+    // console.log(this.selectedImageFile)
+    // console.log(this.userPostImg)
+    // console.log(this.postTextFormControl.value)
+    // console.log(this.userCheckedSports)
+    this.store.dispatch(addPost({post: {id: -1, userId: this.user.id,
+       userFullname: this.user.name + " " + this.user.surname, userImage: this.user.picture,
+        forSports: this.userCheckedSports, date: "", text: this.postTextFormControl.value ?? "",
+      image: this.userPostImg ?? "", numberOfLikes: 0, numberOfDislikes: 0, numberOfComments: 0, usersReactions: [] }}))
+    this.selectedImageFile = null;
+    this.postTextFormControl.reset();
+    this.userPostImg = "";
+    this.userCheckedSports = []
+    this.postCheckListFormControl.reset();
   }
 
-  like(event: MouseEvent){
-    this.color = 'primary'
-    //console.log(event.target)
-    // this.store.select(userReactonToPostDictSelector).subscribe(dict => console.log(dict))
+  like(post: Post){
+    this.store.dispatch(likePost({post: post, userId: this.user.id}))
+  }
+
+  dislike(post: Post){
+    this.store.dispatch(dislikePost({post: post, userId: this.user.id}))
   }
 
   getUser(userId: number): void{

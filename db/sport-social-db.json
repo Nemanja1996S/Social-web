@@ -119,7 +119,7 @@
             "numberOfDislikes": 20,
             "numberOfComments": 34,
             "numberOfShares": 11,
-            "usersReactionToPostDict" : [{"0" : "liked"}, {"1" : "disliked"}]
+            "usersReactions" : [{"reactedUserId" : 0, "reaction": -1}, {"reactedUserId" : 1, "reaction": -1}]
                     
         },
         {
@@ -136,7 +136,7 @@
             "numberOfDislikes": 20,
             "numberOfComments": 34,
             "numberOfShares": 11,
-            "usersReactionToPostDict" : [{"0" : "liked"}, {"1" : "disliked"}]
+            "usersReactions" : [{"reactedUserId" : 1, "reaction": -1}, {"reactedUserId" : 4, "reaction": -1}]
                     
         },
         {
@@ -152,7 +152,8 @@
             "numberOfLikes": 20,
             "numberOfDislikes": 3,
             "numberOfComments": 3,
-            "numberOfShares": 1
+            "numberOfShares": 1,
+            "usersReactions" : [{"reactedUserId" : 0, "reaction": 1}, {"reactedUserId" : 2, "reaction": 1}]
         },
         {
             "id": 3,
@@ -167,7 +168,8 @@
             "numberOfLikes": 24,
             "numberOfDislikes": 2,
             "numberOfComments": 5,
-            "numberOfShares": 3
+            "numberOfShares": 3,
+            "usersReactions" : [{"reactedUserId" : 0, "reaction": 1}, {"reactedUserId" : 1, "reaction": -1}]
         },
         {
             "id": 2,
@@ -182,7 +184,8 @@
             "numberOfLikes": 35,
             "numberOfDislikes": 5,
             "numberOfComments": 7,
-            "numberOfShares": 7
+            "numberOfShares": 7,
+            "usersReactions" : [{"reactedUserId" : 0, "reaction": 1}, {"reactedUserId" : 1, "reaction": -1}]
         },
         {
             "id": 4,
@@ -197,7 +200,8 @@
             "numberOfLikes": 40,
             "numberOfDislikes": 6,
             "numberOfComments": 3,
-            "numberOfShares": 3
+            "numberOfShares": 3,
+            "usersReactions" : [{"reactedUserId" : 0, "reaction": -1}, {"reactedUserId" : 1, "reaction": -1}]
         }              
     ],
     "comments":[{
@@ -266,5 +270,32 @@
             "postId": 0,
             "reaction": 1 
         }
+    ],
+    "requests": [
+        {
+            "toUserId": 0,
+            "fromUserId": 1,
+            "fromUserFullName": "Marko Stoijljkovic",
+            "fromUserImg": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/376655995_6714521235279645_6116058130008955357_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=100&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=-Ft0o9YZIfQQ7kNvgHgsoyo&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=AzEnuPxBJu6kr8Kqua_gbWq&oh=00_AYA5a2FuCgU6NZGeyRTaQZ5l9ncLnxkJs42iZgUj9M1MZA&oe=67008AC0",
+            "fromUserFriendsIds": [0, 1, 2],
+            "fromUserSelectedSports": ["Tennis", "Football"]
+        },  
+        {
+            "toUserId": 0,
+            "fromUserId": 2,
+            "fromUserFullName": "Aleksandar Mitic",
+            "fromUserImg": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/347581253_826592845676524_5503805857029367895_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=100&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=C5CIt9Ka0GsQ7kNvgG6RIJr&_nc_ht=scontent.fbeg10-1.fna&_nc_gid=ARY_g_QNNRAiTbHjXBBEzbA&oh=00_AYB9hok9wbcGitpf8VeKkdXe_qvBtXp9hVslg6FkBPWVxg&oe=67006BC6",
+            "fromUserFriendsIds": [1],
+            "fromUserSelectedSports": ["Bodybuilding"]
+        },
+        {
+            "toUserId": 0,
+            "fromUserId": 4,
+            "fromUserFullName": "Aleksandar Grujic",
+            "fromUserImg": "https://scontent.fbeg10-1.fna.fbcdn.net/v/t39.30808-1/441966548_25618684077778063_3715518659927830927_n.jpg?stp=cp0_dst-jpg_s80x80&_nc_cat=104&ccb=1-7&_nc_sid=4f5e1a&_nc_ohc=VtpfDmkz458Q7kNvgG5MtNv&_nc_ht=scontent.fbeg10-1.fna&oh=00_AYCtR17GDdoZr5ry2_b15Orjtuuv_zc_3FfdkNj2GPLziQ&oe=670080E5",
+            "fromUserFriendsIds": [7],
+            "fromUserSelectedSports": ["Rugby"]
+        }
+                            
     ]
-}
+}  

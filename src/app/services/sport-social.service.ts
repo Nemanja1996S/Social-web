@@ -8,6 +8,7 @@ import { Comments } from '../../models/Comment';
 import { UserFriends } from '../../models/UserFriends';
 import { PeopleOption } from '../friends/friends.component';
 import { UserPostReaction } from '../../models/PostReaction';
+import { FriendRequest } from '../../models/Request';
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +80,12 @@ export class SportSocialService {
   getPostReactionsForUser(userId: number){
     return this.httpClient
       .get<UserPostReaction[]>(`${environment.apiUrl}/postReactions?userId=${userId}`)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getFriendRequestsForUser(userId: number){
+    return this.httpClient
+      .get<FriendRequest[]>(`${environment.apiUrl}/requests?toUserId=${userId}`)
       .pipe(catchError(this.errorHandler));
   }
 

@@ -105,6 +105,24 @@ form {
     right: 50px;
 }
 
+.backButtonContainer{
+    position: absolute;
+    top: 5px;
+    right: 0px;
+}
+
+.backLabel{
+    position: absolute;
+    top: 20px;
+    right: 45px;
+}
+
+
+.backButton{
+    color: white;
+    transform: scale(2);
+}
+
 // .editButton{
 
 // }

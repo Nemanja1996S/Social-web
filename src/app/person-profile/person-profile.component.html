@@ -54,7 +54,12 @@
                   <span class="mdc-button__label">Friends:</span>
                   <mat-icon style="font-size: 30px;">close</mat-icon>
                 </button>
-                <button mat-raised-button class="width50" ><span class="mdc-button__label" style="margin-right: 1em;">Send request</span><mat-icon class="mIcon">send</mat-icon></button>
+                @if(this.idsOfUserSentRequstTo.includes(this.user.id)){
+                  <button mat-raised-button class="width50" disabled><span class="mdc-button__label" style="margin-right: 1em;">Request sent</span><mat-icon class="mIcon">send</mat-icon></button>
+                }
+                @else{
+                  <button mat-raised-button class="width50" ><span class="mdc-button__label" style="margin-right: 1em;">Send request</span><mat-icon class="mIcon">send</mat-icon></button>
+                }
               }
             }    
         </div>
@@ -78,15 +83,15 @@
   </mat-card-content>
   <img mat-card-image src={{post.image}}>
   <mat-card-actions>
-      <button mat-button ><mat-icon>thumb_up</mat-icon>Like </button><!--[color]="color" (click)="like($event)"-->
-      <button mat-button><mat-icon>thumb_down</mat-icon>Dislike </button>
-      <button mat-button [routerLink]="['./', post.id]"><mat-icon>comment</mat-icon>Comment </button><!--[routerLink]="['./', post.id]"-->
-      <button mat-button><mat-icon>share</mat-icon>Share </button>
+      <button mat-button (click)="like(post)" [color]="getColorForLikeButton(post)"><mat-icon>thumb_up</mat-icon>Like </button><!--[color]="color" (click)="like($event)"-->
+      <button mat-button (click)="dislike(post)" [color]="getColorForDislikeButton(post)"> <mat-icon>thumb_down</mat-icon>Dislike </button>
+      <button mat-button [routerLink]="['/home/', post.id]"><mat-icon>comment</mat-icon>Comment </button><!--[routerLink]="['./', post.id]"-->
+      <!-- <button mat-button><mat-icon>share</mat-icon>Share </button> -->
   </mat-card-actions>
   <mat-card-footer>
       <span class="interaction_numbers"><p>{{post.numberOfLikes}}</p><mat-icon>thumb_up</mat-icon></span>
       <span class="interaction_numbers"><p>{{post.numberOfDislikes}}</p><mat-icon>thumb_down</mat-icon></span>
       <span class="interaction_numbers"><p>{{post.numberOfComments}}</p><mat-icon>comment</mat-icon></span>
-      <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span>
+      <!-- <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span> -->
   </mat-card-footer>
 </mat-card>

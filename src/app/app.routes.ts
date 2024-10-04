@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { CommentComponent } from './comment/comment.component';
 import { FriendsComponent } from './friends/friends.component';
 import { PersonProfileComponent } from './person-profile/person-profile.component';
+import { RequestsComponent } from './requests/requests.component';
 
 export const routes: Routes = [
     { path: '', component: LogInComponent },
@@ -14,6 +15,7 @@ export const routes: Routes = [
     { path: 'home/selectedSports', component: HomeComponent},
     { path: 'home/friends', component: FriendsComponent},
     { path: 'home/user', component: PersonProfileComponent},
+    { path: 'home/requests', component: RequestsComponent},
     { path: 'home/:postId', component: CommentComponent}
     // { path: 'posts', component: PostComponent } home component (post + navbar)
 ];

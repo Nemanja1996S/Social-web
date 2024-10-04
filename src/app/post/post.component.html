@@ -48,16 +48,16 @@
     </mat-card-content>
     <img mat-card-image src={{post.image}}>
     <mat-card-actions>
-        <button mat-button (click)="like($event)" [color]="color"><mat-icon>thumb_up</mat-icon>Like </button>
-        <button mat-button><mat-icon>thumb_down</mat-icon>Dislike </button>
+        <button mat-button (click)="like(post)" [color]="getColorForLikeButton(post)"><mat-icon>thumb_up</mat-icon>Like </button>
+        <button mat-button (click)="dislike(post)" [color]="getColorForDislikeButton(post)"><mat-icon>thumb_down</mat-icon>Dislike </button>
         <button mat-button [routerLink]="['./', post.id]"><mat-icon>comment</mat-icon>Comment </button>
-        <button mat-button><mat-icon>share</mat-icon>Share </button>
+        <!-- <button mat-button><mat-icon>share</mat-icon>Share </button> -->
     </mat-card-actions>
     <mat-card-footer>
         <span class="interaction_numbers"><p>{{post.numberOfLikes}}</p><mat-icon>thumb_up</mat-icon></span>
         <span class="interaction_numbers"><p>{{post.numberOfDislikes}}</p><mat-icon>thumb_down</mat-icon></span>
         <span class="interaction_numbers"><p>{{post.numberOfComments}}</p><mat-icon>comment</mat-icon></span>
-        <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span>
+        <!-- <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span> -->
     </mat-card-footer>
 </mat-card>
 

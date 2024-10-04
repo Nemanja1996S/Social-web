@@ -29,6 +29,13 @@ export const userFriendsIdsArraySelector = createSelector(
     (user) => user.friendsIds
 )
 
+// const numberOfMuturalFriends: number = userFriendsIds.filter(id => friendFriendsIds.includes(id)).length
+
+// export const userFriendsIdsArraySelector = createSelector(
+//     userSelector,
+//     (user) => user.friendsIds
+// )
+
 export const userIdSelector = createSelector(
     userSelector,
     (user) => user.id

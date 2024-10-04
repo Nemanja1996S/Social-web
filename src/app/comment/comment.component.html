@@ -8,6 +8,8 @@
                 cdkAutosizeMaxRows="5"
                 [formControl]="commentTextFormControl" ></textarea>
         <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput>
+        <label class="backLabel">Go back?</label>
+        <button mat-icon-button class="backButtonContainer" (click)="$event.preventDefault(); goBack()" ><mat-icon class="backButton">arrow_back</mat-icon></button>
         <img [src]="this.userCommentImg" class="imgInput">
         <!-- <div style="display: flex;">
             <mat-checkbox *ngFor="let sport of this.userSelectedSport$ | async" [formControl]="postCheckListFormControl" (change)="onSportChecked(sport)">{{sport}}</mat-checkbox>
@@ -51,13 +53,15 @@
         </div>
         <!-- <img mat-card-image src={{userComment.userPicSrc}} class="commentPic"> -->
          <!-- "https://primefaces.org/cdn/primeng/images/galleria/galleria10.jpg" -->
-        <p-image 
+        @if (userComment.commentPic) {
+            <p-image 
             src={{userComment.commentPic}} 
             alt="Image" 
             
             class="commentPic"
             [preview]="true"
         />
+        }
     </div>
     </mat-card-content>
     
