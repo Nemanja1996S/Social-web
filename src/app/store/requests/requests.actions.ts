@@ -23,6 +23,13 @@ export const loadRequestsFailure = createAction(
     }>()
 );
 
+export const sendRequest = createAction(
+    "Sending request",
+    props<{
+        friendRequest: FriendRequest
+    }>()
+);
+
 export const deleteRequest = createAction(
     "Deleting request",
     props<{

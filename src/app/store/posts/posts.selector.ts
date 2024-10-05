@@ -3,6 +3,7 @@ import { AppState } from "../app.state";
 import { Post } from "../../../models/Post";
 import { Dictionary } from "@ngrx/entity";
 import { searchSelectedSportsSelector, userIdSelector } from "../user/user.selector";
+import { profileIdSelector } from "../profile/profile.selectors";
 
 export const selectPostsFeature = (state: AppState) => state.postsState;	
 
@@ -23,6 +24,14 @@ export const loggedInUserPostsSelector = createSelector(
     userIdSelector,
     (state, userId) => Object
     .values(state.entities).map(post => <Post>post).filter(post => post.id === userId)
+    .sort((a, b) => b.date.localeCompare(a.date))
+)
+
+export const profilePostsSelector = createSelector(
+    selectPostsFeature,
+    profileIdSelector,
+    (state, profileId) => Object
+    .values(state.entities).map(post => <Post>post).filter(post => post.id === profileId)
     .sort((a, b) => b.date.localeCompare(a.date))
 )
 

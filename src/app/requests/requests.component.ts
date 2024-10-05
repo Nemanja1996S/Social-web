@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
 import { Observable, of } from 'rxjs';
@@ -17,7 +17,7 @@ import { addFriend } from '../store/user/user.actions';
 @Component({
   selector: 'app-requests',
   standalone: true,
-  imports: [MatCardModule, NgFor, NgIf, CommonModule, NavbarComponent, MatButtonModule],
+  imports: [MatCardModule, NgFor, NgIf, CommonModule, NavbarComponent, MatButtonModule, RouterLink],
   templateUrl: './requests.component.html',
   styleUrl: './requests.component.scss'
 })
@@ -51,9 +51,9 @@ export class RequestsComponent implements OnInit {
     return ` ${sports.slice()} `
   }
 
-  goTo(userId: number){
-    this.service.getUserById(userId).subscribe(user => this.router.navigateByUrl('/home/user',{state: user} ))
-  }
+  // goTo(userId: number){
+  //   this.service.getUserById(userId).subscribe(user => this.router.navigateByUrl('/home/user',{state: user} ))
+  // }
 
   acceptRequestClick(request: FriendRequest){
     this.store.dispatch(addFriend({friendId: request.fromUserId}));

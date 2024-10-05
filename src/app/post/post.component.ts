@@ -151,9 +151,9 @@ export class PostComponent implements OnInit {
     this.store.dispatch(dislikePost({post: post, userId: this.user.id}))
   }
 
-  getUser(userId: number): void{
-    this.service.getUserById(userId).subscribe(user => {this.router.navigateByUrl('/home/user', {state: user})})
-  }
+  // getUser(userId: number): void{
+  //   this.service.getUserById(userId).subscribe(user => {this.router.navigateByUrl('/home/user', {state: user})})
+  // }
 
   getSportsArrayforPost(post: Post): string[]{
     return post.forSports.map(sport => {return ` ${sport}`})

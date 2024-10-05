@@ -34,5 +34,22 @@ export const friendRequestsReducer = createReducer(
     }),
     on(Actions.acceptRequest, (state, {friendRequest, userId, acceptedUserId}) => {
         return {...state, friendRequests: [...state.friendRequests.filter(request => request !== friendRequest)]}
-    })
+    }),
+    on(Actions.sendRequest, (state, {friendRequest}) => {
+        const request = state.friendRequests.find(request =>
+             request.fromUserId === friendRequest.fromUserId && request.toUserId === friendRequest.toUserId)
+            //  .map(request => request.fromUserFriendsIds)
+        if(request){
+            // const fromUserIds = request.fromUserFriendsIds
+            // const newfromUserIds = [...fromUserIds, friendRequest.fromUserId]
+            return {...state}//, friendRequests: [...state.friendRequests.map(req => req.fromUserId), friendRequest]}
+        }
+        else{
+            // const oldFriendRequests = [...state.friendRequests]
+            // const oldFromIds = []
+            // oldFriendRequests.map(req => oldFromIds.push(req.fromUserFriendsIds))
+            return {...state, friendRequests: [...state.friendRequests, friendRequest]}
+        }
+        
+    }),
 );

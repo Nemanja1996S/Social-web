@@ -29,9 +29,9 @@
             <button mat-icon-button class="XbuttonContainer" (click)="openDeleteDialog('0ms', '0ms', post.id)" ><mat-icon class="Xbutton">close</mat-icon></button>
         <!-- treba u if ===, al zato sto je jedno string, a drugo number, ne moze -->
         }
-        <img mat-card-sm-image src={{post.userImage}} (click)="this.getUser(post.userId)"/>
+        <img mat-card-sm-image src={{post.userImage}} [routerLink]="['/home/profile/' + post.userId]"/> <!--(click)="this.getUser(post.userId)-->
         <div class="titleNameAndDate">
-            <div class="divFullname" (click)="this.getUser(post.userId)">
+            <div class="divFullname" [routerLink]="['/home/profile/' + post.userId]">
                 {{post.userFullname}}
             </div>
                 <span mat-card-subtitle>{{post.date}}</span>

@@ -2,7 +2,7 @@
 <div class="content">
 
     <mat-dialog-content>
-        <form [formGroup]="getFormGroup()" (ngSubmit)="onYes()">
+        <form [formGroup]="this.editProfileFormGroup" (ngSubmit)="onYes()">
             <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput formControlName="pictureFormControl">
             <img [src]="this.userInputImg ? this.userInputImg : this.inputData.user.picture" class="imgInput">
             <button mat-flat-button (click)="$event.preventDefault(); fileInput.click()">Change photo</button>
@@ -25,10 +25,10 @@
             <div class="dateContainer">
                 <mat-form-field>
                     <mat-label>Date of birth</mat-label>
-                    <input matInput [matDatepicker]="picker" [placeholder]="this.inputData.user.dateOfBirth" class="imgInput" formControlName="dateOfBirthFormControl"> <!--[value]="this.inputData.user.dateOfBirth"-->
-                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <input matInput type="date" placeholder="DD/MM/YYYY" class="imgInput" formControlName="dateOfBirthFormControl"> <!--[value]="this.inputData.user.dateOfBirth"-->
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-datepicker #picker></mat-datepicker> -->
                 </mat-form-field>
             </div>
             <mat-form-field>

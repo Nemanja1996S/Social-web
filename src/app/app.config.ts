@@ -19,6 +19,8 @@ import { PostReactionsEffect } from './store/postReactions/postReactions.effects
 import { postReactionsReducer } from './store/postReactions/postReactions.reducer';
 import { friendRequestsReducer } from './store/requests/requests.reducer';
 import { FriendRequestEffect } from './store/requests/requests.effects';
+import { profileReducer } from './store/profile/profile.reducer';
+import { ProfileEffect } from './store/profile/profile.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,10 +31,11 @@ export const appConfig: ApplicationConfig = {
       postsState: postsReducer,
       commentsState: commentsReducer,
       userFriendsState : userFriendsReducer,
-      friendRequestsState: friendRequestsReducer
+      friendRequestsState: friendRequestsReducer,
+      profileState: profileReducer
       // postReactionsState : postReactionsReducer,//, PostReactionsEffect
     }),
-    provideEffects([UserEffect, PostsEffect, CommentsEffect, UserFriendsEffect, FriendRequestEffect]),
+    provideEffects([UserEffect, PostsEffect, CommentsEffect, UserFriendsEffect, FriendRequestEffect, ProfileEffect]),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

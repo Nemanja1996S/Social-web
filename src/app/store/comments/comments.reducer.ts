@@ -66,7 +66,7 @@ export const commentsReducer = createReducer(
             const editedUserComm: UserComment = {...userComm, commentText: userComment.commentText, commentPic: userComment.commentPic, commentDate: getCurrentDateAndTime()}
             return {...state, comments: {...state.comments,
                  userComments: [...state.comments.userComments
-                    .filter(userCom => userCom.commentDate !== userComment.commentDate)]}}  //, editedUserComm 
+                    .filter(userCom => userCom.commentDate !== userComment.commentDate), editedUserComm]}}  //, editedUserComm 
         }
         else{
             return {...state}

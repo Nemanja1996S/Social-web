@@ -17,12 +17,12 @@
               <mat-autocomplete requireSelection #auto="matAutocomplete">
                 @for (user of this.users$ | async; track user) {
            
-                  <mat-option *ngIf="this.filteredOptions.includes(user.name + user.surname)" [routerLink]="['/home/user']" [state]="user"
-                   [value]="user.name + user.surname" style="margin-bottom: 1em;" >
+                  <mat-option *ngIf="this.filteredOptions.includes(user.name + user.surname)" [routerLink]="['/home/profile/' + user.id]"
+                   [value]="user.name + user.surname" style="margin-bottom: 1em;" > <!-- [routerLink]="['/home/user'] [state]="user"-->
                     
                         <div style="width: 100%;" >
                             <mat-card-title>
-                                <img mat-card-sm-image src={{user.picture}}/>
+                                <img mat-card-sm-image src={{user.picture}} [routerLink]="['/home/profile/' + user.id]"/>
                                 <div class="titleNameAndNumber">
                                 <div>
                                     {{user.name + " " + user.surname}}
@@ -40,12 +40,12 @@
           </form>
     </mat-card-content>
 </mat-card>
-<mat-card *ngFor="let friendsAndNumberOfMuturalFriends of this.userFriendsAndNumberOfMuturalFriend$| async">
+<mat-card *ngFor="let friendsAndNumberOfMuturalFriends of this.userFriendsAndNumberOfMuturalFriend$ | async">
     <div style="width: 100%;">
         <mat-card-title>
-            <img mat-card-sm-image style="margin-right: 1em;" src={{friendsAndNumberOfMuturalFriends.friend.userImage}} (click)="this.getUser(friendsAndNumberOfMuturalFriends.friend.id)"/>
+            <img mat-card-sm-image style="margin-right: 1em;" src={{friendsAndNumberOfMuturalFriends.friend.userImage}} [routerLink]="['/home/profile/' + friendsAndNumberOfMuturalFriends.friend.id]"/>
             <div class="titleNameAndDate">
-                <div class="divFullname" (click)="this.getUser(friendsAndNumberOfMuturalFriends.friend.id)">
+                <div class="divFullname" [routerLink]="['/home/profile/' + friendsAndNumberOfMuturalFriends.friend.id]">
                     {{friendsAndNumberOfMuturalFriends.friend.userFullname}}
                 </div>
                     <span mat-card-subtitle>Number of mutural friends: {{friendsAndNumberOfMuturalFriends.numberOfMuturalFriends}} </span>

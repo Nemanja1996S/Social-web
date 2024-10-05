@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
 import { UserState } from "./user.reducer";
+import { profileIdSelector } from "../profile/profile.selectors";
 
 // const somethingFeatureKey = 'userReducer'; // Should match with what you pass to .forRoot 
 
@@ -27,6 +28,12 @@ export const selectedSportsSelector = createSelector(
 export const userFriendsIdsArraySelector = createSelector(
     userSelector,
     (user) => user.friendsIds
+)
+
+export const isProfileUserFriendsWithLoggedSelector = createSelector(
+    profileIdSelector,
+    userSelector,
+    (profileUserId, user) => user.friendsIds.includes(profileUserId)
 )
 
 // const numberOfMuturalFriends: number = userFriendsIds.filter(id => friendFriendsIds.includes(id)).length

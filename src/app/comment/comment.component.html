@@ -24,10 +24,10 @@
 </mat-form-field>
 </form>
 
-<div *ngIf="!(this.error$ | async) else noComments">
+<!-- <div *ngIf="!(this.error$ | async) else noComments"> -->
     <mat-card *ngFor="let userComment of this.usersComment$ | async">
     <mat-card-title style="position: relative;">
-        <img mat-card-sm-image src={{userComment.userPicSrc}}/>
+        <img mat-card-sm-image src={{userComment.userPicSrc}} [routerLink]="['/home/profile/' + userComment.userId]"/>
         <div class="titleNameAndDate">
             <div>
                 {{userComment.userFullName}}
@@ -78,7 +78,7 @@
         <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span>
     </mat-card-footer> -->
     </mat-card>
-</div>
+<!-- </div>
 <ng-template #noComments>
     <mat-card>
         <mat-card-content>
@@ -87,6 +87,6 @@
             </div>    
         </mat-card-content>
     </mat-card>
-</ng-template>
+</ng-template> -->
 
 

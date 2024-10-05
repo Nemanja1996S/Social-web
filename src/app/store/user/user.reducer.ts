@@ -55,6 +55,13 @@ export const userReducer = createReducer(
         let newFriendsIds = [...state.user.friendsIds]
         newFriendsIds.push(friendId);
         return ({...state, user: {...state.user, friendsIds: newFriendsIds}})
+    }),
+    on(Actions.removeFriend, (state, {friendId}) => {
+        return ({...state, user: {...state.user, friendsIds: [...state.user.friendsIds.filter(id => id !== friendId)]}})
+    }),
+    on(Actions.deleteUser, (state) => {
+        state = initialState
+        return state
     })
     
 )

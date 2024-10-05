@@ -66,6 +66,7 @@ export class FriendsComponent implements OnInit{
   ngOnInit(): void {
     // this.userFriend$ = this.store.select(userFriendsArraySelector)
     this.userFriendsAndNumberOfMuturalFriend$ = this.store.select(friendsAndNumberOfMuturalFriendsSelector)
+    this.userFriendsAndNumberOfMuturalFriend$.subscribe(sve => console.log(sve))
     // this.service.getAllUsersWithNameStartingWithString("nemanja").subscribe(user => console.log(user))
     this.users$ = this.getUsersObservable()
     this.users$.subscribe(users => console.log(users))
@@ -80,9 +81,9 @@ export class FriendsComponent implements OnInit{
     }
   }
 
-  clicked(user: User){
-    this.router.navigateByUrl('/home/user', {state: user})
-  }
+  // clicked(user: User){
+  //   this.router.navigateByUrl('/home/user', {state: user})
+  // }
 
   getUsersObservable(): Observable<User[]> {
     const input = document.getElementById('searchPeopleInput');
@@ -104,8 +105,8 @@ export class FriendsComponent implements OnInit{
     this.users$.subscribe(people => console.log(people))
   }
 
-  getUser(userId: number): void{
-    this.service.getUserById(userId).subscribe(user => {this.clicked(user)})
-  }
+  // getUser(userId: number): void{
+  //   this.service.getUserById(userId).subscribe(user => {this.clicked(user)})
+  // }
 
 }

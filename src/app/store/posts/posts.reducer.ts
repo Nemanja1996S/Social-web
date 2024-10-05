@@ -33,7 +33,7 @@ export const postsReducer = createReducer(
         return {...state, isLoading: false, error: error}
     }),
     on(Actions.addPost, (state, {post}) => 
-        adapter.addOne(post, state)
+        adapter.addOne({...post, date: getCurrentDateAndTime()}, state)
     ),
     on(Actions.deletePost, (state, {postId}) => 
         adapter.removeOne(postId, state)

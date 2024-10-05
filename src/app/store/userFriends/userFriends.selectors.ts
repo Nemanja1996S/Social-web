@@ -43,7 +43,7 @@ export const friendsAndNumberOfMuturalFriendsSelector = createSelector(
                     friendsArray.forEach(friend => {
                         const friendFriendsIds: number[] = friend.friendsIds
                         const numberOfMuturalFriends: number = userFriendsIds.filter(id => friendFriendsIds.includes(id)).length
-                        friendAndNuberOfMuturalFriendsArray.push({friend,numberOfMuturalFriends})
+                        friendAndNuberOfMuturalFriendsArray.push({friend: friend, numberOfMuturalFriends: numberOfMuturalFriends})
                     })
                     return friendAndNuberOfMuturalFriendsArray.sort((friend1, friend2) => friend2.numberOfMuturalFriends - friend1.numberOfMuturalFriends);
                 }

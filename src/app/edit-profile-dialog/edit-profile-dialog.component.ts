@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,9 +31,10 @@ export interface EditProfileDialogOutputData{
   selector: 'profile-dialog',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, FormsModule, MatSelectModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatDatepickerModule, CommonModule],
-  providers: [provideNativeDateAdapter()],
+  providers: [], //provideNativeDateAdapter()
   templateUrl: './edit-profile-dialog.component.html',
-  styleUrl: './edit-profile-dialog.component.scss'
+  styleUrl: './edit-profile-dialog.component.scss',
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditProfileDialogComponent {
   inputData: EditProfileDialogInputData = {
@@ -48,16 +49,16 @@ export class EditProfileDialogComponent {
   sportsList: Observable<string[]> = of([]);
 
   editProfileFormGroup = new FormGroup({			
-    nameFormControl : new FormControl(this.inputData.user.name),
-    surnameFormControl : new FormControl(this.inputData.user.surname),
-    emailFormControl : new FormControl(this.inputData.user.email),
-    passwordFormControl : new FormControl(this.inputData.user.password),
-    pictureFormControl : new FormControl(this.inputData.user.picture),
-    selectedSportsFormControl: new FormControl(this.inputData.user.selectedSports),
-    dateOfBirthFormControl : new FormControl(this.inputData.user.dateOfBirth),
-    educationFormControl : new FormControl(this.inputData.user.education),
-    workFormControl : new FormControl(this.inputData.user.work),
-    aboutMeFormControl : new FormControl(this.inputData.user.aboutMe)
+    nameFormControl : new FormControl(),
+    surnameFormControl : new FormControl(),
+    emailFormControl : new FormControl(),
+    passwordFormControl : new FormControl(),
+    pictureFormControl : new FormControl(),
+    selectedSportsFormControl: new FormControl(),
+    dateOfBirthFormControl : new FormControl(),
+    educationFormControl : new FormControl(),
+    workFormControl : new FormControl(),
+    aboutMeFormControl : new FormControl()
   })
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: EditProfileDialogInputData, private service:SportSocialService) { } //data: {isYesClicked: boolean, }
@@ -80,39 +81,53 @@ export class EditProfileDialogComponent {
     
   }
 
-  getFormGroup(): FormGroup{
-    return this.editProfileFormGroup
-  }
+  // getFormGroup(): FormGroup{
+  //   return this.editProfileFormGroup
+  // }
   onYes(){
     const controls = this.editProfileFormGroup.controls;
     // console.log(this.editProfileFormGroup.value)
     // console.log(fg)
-    let user: User = this.inputData.user;
-  //   function read_prop(obj : any, prop: any, value: any) {
-  //     obj.prop = value;
-  //     console.log(obj)
-  //     console.log(obj.prop);
-  // }
-    // function getValue(key: keyof User) {
-    //   return user[key]
-    // }
-    // function setValue(key: keyof User, value: any) {
-    //   return user[key]
-    // }
+  //   let user: User = this.inputData.user;
+  // //   function read_prop(obj : any, prop: any, value: any) {
+  // //     obj.prop = value;
+  // //     console.log(obj)
+  // //     console.log(obj.prop);
+  // // }
+  //   // function getValue(key: keyof User) {
+  //   //   return user[key]
+  //   // }
+  //   // function setValue(key: keyof User, value: any) {
+  //   //   return user[key]
+  //   // }
     
-    Object.entries(controls).forEach(([formControlName, formControl]) => {
-      if(formControl.dirty){
-        // console.log(`dirty: formControlName: ${formControlName} value ${formControl.value}`)
-        const userProperty = formControlName.split('FormControl')
-        // read_prop(user, userProperty, formControl.value)
-        // user[userProperty[0].toString()] = formControl.value
-        //this.editProfileFormGroup.controls.pictureFormControl.setValue(this.selectedImageFile)
-        Object.keys(user).filter(property => property !== 'picture').map(property => property === userProperty[0] ? Object.assign(user, user, {[property]: formControl.value}) : null)
-        // console.log(user)
-      }
+  //   Object.entries(controls).forEach(([formControlName, formControl]) => {
+  //     if(formControl.dirty){
+  //       // console.log(`dirty: formControlName: ${formControlName} value ${formControl.value}`)
+  //       const userProperty = formControlName.split('FormControl')
+  //       // read_prop(user, userProperty, formControl.value)
+  //       // user[userProperty[0].toString()] = formControl.value
+  //       //this.editProfileFormGroup.controls.pictureFormControl.setValue(this.selectedImageFile)
+  //       Object.keys(user).filter(property => property !== 'picture').map(property => property === userProperty[0] ? Object.assign(user, user, {[property]: formControl.value}) : null)
+  //       // console.log(user)
+  //     }
       
-    });
-    const output : EditProfileDialogOutputData = {user: user, selectedImage: this.selectedImageFile ?? null}
+  //   });
+    const userOutput: User = {
+      id: this.inputData.user.id,
+      name: controls.nameFormControl.value ?? this.inputData.user.name,
+      surname: controls.surnameFormControl.value ?? this.inputData.user.surname,
+      email: controls.emailFormControl.value ?? this.inputData.user.email,
+      password: controls.passwordFormControl.value ?? this.inputData.user.password,
+      picture: controls.pictureFormControl.value ?? this.inputData.user.picture,
+      friendsIds: this.inputData.user.friendsIds,
+      selectedSports: controls.selectedSportsFormControl.value ?? this.inputData.user.selectedSports,
+      dateOfBirth: controls.dateOfBirthFormControl.value ?? this.inputData.user.dateOfBirth,
+      education: controls.educationFormControl.value ?? this.inputData.user.education,
+      work: controls.workFormControl.value ?? this.inputData.user.work,
+      aboutMe: controls.aboutMeFormControl.value ?? this.inputData.user.aboutMe
+    }
+    const output : EditProfileDialogOutputData = {user: userOutput, selectedImage: this.selectedImageFile ?? null}
     this.dialogRef.close(output);
   }
 

@@ -3,7 +3,7 @@
     <mat-card *ngFor="let request of this.friendRequests$ | async">
         <div style="width: 100%;">
             <mat-card-title>
-                <img mat-card-sm-image style="margin-right: 1em;" src={{request.fromUserImg}} (click)="goTo(request.fromUserId)" /> <!--(click)="" -->
+                <img mat-card-sm-image style="margin-right: 1em;" src={{request.fromUserImg}} [routerLink]="['/home/profile/' + request.fromUserId]" /> <!--(click)="goTo(request.fromUserId)"-->
                 <div class="titleNameAndDate">
                     <div class="divFullname"><!--(click)="this.getUser(request.friend.id)" -->
                         {{request.fromUserFullName}}

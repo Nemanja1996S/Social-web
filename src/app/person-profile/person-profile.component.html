@@ -42,7 +42,7 @@
               <button mat-raised-button class="width50" (click)="this.openDeleteProfileDialog('0ms','0ms')"><span class="mdc-button__label" >Delete</span><mat-icon class="mIcon">delete</mat-icon></button>
             }
             @else {
-              @if(this.loggedInUserFriendsIds.includes(this.user.id)){
+              @if(this.isProfileUserFriendsWithLoggedUser$ | async){
                 <button mat-icon-button disabled class="width50" style="font-size: 25px;">
                   <span class="mdc-button__label">Friends:</span>
                   <mat-icon style="font-size: 30px;">check</mat-icon>
@@ -54,11 +54,11 @@
                   <span class="mdc-button__label">Friends:</span>
                   <mat-icon style="font-size: 30px;">close</mat-icon>
                 </button>
-                @if(this.idsOfUserSentRequstTo.includes(this.user.id)){
+                @if(this.isloggedUserSentRequestToProfileId$ | async){
                   <button mat-raised-button class="width50" disabled><span class="mdc-button__label" style="margin-right: 1em;">Request sent</span><mat-icon class="mIcon">send</mat-icon></button>
                 }
                 @else{
-                  <button mat-raised-button class="width50" ><span class="mdc-button__label" style="margin-right: 1em;">Send request</span><mat-icon class="mIcon">send</mat-icon></button>
+                  <button mat-raised-button class="width50" ><span class="mdc-button__label" style="margin-right: 1em;" (click)="sendRequestTo()">Send request</span><mat-icon class="mIcon">send</mat-icon></button>
                 }
               }
             }    

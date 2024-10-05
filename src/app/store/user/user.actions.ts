@@ -40,3 +40,15 @@ export const addFriend = createAction(
 		friendId: number
 	}>()
 );
+
+export const removeFriend = createAction(		
+	"Remove friend to user state",			
+	props<{					
+		friendId: number
+	}>()
+);
+
+export const deleteUser = createAction(		
+	"Delete profile and user from state",			
+	
+);
