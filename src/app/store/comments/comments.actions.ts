@@ -15,7 +15,7 @@ export const loadCommentsSuccess = createAction(
     }>()
 );
 
-export const loadPostsFailure = createAction(
+export const loadCommentsFailure = createAction(
     "Loading comments to state failure",
     props<{
         error: string
@@ -32,8 +32,24 @@ export const deleteUserComment = createAction(
 export const makeComment = createAction(
     "Making user comment",
     props<{
+        postId: number,
+        userComment: UserComment
+    }>()
+);
+
+export const makeCommentSuccess = createAction(
+    "Making user comment success",
+    props<{
         // postId: number,
         userComment: UserComment
+    }>()
+);
+
+export const makeCommentFailure = createAction(
+    "Making user comment failure",
+    props<{
+        // postId: number,
+        error: string
     }>()
 );
 

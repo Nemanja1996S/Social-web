@@ -1,90 +1,110 @@
+<div class="full-screen-container">
+<div class="input-container">
 <h4>Please enter registration informations:</h4>
 <form [formGroup]="registryFormGroup" (ngSubmit)="$event.preventDefault(); submitForm()">
-    <div class="mb-3 mt-3">
-        <label class="form-label">Name:</label>
-        <input type="text" class="form-control" formControlName="nameFormControl">
-        <div *ngIf="this.registryFormGroup.get('nameFormControl')?.invalid && 
-        this.registryFormGroup.get('nameFormControl')?.touched ">
-            <small class="text-danger" 
-            *ngIf="this.registryFormGroup.get('nameFormControl')?.hasError('required')">Name is required</small>
-        </div>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Surname:</label>
-        <input type="text" class="form-control" formControlName="surnameFormControl">
-        <div *ngIf="this.registryFormGroup.get('surnameFormControl')?.invalid && 
-        this.registryFormGroup.get('surnameFormControl')?.touched ">
-            <small class="text-danger" 
-            *ngIf="this.registryFormGroup.get('surnameFormControl')?.hasError('required')">Surname is required</small>
-        </div>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Email:</label>
-      <input type="email" class="form-control" placeholder="Enter email" name="email" formControlName="emailFormControl">
-      <div *ngIf="this.registryFormGroup.get('emailFormControl')?.invalid && 
-        this.registryFormGroup.get('emailFormControl')?.touched ">
-            <small class="text-danger" 
-            *ngIf="this.registryFormGroup.get('emailFormControl')?.hasError('required')">Email is required</small>
-            <small class="text-danger" 
-            *ngIf="this.registryFormGroup.get('emailFormControl')?.hasError('email')">Email is not valid</small>
-        </div>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Password:</label>
-        <div class="input-password">
-            <input [type]="this.visiblePassword? 'text' : 'password'" class="form-control input-password" placeholder="Enter password" name="pswd" formControlName="passwordFormControl">
-            <div class="d-flex" *ngIf="!this.visiblePassword else crossEye">
-            <i class="fa-solid fa-eye fa-align" (click)="togglePasswordText()"></i>
+        <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput>
+        <img [src]="this.userImg" class="imgInput">
+        <button mat-flat-button class="marginBottom1" (click)="$event.preventDefault(); fileInput.click()">Choose your profile picture:</button>
+        <mat-form-field class="full-width">
+            <mat-label >Name:</mat-label>
+            <input matInput type="text"  formControlName="nameFormControl">
+            <div *ngIf="this.registryFormGroup.get('nameFormControl')?.invalid && 
+                this.registryFormGroup.get('nameFormControl')?.touched ">
+                <small class="text-danger" 
+                *ngIf="this.registryFormGroup.get('nameFormControl')?.hasError('required')">Name is required</small>
             </div>
-            <ng-template #crossEye>
-                <div class="d-flex">
-                    <i class="fa-solid fa-eye-slash fa-align" (click)="togglePasswordText()"></i>
-                </div>
-            </ng-template>
-        </div> 
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Choose sports of interest:</label>
-        <select class="form-select" formControlName="selectedSportFormControl" (change)="addSelectedOption()" >
-            <option *ngFor="let option of sportsOptions"
-             value={{option}} >{{option}} </option>
-          </select>
-        <div *ngIf="(this.registryFormGroup.get('selectedSportFormControl')?.invalid && 
-          this.registryFormGroup.get('selectedSportFormControl')?.touched && this.sportsSelected.length < 1) else showChosenSports ">
-              <small class="text-danger" *ngIf="this.registryFormGroup
-              .get('selectedSportFormControl')?.hasError('required')">You must choose at least 1 sport</small>
-        </div>
-        <ng-template #showChosenSports>
-            <ul class="d-flex">
-                <li *ngFor="let sport of sportsSelected" class="list-sports">
-                    {{sport}} <i class="fa-solid fa-square-xmark" (click)="removeSport(sport)"></i>
-                </li>
-            </ul>
-        </ng-template>
-    </div>
+        </mat-form-field>
+        
     
-    <div class="mb-3">
-        <label class="form-label">Date of birth:</label>
-        <input type="date" class="form-control" formControlName="dateFormControl">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Education:</label>
-        <input type="text" class="form-control" formControlName="educationFormControl">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Work:</label>
-        <input type="text" class="form-control" formControlName="workFormControl">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">About me:</label>
-        <div class="form-floating">
-            <textarea class="form-control" style="height: 100px" formControlName="aboutMeFormControl"></textarea>
-        </div>
-    </div>
-    <!-- <div class="form-check mb-3">
-      <label class="form-check-label">
-        <input class="form-check-input" type="checkbox" name="remember"> Remember me
-      </label>
-    </div> -->
-    <button type="submit" class="btn btn-primary" [disabled]="this.registryFormGroup.invalid">Submit</button>
+    <mat-form-field class="full-width">
+       
+            <mat-label >Surname:</mat-label>
+            <input matInput type="text" formControlName="surnameFormControl">
+            <div *ngIf="this.registryFormGroup.get('surnameFormControl')?.invalid && 
+            this.registryFormGroup.get('surnameFormControl')?.touched ">
+                <small class="text-danger" 
+                *ngIf="this.registryFormGroup.get('surnameFormControl')?.hasError('required')">Surname is required</small>
+            </div>
+        
+    </mat-form-field>
+    <mat-form-field class="full-width">
+       
+            <mat-label >Email:</mat-label>
+            <input matInput type="email"  placeholder="Enter email" name="email" formControlName="emailFormControl">
+            <div *ngIf="this.registryFormGroup.get('emailFormControl')?.invalid && 
+              this.registryFormGroup.get('emailFormControl')?.touched ">
+                  <small class="text-danger" 
+                  *ngIf="this.registryFormGroup.get('emailFormControl')?.hasError('required')">Email is required</small>
+                  <small class="text-danger" 
+                  *ngIf="this.registryFormGroup.get('emailFormControl')?.hasError('email')">Email is not valid</small>
+              </div>
+          
+    </mat-form-field>
+    <mat-form-field class="full-width">
+       
+            <mat-label >Password:</mat-label>
+            <div class="input-password">
+                <input matInput [type]="this.visiblePassword? 'text' : 'password'" class="input-password" placeholder="Enter password" name="pswd" formControlName="passwordFormControl">
+                <div class="d-flex" *ngIf="!this.visiblePassword else crossEye">
+                <i class="fa-solid fa-eye fa-align" (click)="togglePasswordText()"></i>
+                </div>
+                <ng-template #crossEye>
+                    <div class="d-flex">
+                        <i class="fa-solid fa-eye-slash fa-align" (click)="togglePasswordText()"></i>
+                    </div>
+                </ng-template>
+            </div> 
+        
+    </mat-form-field>
+    <mat-form-field class="full-width">
+       
+            <mat-label>Choose sports of interest:</mat-label>
+            <!-- <select matInput class="form-select" formControlName="selectedSportFormControl" (change)="addSelectedOption()" >
+                <option *ngFor="let option of sportsOptions"
+                 value={{option}} >{{option}} </option>
+              </select> -->
+            <mat-select multiple formControlName="selectedSportFormControl">
+                <mat-option *ngFor="let option of sportsOptions$ | async" [value]="option" >{{option}} </mat-option>
+            </mat-select>
+            <div *ngIf="(this.registryFormGroup.get('selectedSportFormControl')?.invalid && 
+              this.registryFormGroup.get('selectedSportFormControl')?.touched && this.sportsSelected.length < 1) ">
+                  <small class="text-danger" *ngIf="this.registryFormGroup
+                  .get('selectedSportFormControl')?.hasError('required')">You must choose at least 1 sport</small>
+            </div>
+        
+    </mat-form-field>
+    <mat-form-field class="full-width">
+       
+            <mat-label >Date of birth:</mat-label>
+            <input type="date" matInput formControlName="dateFormControl">
+            <!-- <input matInput [matDatepicker]="picker" formControlName="dateFormControl">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+         -->
+    </mat-form-field>
+    <mat-form-field class="full-width">
+       
+            <mat-label >Education:</mat-label>
+            <input type="text" matInput formControlName="educationFormControl">
+        
+    </mat-form-field>
+    <mat-form-field class="full-width">
+       
+            <mat-label >Work:</mat-label>
+            <input type="text" matInput formControlName="workFormControl">
+        
+    </mat-form-field>
+    
+    <mat-form-field class="full-width">
+       
+            <mat-label >About me:</mat-label>
+            <div class="form-floating">
+                <textarea matInput style="height: 100px" formControlName="aboutMeFormControl"></textarea>
+            </div>
+        
+    </mat-form-field>
+    <button type="submit" class="btn btn-primary" [disabled]="this.registryFormGroup.invalid && !this.selectedImageFile">Submit</button>
   </form>
+</div>
+</div>

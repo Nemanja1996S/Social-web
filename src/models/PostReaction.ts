@@ -18,3 +18,5 @@ export interface UserPostReaction{
 //     "neutral" = 0,
 //     "like" = 1
 // }
+
+// const k : ReactionEnum = ReactionEnum.dislike

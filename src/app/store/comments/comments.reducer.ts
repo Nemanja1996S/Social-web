@@ -44,7 +44,7 @@ export const commentsReducer = createReducer(
         // adapter.setOne(comments, state)
         return {...state, isLoading: false, comments: comments}
     }),
-    on(Actions.loadPostsFailure, (state, {error}) => {
+    on(Actions.loadCommentsFailure, (state, {error}) => {
         return {...state, isLoading: false, error: error}
     }),
     on(Actions.deleteUserComment, (state, {userComment}) => {
@@ -52,12 +52,15 @@ export const commentsReducer = createReducer(
         const comms : Comments = {...state.comments, userComments: userComms}
         return {...state, comments: comms }
     }),
-    on(Actions.makeComment, (state, {userComment}) => {
+    on(Actions.makeCommentSuccess, (state, {userComment}) => {
         let userComm = {...userComment, commentDate: getCurrentDateAndTime() }
         let userComms: UserComment[] = state.comments.userComments;
         //userComms.push(userComm);
         return {...state, comments: {...state.comments, userComments: [...state.comments.userComments, userComm]}}
 
+    }),
+    on(Actions.makeCommentFailure, (state, {error}) => {
+        return {...state, error: error}
     }),
     on(Actions.editUserComment, (state, { userComment}) => {
         const userComms: UserComment[] = state.comments.userComments;

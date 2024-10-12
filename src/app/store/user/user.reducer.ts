@@ -42,6 +42,9 @@ export const userReducer = createReducer(
     on(Actions.loadUser, (state, {email, password}) => {
         return ({...state, isLoading: true, searchSelectedSports: [] })
     }),
+    on(Actions.loadUserById, (state, {id}) => {
+        return ({...state, isLoading: true, searchSelectedSports: [] })
+    }),
     on(Actions.loadUserSuccess, (state, {user}) =>  {
         return ({...state, isLoading: false, user: user })
     }),

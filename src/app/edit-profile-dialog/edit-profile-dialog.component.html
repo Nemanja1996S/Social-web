@@ -34,7 +34,7 @@
             <mat-form-field>
                 <mat-label>Selected sports:</mat-label>
                 <mat-select formControlName="selectedSportsFormControl" multiple>
-                  @for (sport of this.sportsList | async; track sport) {
+                  @for (sport of this.sportsLista ; track sport) {
                     <mat-option [value]="sport">{{sport}}</mat-option>
                   }
                 </mat-select>

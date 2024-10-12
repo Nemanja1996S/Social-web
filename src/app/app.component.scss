@@ -1,3 +1,17 @@
-.container {
-    margin: 50px;
+// .container {
+//     margin: 50px;
+// }
+// :root{
+//     margin: 0;
+// }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import "primeng/resources/primeng.css";
+
+span .p-component, .p-component * {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 5%;
 }

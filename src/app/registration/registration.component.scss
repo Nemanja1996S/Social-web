@@ -1,3 +1,7 @@
+:host{
+    width: 80%;
+}
+
 .reg-form {
     margin: 50px;
 }
@@ -34,4 +38,44 @@ input {
 
 ul{
     padding-inline-start: 0px;
+}
+
+
+.imgInput{
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.full-width{
+    width: 100%;
+}
+
+.marginBottom1{
+    margin-bottom: 1em;
+}
+
+.full-screen-container{
+    background-image: url('../../assets/sports.jpg');
+    height: auto;
+    width: 100vw;
+    margin: 0;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.input-container{
+    align-self: center;
+    width: 80%;
+    --color: hsl(200, 100%, 6%, .7);
+    color: white;
+    background-color: hsl(200, 100%, 6%, .7);
+    box-shadow: 5px 5px 5px 5px hsl(200, 100%, 6%, .7);
+    border-radius: 20px;
+    padding: 5px 50px;
+    font-weight: lighter;
+    color: white;
 }

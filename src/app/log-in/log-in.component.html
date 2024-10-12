@@ -1,4 +1,6 @@
-<div class="reg-div">
+<div class="full-screen-container">
+  <div class="input-container">
+  <div class="reg-div">
     <h1>Welcome to SportSocial!</h1>
     <small>First time here?
         <a href="" (click)="$event.preventDefault(); goToRegistry()">Registry</a>
@@ -9,7 +11,7 @@
 
 <h3>Please log in:</h3>
 <form class="reg-form mt-3" [formGroup]="logInFormGroup" (ngSubmit)="$event.preventDefault(); submitForm()">
-    <div class="mb-3">
+    <div class="mb-3" style="color: white;">
       <label class="form-label">Your email address</label>
       <input type="email" class="form-control" placeholder="Enter email" name="email" formControlName="emailFormControl">
       <div *ngIf="this.logInFormGroup.get('emailFormControl')?.invalid && 
@@ -45,3 +47,5 @@
     </ng-template>
     </button>
   </form>
+</div>
+</div>

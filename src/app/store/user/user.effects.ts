@@ -11,7 +11,7 @@ export class UserEffect {
 	loadUserEffect$ = createEffect( () =>
 		this.actions$.pipe(
 			ofType(UserActions.loadUser),
-			exhaustMap( ({email, password}) =>
+			switchMap( ({email, password}) =>
 				this.service.getUser(email, password).pipe(
 					map((user) => UserActions.loadUserSuccess({user})),
 					catchError(error => of(UserActions.loadUserFailure({error})))
@@ -20,4 +20,17 @@ export class UserEffect {
 			
 		)
 	)
+
+	// loadUserByIdEffect$ = createEffect( () =>
+	// 	this.actions$.pipe(
+	// 		ofType(UserActions.loadUserById),
+	// 		exhaustMap( ({id}) =>
+	// 			this.service.getUserById(id).pipe(
+	// 				map((user) => UserActions.loadUserSuccess({user})),
+	// 				catchError(error => of(UserActions.loadUserFailure({error})))
+	// 			)
+	// 		)
+			
+	// 	)
+	// )
 }

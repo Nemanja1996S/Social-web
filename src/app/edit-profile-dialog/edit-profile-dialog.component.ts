@@ -18,6 +18,7 @@ export interface EditProfileDialogInputData{
   // isConfirmed: boolean,
   title: string,
   user: User,
+  sportsList: string[],
   confirmString: string,
   cancelString: string
 }
@@ -40,13 +41,14 @@ export class EditProfileDialogComponent {
   inputData: EditProfileDialogInputData = {
     title: '',
     user: initialUser,
+    sportsList: [],
     confirmString: '',
     cancelString: ''
   }
   readonly dialogRef = inject(MatDialogRef<DialogComponent>);
   selectedImageFile = null;
   userInputImg : string = '';
-  sportsList: Observable<string[]> = of([]);
+  sportsLista: string[] = []
 
   editProfileFormGroup = new FormGroup({			
     nameFormControl : new FormControl(),
@@ -65,7 +67,7 @@ export class EditProfileDialogComponent {
 
   ngOnInit(): void {
     this.inputData = this.data
-    this.sportsList = this.service.getAllSports();//.subscribe(sports => {this.sportsList = Array.from(sports)})
+    this.sportsLista = this.inputData.sportsList//.subscribe(sports => {this.sportsList = Array.from(sports)})
     if(this.inputData.user){
       this.editProfileFormGroup.setValue({nameFormControl : (this.inputData.user.name),
         surnameFormControl : (this.inputData.user.surname),
@@ -73,7 +75,7 @@ export class EditProfileDialogComponent {
         passwordFormControl : (this.inputData.user.password),
         pictureFormControl : (''),
         selectedSportsFormControl: (this.inputData.user.selectedSports),
-        dateOfBirthFormControl : (this.inputData.user.dateOfBirth),
+        dateOfBirthFormControl : (''),
         educationFormControl : (this.inputData.user.education),
         workFormControl : (this.inputData.user.work),
         aboutMeFormControl : (this.inputData.user.aboutMe)})

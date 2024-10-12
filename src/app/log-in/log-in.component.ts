@@ -6,7 +6,7 @@ import { SportSocialService } from '../services/sport-social.service';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
 import * as Actions from '../store/user/user.actions'
-import { isLoadingSelector } from '../store/user/user.selector';
+import { errorSelector, isLoadingSelector } from '../store/user/user.selector';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -25,14 +25,16 @@ export class LogInComponent implements OnInit {
     passwordFormControl: new FormControl('', Validators.required),
   });
 
-  isLoading$ : Observable<boolean> = of(false); 
+  isError$ : Observable<string | null> = of(null);
+  isLoading$: Observable<boolean> = of(false)
 
   constructor(private router: Router, private service: SportSocialService, private store : Store<AppState> ){
-    this.isLoading$ = this.store.select(isLoadingSelector);
+    
    }
 
   ngOnInit(): void {
-   
+   this.isError$ = this.store.select(errorSelector);
+   this.isLoading$ = this.store.select(isLoadingSelector);
   }
 
   goToRegistry(){
@@ -47,9 +49,19 @@ export class LogInComponent implements OnInit {
   submitForm(){
     this.store.dispatch(Actions.setIsLoading());
     this.store.dispatch(Actions.loadUser({
-      email: this.logInFormGroup.get('emailFormControl')?.value ?? '',
-      password: this.logInFormGroup.get('passwordFormControl')?.value ?? '',}))
-     this.router.navigate(['home'])
+      email: this.logInFormGroup.controls.emailFormControl.value ?? '',
+      password: this.logInFormGroup.controls.passwordFormControl.value ?? '',}))
+    // this.store.dispatch(Actions.loadUserById({id: 0}))
+    this.isError$.subscribe({ next: (error) => {
+      if(error){
+        alert(error)
+      }
+      else{
+        this.router.navigate(['home'])
+      }
+    }})
+    
+     
   }
 
   // tryToLogIn(): boolean {

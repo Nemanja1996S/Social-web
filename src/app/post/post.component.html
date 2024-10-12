@@ -1,3 +1,4 @@
+<div class="everythingContainer">
 <form>
 <mat-form-field class="userPostContainer">
     <mat-label>What are you thinking about?</mat-label>
@@ -9,30 +10,39 @@
                 [formControl]="postTextFormControl" ></textarea>
         <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput>
         <img [src]="this.userPostImg" class="imgInput">
+        <div *ngIf="this.userPostImg">
+            <button mat-icon-button class="imgXbutton" (click)="closeImg()"><mat-icon class="Xbutton">close</mat-icon></button>
+        </div>
+        
         <div style="display: flex;">
             <mat-checkbox *ngFor="let sport of this.userSelectedSport$ | async" [formControl]="postCheckListFormControl" (change)="onSportChecked(sport)">{{sport}}</mat-checkbox>
         </div>
         <div>
             <button mat-flat-button (click)="$event.preventDefault(); fileInput.click()">Pick photo</button>
             <button mat-flat-button (click)="$event.preventDefault(); onPost()" 
-            [disabled]="!this.postTextFormControl.dirty ||
-            this.postTextFormControl.invalid || 
-            this.postCheckListFormControl.invalid" >POST</button>
+            [disabled]="(this.userCheckedSports.length < 1) &&
+             (this.postTextFormControl.invalid || !this.userPostImg)" >POST</button>
+             
+
+             <!-- (this.postCheckListFormControl) &&
+             (this.postTextFormControl.invalid || !this.userPostImg) -->
         </div>
     </div>
 </mat-form-field>
 </form>
+<!-- <button (click)="check()">log</button> -->
+<!-- <div *ngIf="this.user$ | async"> -->
 <mat-card *ngFor="let post of this.posts$ | async">
     <mat-card-title class=".positionRelative">
-        @if(this.user.id == post.userId){  
+        @if(this.user.id == post.user.id){  
             <button mat-icon-button class="editButtonContainer" (click)="openEditDialog('0ms', '0ms', post)" ><mat-icon class="editButton">edit_note</mat-icon></button>
             <button mat-icon-button class="XbuttonContainer" (click)="openDeleteDialog('0ms', '0ms', post.id)" ><mat-icon class="Xbutton">close</mat-icon></button>
         <!-- treba u if ===, al zato sto je jedno string, a drugo number, ne moze -->
         }
-        <img mat-card-sm-image src={{post.userImage}} [routerLink]="['/home/profile/' + post.userId]"/> <!--(click)="this.getUser(post.userId)-->
+        <img mat-card-sm-image [src]="post.user.picture " [routerLink]="['/home/profile/' + post.user.id]"/> <!--(click)="this.getUser(post.userId)-->
         <div class="titleNameAndDate">
-            <div class="divFullname" [routerLink]="['/home/profile/' + post.userId]">
-                {{post.userFullname}}
+            <div class="divFullname" [routerLink]="['/home/profile/' + post.user.id]">
+                {{post.user.name + ' ' + post.user.surname}}
             </div>
                 <span mat-card-subtitle>{{post.date}}</span>
                 <div>
@@ -46,7 +56,7 @@
             {{post.text}}
         </p>
     </mat-card-content>
-    <img mat-card-image src={{post.image}}>
+    <img mat-card-image [src]="post.image">
     <mat-card-actions>
         <button mat-button (click)="like(post)" [color]="getColorForLikeButton(post)"><mat-icon>thumb_up</mat-icon>Like </button>
         <button mat-button (click)="dislike(post)" [color]="getColorForDislikeButton(post)"><mat-icon>thumb_down</mat-icon>Dislike </button>
@@ -60,6 +70,8 @@
         <!-- <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span> -->
     </mat-card-footer>
 </mat-card>
+</div>
+<!-- </div> -->
 
 
 <!-- <mat-card>

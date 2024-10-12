@@ -12,12 +12,12 @@ import { AppState } from '../store/app.state';
 import { mergeMap, Observable, of } from 'rxjs';
 import { isProfileUserFriendsWithLoggedSelector, userFriendsIdsArraySelector, userIdSelector, userSelector } from '../store/user/user.selector';
 import { CommonModule, NgFor } from '@angular/common';
-import { Post } from '../../models/Post';
+import { Post, ReactionEnum } from '../../models/Post';
 import { SportSocialService } from '../services/sport-social.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { EditProfileDialogComponent, EditProfileDialogInputData, EditProfileDialogOutputData } from '../edit-profile-dialog/edit-profile-dialog.component';
-import { dislikePost, likePost } from '../store/posts/posts.actions';
+import { dislikePost, likePost, reactToPost } from '../store/posts/posts.actions';
 import { loggedInUserPostsSelector, profilePostsSelector } from '../store/posts/posts.selector';
 import { idsOfloggedUserSentRequestToSelector, isloggedUserSentRequestToProfileUserSelector } from '../store/requests/requests.selectors';
 import { loadProfile } from '../store/profile/profile.actions';
@@ -49,6 +49,7 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
   isProfileUserFriendsWithLoggedUser$: Observable<boolean> = of();
   isloggedUserSentRequestToProfileId$: Observable<boolean> = of()
   idsOfUserSentRequstTo: number[] = []
+  sportsList: string [] = []
   readonly dialog = inject(MatDialog);
   // readonly editDialog = inject(MatDialog)
 
@@ -63,6 +64,7 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     console.log("Iz init")
     console.log(this.isSelfProfile)
+    this.service.getAllSports().subscribe(sports => this.sportsList = sports)
     this.route.paramMap.pipe(
       mergeMap((params) => of(params.get('userId'))),
       mergeMap((id) => {
@@ -196,7 +198,7 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
  }
 
   openEditDialog(): void {
-    const data : EditProfileDialogInputData = {title: "Edit profile:", user: this.user, confirmString: "Save", cancelString: "Cancel"}
+    const data : EditProfileDialogInputData = {title: "Edit profile:", user: this.user, sportsList: this.sportsList, confirmString: "Save", cancelString: "Cancel"}
     this.dialog.closeAll();
     this.dialog.afterOpened.subscribe(result => console.log("otvoren sam"))
     const dialogRef = this.dialog.open(EditProfileDialogComponent, {
@@ -233,17 +235,17 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
   }
 
   like(post: Post){
-    this.store.dispatch(likePost({post: post, userId: this.getWatchedUserId()}))
+    this.store.dispatch(reactToPost({post: post, userId: this.user.id, reactionEnum: ReactionEnum.like}))
   }
 
   dislike(post: Post){
-    this.store.dispatch(dislikePost({post: post, userId: this.getWatchedUserId()}))
+    this.store.dispatch(reactToPost({post: post, userId: this.user.id, reactionEnum: ReactionEnum.dislike}))
   }
 
   getUserReactionForPost(post: Post): number{
-    const userReaction = post.usersReactions.find(userReaction => userReaction.reactedUserId === this.getWatchedUserId())
+    const userReaction = post.usersReactions.find(userReaction => userReaction.userId === this.user.id)
     if(userReaction)
-      return userReaction.reaction
+      return userReaction.reactionEnum
     return 0;
  }
 

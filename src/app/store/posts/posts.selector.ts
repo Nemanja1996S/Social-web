@@ -19,11 +19,23 @@ function isForSports(post: Post, selectedSports: string[]): boolean {
     return post.forSports.some(sport => selectedSports.includes(sport));
 }
 
+// export const userReactionForPostsSelector = createSelector(
+//     selectPostsFeature,
+//     userIdSelector,
+//     (state, userId) => Object.values(state.entities).map(post => <Post>post).map(post => post.usersReactions)
+//     .map(reactions => reactions.filter(reaction => reaction.reactedUserId === userId))
+// )
+
+
+// export const postIdSelector = createSelector(
+//     (user) => user.id
+// )
+
 export const loggedInUserPostsSelector = createSelector(
     selectPostsFeature,
     userIdSelector,
     (state, userId) => Object
-    .values(state.entities).map(post => <Post>post).filter(post => post.id === userId)
+    .values(state.entities).map(post => <Post>post).filter(post => post.user.id === userId)
     .sort((a, b) => b.date.localeCompare(a.date))
 )
 
@@ -31,7 +43,7 @@ export const profilePostsSelector = createSelector(
     selectPostsFeature,
     profileIdSelector,
     (state, profileId) => Object
-    .values(state.entities).map(post => <Post>post).filter(post => post.id === profileId)
+    .values(state.entities).map(post => <Post>post).filter(post => post.user.id === profileId)
     .sort((a, b) => b.date.localeCompare(a.date))
 )
 

@@ -5,17 +5,27 @@ import { Dictionary } from "@ngrx/entity"
 //     "neutral" = 0,
 //     "like" = 1
 // }
-export interface UserReaction{
-    reactedUserId: number,
-    reaction: number
+
+export enum ReactionEnum {        
+    "dislike" = -1,
+    "neutral" = 0,
+    "like" = 1
+}
+
+export interface createPost {
+    forSports: string[]
+    text?: string
+    image?: string
+}
+export interface UserReaction {
+    userId: number,
+    reactionEnum: ReactionEnum
     // reactions: ReactionEnum[]
 }
 
 export interface Post {
-    id: number,
-    userId: number,
-    userFullname: string,
-    userImage: string,
+    id: number
+    user: MiniUser,
     forSports: string[],
     date: string,
     text?: string,
@@ -32,11 +42,23 @@ export interface Post {
     // numberOfShares: number
 }
 
+export interface MiniUser{
+    id: number,
+    name: string,
+    surname: string,
+    picture: string
+}
+
+export const initialMiniuser: MiniUser = {
+    id: -1,
+    name: "",
+    surname: "",
+    picture: ""
+} 
+
 export const initialPost: Post = {
     id: -1,
-    userId: -1,
-    userFullname: '',
-    userImage: '',
+    user: initialMiniuser,
     forSports: [],
     date: '',
     text: '',

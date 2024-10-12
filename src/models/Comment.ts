@@ -12,3 +12,9 @@ export interface UserComment{
     commentText: string,
     commentPic: string
 }
+
+export interface CreateUserComment{
+    userId: number,
+    commentText?: string,
+    commentPic?: string
+}

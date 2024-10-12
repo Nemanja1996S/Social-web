@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { User } from '../../models/User';
 import { catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { Post } from '../../models/Post';
-import { Comments } from '../../models/Comment';
+import { createPost, Post, ReactionEnum } from '../../models/Post';
+import { Comments, CreateUserComment, UserComment } from '../../models/Comment';
 import { UserFriends } from '../../models/UserFriends';
 import { PeopleOption } from '../friends/friends.component';
 import { UserPostReaction } from '../../models/PostReaction';
@@ -53,15 +53,20 @@ export class SportSocialService {
     .pipe(catchError(this.errorHandler));
   }
 
-  getUser(email: string, password: string){   //treba da se vrati id ciji je mejl i pasvord ovo
+  getUser(email: string, password: string){   
     return this.httpClient
-    .get<User>(environment.apiUrl + "/users/0")  ///users?email=${email}&&password=${password}
+    .get<User>(`${environment.apiUrl}/users/login/user?email=${email}&password=${password}`)  
     .pipe(catchError(this.errorHandler));
   }
 
-  getPostsForUser(id: number){
+  postUser(user: User){   
+    return this.httpClient.post<User>(environment.apiUrl + "/users",user)  
+    .pipe(catchError(this.errorHandler));
+  }
+
+  getPostsForUser(userId: number){
     return this.httpClient
-    .get<Post[]>(`${environment.apiUrl}/posts`)
+    .get<Post[]>(`${environment.apiUrl}/posts/forUser/${userId}`)
     .pipe(catchError(this.errorHandler));
   }
 
@@ -71,9 +76,9 @@ export class SportSocialService {
     .pipe(catchError(this.errorHandler));
   }
 
-  getCommentsForPost(id: number){
+  getCommentsForPost(postId: number){
     return this.httpClient
-      .get<Comments>(`${environment.apiUrl}/comments/${id}`)
+      .get<Comments>(`${environment.apiUrl}/comments/${postId}`)
       .pipe(catchError(this.errorHandler));
   }
 
@@ -99,6 +104,47 @@ export class SportSocialService {
     return this.httpClient
       .get<string[]>(`${environment.apiUrl}/sports`)
       .pipe(catchError(this.errorHandler));
+  }
+
+  addPost(userId: number, createPostObjectbody: createPost){
+    return this.httpClient
+      .post(`${environment.apiUrl}/posts/${userId}`, createPostObjectbody //options?
+      )
+  }
+
+  editPost(postId: number, text: string | undefined, image: string | undefined){
+    return this.httpClient
+      .patch(`${environment.apiUrl}/posts/${postId}`, {text, image})
+  }
+
+  reactToPost(userId: number, postId: number, reactionEnum: ReactionEnum){
+    console.log("reakcija:")
+    console.log(reactionEnum)
+    if(reactionEnum === ReactionEnum.like){
+      return this.httpClient
+      .patch(`${environment.apiUrl}/reactions/${postId}`, {userId: userId, reactionEnum: ReactionEnum.like})
+    }
+    else{
+      return this.httpClient
+      .patch(`${environment.apiUrl}/reactions/${postId}`, {userId: userId, reactionEnum: ReactionEnum.dislike})
+
+    }
+  }
+
+  deletePost(postId: number){
+    return this.httpClient
+    .delete(`${environment.apiUrl}/posts/${postId}`)  //options?
+  }
+
+  makeCommentForPost(postId: number, comment: UserComment){
+    const createComment: CreateUserComment = {
+      userId: comment.userId,
+      commentText: comment.commentText,
+      commentPic: comment.commentPic
+    }
+    return this.httpClient
+    .post(`${environment.apiUrl}/comments/${postId}`, createComment) //options?
+
   }
 
   addUser(user: User){

@@ -5,10 +5,10 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { SportSocialService } from '../services/sport-social.service';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
-import { postsSelector } from '../store/posts/posts.selector';
-import { find, Observable, of } from 'rxjs';
-import { Post, UserReaction } from '../../models/Post';
-import { addPost, deletePost, dislikePost, editPost, likePost, loadPosts, loadPostsForSports } from '../store/posts/posts.actions';
+import { loggedInUserPostsSelector, postsSelector } from '../store/posts/posts.selector';
+import { find, mergeMap, switchMap, Observable, of } from 'rxjs';
+import { Post, ReactionEnum, UserReaction } from '../../models/Post';
+import { addPost, deletePost, dislikePost, editPost, likePost, loadPosts, loadPostsForSports, reactToPost } from '../store/posts/posts.actions';
 import { CommonModule, NgFor } from '@angular/common';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -21,6 +21,7 @@ import { loadUserFriends } from '../store/userFriends/userFiends.actions';
 import { initialUser } from '../store/user/user.reducer';
 import { User } from '../../models/User';
 import { DialogComponent } from '../dialog/dialog.component';
+
 import {
   MatDialog,
   MatDialogActions,
@@ -38,7 +39,7 @@ import { loadPostReactions } from '../store/postReactions/postReactions.actions'
   selector: 'post',
   standalone: true,
   imports: [MatCardModule, MatButtonModule, MatIconModule,
-            NgFor, CommonModule, ReactiveFormsModule, MatFormFieldModule,
+            NgFor, CommonModule, ReactiveFormsModule, MatFormFieldModule, MatCheckboxModule,
             MatInputModule, MatCheckboxModule, MatIcon, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, RouterLink],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
@@ -51,14 +52,16 @@ export class PostComponent implements OnInit {
   selectedImageFile = null;
   userPostImg : string = '';
   userSelectedSport$ : Observable<string[]> = of([])
-  user: User = initialUser;
+  user: User | any = {};
+  user$: Observable<User> = of()
   // userSelectedSports = ['football', 'basketball', 'table tennis', 'bodybuilding'];
   userCheckedSports : string[] = []
   //userReactionToPostDict$: Observable<Dictionary<Reaction>[]> = of([])
   clicked: boolean = false
   color = 'accent';
-  //userPostReactions$ : Observable<UserPostReaction[]> = of([])
-  userReaction$ : Observable<UserReaction> = of()
+  // userPostReactions$ : Observable<UserPostReaction[]> = of([])
+  userReaction$ : Observable<UserReaction[][]> = of()
+  colorforReactButton$ : Observable<string> = of('')
   readonly dialog = inject(MatDialog);
 
   constructor(private store: Store<AppState>, private service: SportSocialService, private router: Router) {
@@ -69,9 +72,21 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.posts$ = this.store.select(postsSelector);
-    this.userSelectedSport$ = this.store.select(selectedSportsSelector);
-    this.store.select(userSelector).subscribe(user => this.user = user)
+    // this.posts$ = this.store.select(postsSelector);
+    // this.userSelectedSport$ = this.store.select(selectedSportsSelector);
+    this.user$ = this.store.select(userSelector);
+    // this.user$.subscribe({next: (user) => this.user = user})
+    this.user$.subscribe(user => {
+      this.user = user
+      this.store.dispatch(loadPosts({userId: user.id}))
+      this.posts$ = this.store.select(postsSelector);
+      this.userSelectedSport$ = this.store.select(selectedSportsSelector);
+     // this.userReaction$ = this.store.select(userReactionForPostsSelector)
+     
+    
+    })
+    // this.user$.subscribe(user => {this.user = user;})
+    // this.user$.subscribe(user => this.store.dispatch(loadPosts({userId: user.id})));
     // if(history.state){
     //   console.log("history state")
     //   console.log(history.state)
@@ -80,10 +95,10 @@ export class PostComponent implements OnInit {
     // else{
     //   this.store.dispatch(loadPosts({userId: 0}));
     // }
-    this.store.dispatch(loadPosts({userId: 0}));
-    this.store.dispatch(loadUserFriends({userId: 0}));
-    this.store.dispatch(loadPostReactions({userId: 0}))
-    //this.userPostReactions$ = this.store.select(allUserReactionsSelector)
+    
+    // this.store.dispatch(loadUserFriends({userId: 0}));
+    // this.store.dispatch(loadPostReactions({userId: 0}))
+    // this.userPostReactions$ = this.store.select(allUserReactionsSelector)
     
   }
 
@@ -93,11 +108,37 @@ export class PostComponent implements OnInit {
   // }
 
   getUserReactionForPost(post: Post): number{
-    const userReaction = post.usersReactions.find(userReaction => userReaction.reactedUserId === this.user.id)
+    const userReaction = post.usersReactions.find(userReaction => userReaction.userId === this.user.id)
     if(userReaction)
-      return userReaction.reaction
+      return userReaction.reactionEnum
     return 0;
  }
+
+//  getUserReactionForPostObsrvable(post: Post, isLike: boolean): Observable<string>{
+//   const userReaction = post.usersReactions.find(userReaction => userReaction.userId === this.user.id)
+//   if(userReaction){
+//     if(isLike && userReaction.reactionEnum === ReactionEnum.like){
+//       return of('primary');
+//     }
+//     else if(userReaction.reactionEnum === ReactionEnum.dislike){
+//       return of('accent')
+//     }
+//   }
+//     return of('')
+// }
+
+// getUserReactionForPost(post: Post, isLike: boolean): string{
+//   const userReaction = post.usersReactions.find(userReaction => userReaction.userId === this.user.id)
+//   if(userReaction){
+//     if(isLike){
+//       return 'primary';
+//     }
+//     else if(userReaction.reactionEnum === ReactionEnum.dislike){
+//       return 'accent'
+//     }
+//   }
+//     return ''
+// }
 
  getColorForLikeButton(post: Post): string{
     if(this.getUserReactionForPost(post) > 0)
@@ -106,11 +147,21 @@ export class PostComponent implements OnInit {
       return ''
  }
 
+
+
  getColorForDislikeButton(post: Post): string{
   if(this.getUserReactionForPost(post) < 0)
     return 'accent'
   else
     return ''
+}
+
+like(post: Post){
+  this.store.dispatch(reactToPost({post: post, userId: this.user.id, reactionEnum: ReactionEnum.like}))
+}
+
+dislike(post: Post){
+  this.store.dispatch(reactToPost({post: post, userId: this.user.id, reactionEnum: ReactionEnum.dislike}))
 }
 
   onFileSelected( event: any) : void{
@@ -132,10 +183,14 @@ export class PostComponent implements OnInit {
     // console.log(this.userPostImg)
     // console.log(this.postTextFormControl.value)
     // console.log(this.userCheckedSports)
-    this.store.dispatch(addPost({post: {id: -1, userId: this.user.id,
-       userFullname: this.user.name + " " + this.user.surname, userImage: this.user.picture,
-        forSports: this.userCheckedSports, date: "", text: this.postTextFormControl.value ?? "",
-      image: this.userPostImg ?? "", numberOfLikes: 0, numberOfDislikes: 0, numberOfComments: 0, usersReactions: [] }}))
+    this.store.dispatch(addPost({
+      userId: this.user.id,
+      createPostObject: {
+        forSports: this.userCheckedSports,
+        text: this.postTextFormControl.value ?? "",
+        image: this.userPostImg ?? ""
+          }
+    }))
     this.selectedImageFile = null;
     this.postTextFormControl.reset();
     this.userPostImg = "";
@@ -143,13 +198,7 @@ export class PostComponent implements OnInit {
     this.postCheckListFormControl.reset();
   }
 
-  like(post: Post){
-    this.store.dispatch(likePost({post: post, userId: this.user.id}))
-  }
 
-  dislike(post: Post){
-    this.store.dispatch(dislikePost({post: post, userId: this.user.id}))
-  }
 
   // getUser(userId: number): void{
   //   this.service.getUserById(userId).subscribe(user => {this.router.navigateByUrl('/home/user', {state: user})})
@@ -169,7 +218,7 @@ export class PostComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result){
         console.log(result)
-        this.store.dispatch(deletePost({postId: postId}))       //delete post
+        this.store.dispatch(deletePost({postId: postId}))       
       }
     });
   }
@@ -193,5 +242,11 @@ export class PostComponent implements OnInit {
       }
     });
   }
+  check(){
+    console.log(this.postTextFormControl.value)
+  }
 
+  closeImg(){
+    this.userPostImg = ''
+  }
 }

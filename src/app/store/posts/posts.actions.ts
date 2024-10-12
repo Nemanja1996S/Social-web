@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
-import { Post } from "../../../models/Post"
+import { createPost, Post, ReactionEnum } from "../../../models/Post"
+
 
 export const loadPosts = createAction(
     "Loading posts to state",
@@ -23,25 +24,65 @@ export const loadPostsFailure = createAction(
 );
 
 export const deletePost = createAction(
-    "Loading post to state failure",
+    "Deleting post from database",
     props<{
         postId: number
+    }>()
+);
+
+export const deletePostSuccess = createAction(
+    "Deleting post from database success",
+    props<{
+        postId: number
+    }>()
+);
+
+export const deletePostFailure = createAction(
+    "Deleting post from database failure",
+    props<{
+        error: string
     }>()
 );
 
 export const addPost = createAction(
     "Add post",
     props<{
-        post: Post;
+        userId: number,
+        createPostObject: createPost
     }>()
 )
 
+export const addPostsFailure = createAction(
+    "Adding post to database failure",
+    props<{
+        error: string
+    }>()
+);
+
+
+
 export const editPost = createAction(
-    "Edit post",
+    "Editing post from database",
     props<{
         postId: number
         postText?: string
         postImage?: string
+    }>()
+);
+
+export const editPostSuccess = createAction(
+    "Edit post success",
+    props<{
+        postId: number
+        postText?: string
+        postImage?: string
+    }>()
+);
+
+export const editPostFailure = createAction(
+    "Edit post failure",
+    props<{
+        error: string
     }>()
 );
 
@@ -71,7 +112,48 @@ export const likePost = createAction(
     "Liking post",
     props<{
         post: Post,
+        userId: number,
+        reactionEnum?: ReactionEnum.like
+    }>()
+)
+
+export const likePostSuccess = createAction(
+    "Liking post success",
+    props<{
+        post: Post,
         userId: number
+    }>()
+)
+
+export const likePostFailure = createAction(
+    "Liking post failure",
+    props<{
+        error: string
+    }>()
+)
+
+export const reactToPost = createAction(
+    "Reacting to post",
+    props<{
+        post: Post,
+        userId: number,
+        reactionEnum: ReactionEnum
+    }>()
+)
+
+export const reactToPostSuccess = createAction(
+    "React to post success",
+    props<{
+        post: Post,
+        userId: number,
+        reactionEnum: ReactionEnum
+    }>()
+)
+
+export const reactToPostFailure = createAction(
+    "React post failure",
+    props<{
+        error: string
     }>()
 )
 
@@ -79,7 +161,8 @@ export const dislikePost = createAction(
     "Disliking post",
     props<{
         post: Post,
-        userId: number
+        userId: number,
+        reactionEnum?: ReactionEnum.dislike
     }>()
 )
 

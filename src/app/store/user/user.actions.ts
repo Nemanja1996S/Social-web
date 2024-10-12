@@ -12,6 +12,13 @@ export const loadUser = createAction(
 	}>()
 );
 
+export const loadUserById = createAction(		
+	"Load user from database and set user to userState",			
+	props<{					
+		id: number
+	}>()
+);
+
 export const loadUserSuccess = createAction(		
 	"Load user from database and set user to userState success",			
 	props<{					

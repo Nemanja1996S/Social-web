@@ -1,3 +1,52 @@
+// *, *::before, *::after {
+//     box-sizing: border-box;
+//     font-family: Arial, Helvetica, sans-serif;
+// }
+
+.full-screen-container{
+    background-image: url('../../assets/sports.jpg');
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+// :root{
+//     --primary-light-hsl: 200, 100%, 91%;
+//     --primary-hsl: 200, 100%, 50%;
+//     --primary-dark-hsl: 200, 100%, 6%;
+// }
+
+.input-container{
+    align-self: center;
+    width: 80%;
+    --color: hsl(200, 100%, 6%, .7);
+    color: white;
+    background-color: hsl(200, 100%, 6%, .7);
+    box-shadow: 5px 5px 5px 5px hsl(200, 100%, 6%, .7);
+    border-radius: 20px;
+    padding: 5px 50px;
+    font-weight: lighter;
+    color: white;
+}
+
+::placeholder {
+    color:white;
+    opacity: 1; /* Firefox */
+  }
+
+// :host{
+//     margin: 0;
+// }
+// body{
+//     margin: 0;
+// }
+
 .reg-div {
     display: flex;
     justify-content: space-around;
@@ -16,4 +65,10 @@ small{
 
 .fa-align{
     align-self: center;
+}
+
+input{
+    box-shadow: 5px 5px 5px 5px hsl(200, 100%, 6%, .7);
+    background-color: hsl(200, 100%, 91%, .3);
+    color: white;
 }

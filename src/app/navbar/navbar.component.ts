@@ -52,6 +52,7 @@ export class NavbarComponent implements OnInit {
   // usersSports : string[] = []
   linksIcons: LinkIconsPath[] = [{link: 'Home', icon: 'home', path: 'home'}, {link: 'Friends', icon: 'group', path: 'home/friends'}, {link:'Requests', icon: 'groups', path: 'home/requests'}];
   // activeLink = this.linksIcons[0].link;
+  userPic$: Observable<string> = of('');
   @Input() activeLink: string = 'Home';
 
 
@@ -66,6 +67,7 @@ export class NavbarComponent implements OnInit {
   }
   ngOnInit(): void {
     this.usersSport$ = this.store.select(selectedSportsSelector);
+    this.userPic$ = this.store.select(pictureSelector)
   }
 
   searchSports(){
