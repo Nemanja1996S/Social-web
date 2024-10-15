@@ -127,7 +127,8 @@ export class EditProfileDialogComponent {
       dateOfBirth: controls.dateOfBirthFormControl.value ?? this.inputData.user.dateOfBirth,
       education: controls.educationFormControl.value ?? this.inputData.user.education,
       work: controls.workFormControl.value ?? this.inputData.user.work,
-      aboutMe: controls.aboutMeFormControl.value ?? this.inputData.user.aboutMe
+      aboutMe: controls.aboutMeFormControl.value ?? this.inputData.user.aboutMe,
+      requests: []
     }
     const output : EditProfileDialogOutputData = {user: userOutput, selectedImage: this.selectedImageFile ?? null}
     this.dialogRef.close(output);

@@ -45,3 +45,19 @@ export const acceptRequest = createAction(
         friendRequest: FriendRequest
     }>()
 );
+
+export const acceptRequestSuccess = createAction(
+    "Accepting request",
+    props<{
+        userId: number,
+        acceptedUserId: number,
+        friendRequest: FriendRequest
+    }>()
+);
+
+export const acceptRequestFailure = createAction(
+    "Accepting request",
+    props<{
+        error: string;
+    }>()
+);

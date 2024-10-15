@@ -50,7 +50,7 @@ export class EditUserCommentDialogComponent {
     console.log(this.data)
     this.inputData = this.data
     if(this.inputData.userComment){
-      this.editCommentFormGroup.setValue({commentTextFormControl : (this.inputData.userComment.commentText),
+      this.editCommentFormGroup.setValue({commentTextFormControl : (this.inputData.userComment.commentText ?? ''),
         commentPicFormControl : ('')})
     }
   }

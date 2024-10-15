@@ -67,19 +67,19 @@ export class RegistrationComponent implements OnInit{
     }
       
     const user: User = {
-        id: -1,
-        name: this.registryFormGroup.get('nameFormControl')?.value ?? '',
-        surname: this.registryFormGroup.get('surnameFormControl')?.value ?? '',
-        email: this.registryFormGroup.get('emailFormControl')?.value ?? '',
-        password: this.registryFormGroup.get('passwordFormControl')?.value ?? '',
-        picture: this.userImg,
-        friendsIds: [],
-        selectedSports: this.registryFormGroup.controls.selectedSportFormControl.value ?? [],
-        dateOfBirth: this.getDateFromFormControlStringDDMMYYYY(this.registryFormGroup.controls.dateFormControl.value ?? '') ,
-        education: this.registryFormGroup.get('educationFormControl')?.value ?? '',
-        work: this.registryFormGroup.get('workFormControl')?.value ?? '',
-        aboutMe: this.registryFormGroup.get('aboutMeFormControl')?.value ?? '',
-
+      id: -1,
+      name: this.registryFormGroup.get('nameFormControl')?.value ?? '',
+      surname: this.registryFormGroup.get('surnameFormControl')?.value ?? '',
+      email: this.registryFormGroup.get('emailFormControl')?.value ?? '',
+      password: this.registryFormGroup.get('passwordFormControl')?.value ?? '',
+      picture: this.userImg,
+      friendsIds: [],
+      selectedSports: this.registryFormGroup.controls.selectedSportFormControl.value ?? [],
+      dateOfBirth: this.getDateFromFormControlStringDDMMYYYY(this.registryFormGroup.controls.dateFormControl.value ?? ''),
+      education: this.registryFormGroup.get('educationFormControl')?.value ?? '',
+      work: this.registryFormGroup.get('workFormControl')?.value ?? '',
+      aboutMe: this.registryFormGroup.get('aboutMeFormControl')?.value ?? '',
+      requests: []
     }
     // let ddmmyy = user.dateOfBirth.split('-').reverse() this.getDateFromFormControlStringDDMMYYYY(
     // let birth = ''

@@ -1,3 +1,4 @@
+<div class="wholeContainer">
 <navbar [activeLink]="activeLink"></navbar>
 <div *ngIf="this.friendRequests$ | async else noRequests"  >
     <mat-card *ngFor="let request of this.friendRequests$ | async">
@@ -28,3 +29,4 @@
         </mat-card-content>
     </mat-card>
 </ng-template>
+</div>

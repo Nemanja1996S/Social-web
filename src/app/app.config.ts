@@ -13,14 +13,14 @@ import { postsReducer } from './store/posts/posts.reducer';
 import { PostsEffect } from './store/posts/posts.effects';
 import { commentsReducer } from './store/comments/comments.reducer';
 import { CommentsEffect } from './store/comments/comments.effects';
-import { userFriendsReducer } from './store/userFriends/userFriends.reducer';
-import { UserFriendsEffect } from './store/userFriends/userFriends.effects';
-import { PostReactionsEffect } from './store/postReactions/postReactions.effects';
-import { postReactionsReducer } from './store/postReactions/postReactions.reducer';
+// import { friendsReducer, userFriendsReducer } from './store/friends/friends.reducer';
+// import { FriendsEffect, UserFriendsEffect } from './store/friends/friends.effects';
 import { friendRequestsReducer } from './store/requests/requests.reducer';
 import { FriendRequestEffect } from './store/requests/requests.effects';
 import { profileReducer } from './store/profile/profile.reducer';
 import { ProfileEffect } from './store/profile/profile.effects';
+import { FriendsEffect } from './store/friends/friends.effects';
+import { friendsReducer } from './store/friends/friends.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,12 +30,13 @@ export const appConfig: ApplicationConfig = {
       userState: userReducer,
       postsState: postsReducer,
       commentsState: commentsReducer,
-      userFriendsState : userFriendsReducer,
+      // userFriendsState : userFriendsReducer,
+      friendsState: friendsReducer,
       friendRequestsState: friendRequestsReducer,
       profileState: profileReducer
       // postReactionsState : postReactionsReducer,//, PostReactionsEffect
     }),
-    provideEffects([UserEffect, PostsEffect, CommentsEffect, UserFriendsEffect, FriendRequestEffect, ProfileEffect]),
+    provideEffects([UserEffect, PostsEffect, CommentsEffect, FriendsEffect, FriendRequestEffect, ProfileEffect]),//UserFriendsEffect
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

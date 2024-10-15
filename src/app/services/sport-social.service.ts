@@ -1,14 +1,14 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../../models/User';
+import { User, UserFromDatabase } from '../../models/User';
 import { catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { createPost, Post, ReactionEnum } from '../../models/Post';
-import { Comments, CreateUserComment, UserComment } from '../../models/Comment';
-import { UserFriends } from '../../models/UserFriends';
+import { CommentEntityFromDatabase, Comments, CreateUserComment, UserComment } from '../../models/Comment';
+// import { UserFriends } from '../../models/Friends';
 import { PeopleOption } from '../friends/friends.component';
-import { UserPostReaction } from '../../models/PostReaction';
-import { FriendRequest } from '../../models/Request';
+import { FriendRequest, FriendRequestFromDatabase } from '../../models/Request';
+import { Friend } from '../../models/Friends';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +43,7 @@ export class SportSocialService {
 
   getAllUsersWithNameStartingWithString(startingString: string){
     return this.httpClient
-    .get<User[]>(`${environment.apiUrl}/users?name_like=^${startingString}.*`)// .get<User[]>(environment.apiUrl + "/users?name_like=^" + startingString +".*")
+    .get<User[]>(`${environment.apiUrl}/users/like/${startingString}`)// .get<User[]>(environment.apiUrl + "/users?name_like=^" + startingString +".*")
     .pipe(catchError(this.errorHandler));
   }
 
@@ -55,7 +55,7 @@ export class SportSocialService {
 
   getUser(email: string, password: string){   
     return this.httpClient
-    .get<User>(`${environment.apiUrl}/users/login/user?email=${email}&password=${password}`)  
+    .get<UserFromDatabase>(`${environment.apiUrl}/users/login/user?email=${email}&password=${password}`)  
     .pipe(catchError(this.errorHandler));
   }
 
@@ -78,25 +78,42 @@ export class SportSocialService {
 
   getCommentsForPost(postId: number){
     return this.httpClient
-      .get<Comments>(`${environment.apiUrl}/comments/${postId}`)
+      .get<CommentEntityFromDatabase[]>(`${environment.apiUrl}/comments/userComment/${postId}`)
       .pipe(catchError(this.errorHandler));
   }
 
-  getPostReactionsForUser(userId: number){
+  editComment(userComment: UserComment, commentId: number){
     return this.httpClient
-      .get<UserPostReaction[]>(`${environment.apiUrl}/postReactions?userId=${userId}`)
-      .pipe(catchError(this.errorHandler));
+    .patch(`${environment.apiUrl}/comments/${commentId}`, userComment)  
+  }
+
+
+  deleteComment(commentId: number){
+    return this.httpClient
+    .delete(`${environment.apiUrl}/comments/${commentId}`)  
   }
 
   getFriendRequestsForUser(userId: number){
     return this.httpClient
-      .get<FriendRequest[]>(`${environment.apiUrl}/requests?toUserId=${userId}`)
+      .get<FriendRequestFromDatabase[]>(`${environment.apiUrl}/requests/${userId}`)
       .pipe(catchError(this.errorHandler));
   }
 
+  acceptFriendRequest(userId: number, acceptedUserId: number, friendRequestId: number){
+    return this.httpClient
+      .post<FriendRequestFromDatabase[]>(`${environment.apiUrl}/requests/accept`, {userId, acceptedUserId, friendRequestId})
+      .pipe(catchError(this.errorHandler));
+  }jn
+
+  // getFriendsForUser(id: number){
+  //   return this.httpClient
+  //     .get<UserFriends>(`${environment.apiUrl}/userFriends/${id}`)
+  //     .pipe(catchError(this.errorHandler));
+  // }
+
   getFriendsForUser(id: number){
     return this.httpClient
-      .get<UserFriends>(`${environment.apiUrl}/userFriends/${id}`)
+      .get<Friend[]>(`${environment.apiUrl}/users/friends/${id}`)
       .pipe(catchError(this.errorHandler));
   }
 

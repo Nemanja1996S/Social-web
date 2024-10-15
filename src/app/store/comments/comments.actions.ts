@@ -11,7 +11,7 @@ export const loadComments = createAction(
 export const loadCommentsSuccess = createAction(
     "Loading comments to state success",
     props<{
-        comments: Comments // usersComments: UserComment[]
+        userComments: UserComment[] // usersComments: UserComment[]
     }>()
 );
 
@@ -26,6 +26,20 @@ export const deleteUserComment = createAction(
     "Deleting user comment",
     props<{
         userComment: UserComment
+    }>()
+);
+
+export const deleteUserCommentSuccess = createAction(
+    "Deleting user comment success",
+    props<{
+        userComment: UserComment
+    }>()
+);
+
+export const deleteUserCommentFailure = createAction(
+    "Deleting user comment failure",
+    props<{
+        error: string
     }>()
 );
 
@@ -56,7 +70,19 @@ export const makeCommentFailure = createAction(
 export const editUserComment = createAction(
     "Editing user comment",
     props<{
-        // postId: number,
         userComment: UserComment
+    }>()
+);
+
+export const editUserCommentSuccess = createAction(
+    "Editing user comment success",
+    props<{
+        userComment: UserComment
+    }>()
+);
+export const editUserCommentFailure = createAction(
+    "Editing user comment failure",
+    props<{
+        error: string
     }>()
 );

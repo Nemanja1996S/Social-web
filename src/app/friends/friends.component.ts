@@ -2,9 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { Friend } from '../../models/UserFriends';
+import { Friend } from '../../models/Friends';
 import { debounceTime, filter, fromEvent, map, Observable, of, switchMap } from 'rxjs';
-import { FriendAndNumberOfMuturalFriends, friendsAndNumberOfMuturalFriendsSelector, userFriendsArraySelector } from '../store/userFriends/userFriends.selectors';
+import { errorFreindsSelector, FriendAndNumberOfMuturalFriends, friendsAndNumberOfMuturalFriendsSelector } from '../store/friends/friends.selectors'; // friendsAndNumberOfMuturalFriendsSelector, userFriendsArraySelector
 import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
@@ -14,6 +14,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { SportSocialService } from '../services/sport-social.service';
 import { User } from '../../models/User';
 import { Route, Router, RouterLink } from '@angular/router';
+import { loadFriends } from '../store/friends/friends.actions';
+import { userIdSelector } from '../store/user/user.selector';
+import { loadCommentsFailure } from '../store/comments/comments.actions';
 
 export interface PeopleOption{
   userId: number,
@@ -33,6 +36,7 @@ export interface PeopleOption{
 export class FriendsComponent implements OnInit{
 
   activeLink: string = "Friends";
+  friend$: Observable<Friend | null> = of()
   // userFriend$: Observable<Friend[] | null> = of([]);
   userFriendsAndNumberOfMuturalFriend$ : Observable<FriendAndNumberOfMuturalFriends[] | null> = of([]);
   @ViewChild('input')
@@ -53,11 +57,14 @@ export class FriendsComponent implements OnInit{
   //     numberOfMuturalFriends: 6
   //   }
   // ]
+  loggedUserId$: Observable<number> = of()
   users$: Observable<User[]> = of([]) //PeopleOption[]
   //usersFullNames = ["Nemanja Savic", "Marko Stoijljkovic", "Bogdan Randjelovic"]
   usersFullNames : string[] = [];
 
   filteredOptions: string[] = [];
+  error$: Observable<string | null> = of('');
+  noFriends: boolean = false
 
   constructor(private store: Store<AppState>, private service: SportSocialService, private router: Router){
     // this.filteredOptions = this.options.slice();
@@ -66,12 +73,19 @@ export class FriendsComponent implements OnInit{
   ngOnInit(): void {
     // this.userFriend$ = this.store.select(userFriendsArraySelector)
     this.userFriendsAndNumberOfMuturalFriend$ = this.store.select(friendsAndNumberOfMuturalFriendsSelector)
-    this.userFriendsAndNumberOfMuturalFriend$.subscribe(sve => console.log(sve))
+    // this.userFriendsAndNumberOfMuturalFriend$.subscribe(sve => console.log(sve))
     // this.service.getAllUsersWithNameStartingWithString("nemanja").subscribe(user => console.log(user))
+    this.error$ = this.store.select(errorFreindsSelector);
+    this.error$.subscribe(() => this.noFriends = true )
     this.users$ = this.getUsersObservable()
-    this.users$.subscribe(users => console.log(users))
-    this.users$.subscribe(users => console.log(users.map(users => ({userFullName : users.name + users.surname } ))))
+    // this.users$.subscribe(users => console.log(users))
+    // this.users$.subscribe(users => console.log(users.map(users => ({userFullName : users.name + users.surname } ))))
     this.users$.subscribe((users => this.changeFilterOptionAndUsersFullNames(users.map(user => (user.name + user.surname )))))
+    this.loggedUserId$ = this.store.select(userIdSelector)
+    this.loggedUserId$.subscribe((id) => {
+      this.store.dispatch(loadFriends({userId: id }))
+    })
+    
   }
 
   filter(): void {

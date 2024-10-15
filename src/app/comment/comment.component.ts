@@ -96,7 +96,12 @@ export class CommentComponent implements OnInit{
     console.log(this.commentTextFormControl.value)
     console.log(this.userCommentImg)
     this.currentUser$.subscribe(currentUser => console.log(currentUser))
-    let userComment: UserComment = {userId: this.currentUser.id, userFullName: `${this.currentUser.name} ${this.currentUser.surname}`, userPicSrc: this.currentUser.picture, commentDate: '', commentPic: this.userCommentImg, commentText: this.commentTextFormControl.value ?? ''}
+    let userComment: UserComment = {
+      userId: this.currentUser.id, userName: this.currentUser.name, userSurname: this.currentUser.surname,
+      userPicSrc: this.currentUser.picture, commentDate: '', commentPic: this.userCommentImg,
+      commentText: this.commentTextFormControl.value ?? '', postId: this.currentPostId,
+      id: -1
+    }
     this.store.dispatch(makeComment({userComment: userComment, postId: this.currentPostId}));
     this.store.dispatch(changeNumberOfCommentsOfPost({postId: this.currentPostId, amount: 1}));
     this.userCommentImg = '';

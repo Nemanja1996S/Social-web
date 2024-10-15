@@ -19,6 +19,7 @@ export const initialUser: User = {
     friendsIds: [],
     password: '',
     selectedSports: [],
+    requests: [],
     dateOfBirth: '',
     education: '',
     work: '',

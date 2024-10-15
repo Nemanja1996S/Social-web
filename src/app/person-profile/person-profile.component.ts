@@ -154,8 +154,8 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
     return muturalFriends.length;
   }
 
-  sendRequestTo(): void{
-    this.store.dispatch(sendRequest({friendRequest: {toUserId: this.paramsId, fromUserId: this.loggedUserId, fromUserFullName: this.loggedUser.name + " " + this.loggedUser.surname, fromUserImg: this.loggedUser.picture, fromUserSelectedSports: this.loggedUser.selectedSports, fromUserFriendsIds: []}}))
+  sendRequestTo(): void{      ///////////////iddddddddddddddddddddddddddddddddddd
+    this.store.dispatch(sendRequest({friendRequest: {id: -1 ,toUserId: this.paramsId, fromUserId: this.loggedUserId, fromUserFullName: this.loggedUser.name + " " + this.loggedUser.surname, fromUserImg: this.loggedUser.picture, fromUserSelectedSports: this.loggedUser.selectedSports, fromUserFriendsIds: []}}))
     //console.log({toUserId: this.paramsId, fromUserId: this.loggedUserId, fromUserFullName: this.loggedUser.name + " " + this.loggedUser.surname, fromUserImg: this.loggedUser.picture, fromUserSelectedSports: this.loggedUser.selectedSports, fromUserFriendsIds: []}) 
   }
 

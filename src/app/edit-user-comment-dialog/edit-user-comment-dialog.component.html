@@ -2,14 +2,14 @@
 <div class="content">
     <mat-dialog-content>
         <form [formGroup]="this.editCommentFormGroup" (ngSubmit)="onYes()">
-            <p class="noBottomMargin">{{this.inputData.userComment.userFullName}}</p>
+            <p class="noBottomMargin">{{this.inputData.userComment.userName + ' ' + this.inputData.userComment.userSurname}}</p>
             <p>{{this.inputData.userComment.commentDate}}</p>
             <input type="file" style="display: none;" (change)="onFileSelected($event)" #fileInput formControlName="commentPicFormControl">
             <img [src]="this.userInputCommentImg ? this.userInputCommentImg : this.inputData.userComment.commentPic" class="imgInput">
             <button mat-flat-button (click)="$event.preventDefault(); fileInput.click()" class="changeButton">Change image</button>
             <mat-form-field class="textInput">
                 <mat-label>Text:</mat-label>
-                <textarea matInput cdkTextareaAutosize rows="3" class="width100" [placeholder]="this.inputData.userComment.commentText" formControlName="commentTextFormControl"></textarea>
+                <textarea matInput cdkTextareaAutosize rows="3" class="width100" [placeholder]="this.inputData.userComment.commentText ?? ''" formControlName="commentTextFormControl"></textarea>
             </mat-form-field>
         </form>
     </mat-dialog-content>

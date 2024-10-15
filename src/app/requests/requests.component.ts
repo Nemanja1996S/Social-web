@@ -11,7 +11,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatButtonModule } from '@angular/material/button';
 import { SportSocialService } from '../services/sport-social.service';
-import { userFriendsIdsArraySelector } from '../store/user/user.selector';
+import { userFriendsIdsArraySelector, userIdSelector } from '../store/user/user.selector';
 import { addFriend } from '../store/user/user.actions';
 
 @Component({
@@ -25,7 +25,7 @@ export class RequestsComponent implements OnInit {
   
   activeLink: string = "Requests";
   friendRequests$ : Observable<FriendRequest[]> = of([])
-  userId: number = -1;
+  userId$: Observable<number> = of()
   userFriendsIds: number[] = []
   // userFriendsIds$: Observable<number[]> = of([])
   friendFriendsIds: number[] = []
@@ -34,7 +34,8 @@ export class RequestsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadRequests({userId: 0}));
+    this.userId$ = this.store.select(userIdSelector)
+    this.userId$.subscribe(userId => this.store.dispatch(loadRequests({userId: 1})))  //ostavljeno
     this.friendRequests$ = this.store.select(friendRequestsSelector);
     this.store.select(userFriendsIdsArraySelector).subscribe(userFriendsIds => this.userFriendsIds = userFriendsIds)
 

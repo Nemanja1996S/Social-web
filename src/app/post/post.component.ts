@@ -17,7 +17,7 @@ import { selectedSportsSelector, userIdSelector, userSelector } from '../store/u
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { Dictionary } from '@ngrx/entity';
 import { Router, RouterLink } from '@angular/router';
-import { loadUserFriends } from '../store/userFriends/userFiends.actions';
+// import { loadUserFriends } from '../store/friends/friends.actions';
 import { initialUser } from '../store/user/user.reducer';
 import { User } from '../../models/User';
 import { DialogComponent } from '../dialog/dialog.component';
@@ -31,7 +31,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { EditPostDialogComponent, EditPostDialogOutputData } from '../edit-post-dialog/edit-post-dialog.component';
-import { loadPostReactions } from '../store/postReactions/postReactions.actions';
+
 
 
 
@@ -77,7 +77,9 @@ export class PostComponent implements OnInit {
     this.user$ = this.store.select(userSelector);
     // this.user$.subscribe({next: (user) => this.user = user})
     this.user$.subscribe(user => {
+      
       this.user = user
+      console.log(this.user)
       this.store.dispatch(loadPosts({userId: user.id}))
       this.posts$ = this.store.select(postsSelector);
       this.userSelectedSport$ = this.store.select(selectedSportsSelector);

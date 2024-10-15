@@ -1,9 +1,12 @@
+<div class="wholeContainer">
 <navbar [activeLink]="activeLink"></navbar>
 <mat-card appearance="outlined">
     <mat-card-content>
         <form class="example-form">
-            Search for people, or your friend:<!--  {{myControl.value || 'empty'}} -->
-            <mat-form-field class="example-full-width">
+            <p>
+                Search for people, or your friend:
+            </p>
+              <mat-form-field class="example-full-width">
               <mat-label></mat-label>
               <input #input
                      type="text"
@@ -41,12 +44,13 @@
     </mat-card-content>
 </mat-card>
 <mat-card *ngFor="let friendsAndNumberOfMuturalFriends of this.userFriendsAndNumberOfMuturalFriend$ | async">
+    <!-- <div *ngIf="this.noFriends">You have no friends, maybe search for them</div>  ne radi, zato sto imam 2 direktive ugnjezdene-->
     <div style="width: 100%;">
         <mat-card-title>
-            <img mat-card-sm-image style="margin-right: 1em;" src={{friendsAndNumberOfMuturalFriends.friend.userImage}} [routerLink]="['/home/profile/' + friendsAndNumberOfMuturalFriends.friend.id]"/>
+            <img mat-card-sm-image style="margin-right: 1em;" [src]="friendsAndNumberOfMuturalFriends.friend.picture" [routerLink]="['/home/profile/' + friendsAndNumberOfMuturalFriends.friend.id]"/> <!--[src]="friendsAndNumberOfMuturalFriends.friend.userImage"-->
             <div class="titleNameAndDate">
                 <div class="divFullname" [routerLink]="['/home/profile/' + friendsAndNumberOfMuturalFriends.friend.id]">
-                    {{friendsAndNumberOfMuturalFriends.friend.userFullname}}
+                    {{friendsAndNumberOfMuturalFriends.friend.name + ' ' + friendsAndNumberOfMuturalFriends.friend.surname}}
                 </div>
                     <span mat-card-subtitle>Number of mutural friends: {{friendsAndNumberOfMuturalFriends.numberOfMuturalFriends}} </span>
                     <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
@@ -57,3 +61,5 @@
     
 
 </mat-card>
+
+</div>

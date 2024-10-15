@@ -13,7 +13,7 @@
 }
 
 .commentsContainer{
-    background-color: black;
+    background-color: rgb(42, 48, 59);
     //height: 100vh;
 }
 
@@ -40,14 +40,17 @@
 
 .textContainer{
     // border: 5px solid white;
+    display: flex;
+    justify-content: center;
     width: 80%;
     // display: flex;
     // flex-wrap: wrap;
-    color: white;
-    font-size: medium;
-    border: 5px solid white;
+    color: rgb(118, 115, 158);
+    font-family: cursive;
+    font-size: larger;
+    border: 5px solid rgb(118, 115, 158);
     padding: 0.5em;
-    border-radius: 25%;
+    border-radius: 15%;
     overflow-wrap: break-word;
 }
 

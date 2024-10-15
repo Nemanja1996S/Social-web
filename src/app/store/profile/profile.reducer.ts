@@ -21,7 +21,8 @@ export const initialUser: User = {
     dateOfBirth: '',
     education: '',
     work: '',
-    aboutMe: ''
+    aboutMe: '',
+    requests: []
 }
 
 export const initialState: ProfileState = {

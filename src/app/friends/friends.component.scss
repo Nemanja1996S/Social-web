@@ -34,7 +34,16 @@ mat-card {
     margin-top: 16px;
     font-size: larger;
   }
+
+  .example-form p {
+    color: antiquewhite;
+  }
   
   .example-full-width {
     width: 100%;
+  }
+
+  .wholeContainer{
+    background-color: adjust-hue($color: #471863, $degrees: 3);
+    height: 100vh;
   }

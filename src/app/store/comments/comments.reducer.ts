@@ -14,12 +14,16 @@ export interface CommentsState {
 // })
 
 export const initialUserComment: UserComment = {
+    id: -1,
+    postId: -1,
     userId: -1,
-    userFullName: '',
+    userName: '',
+    userSurname: '',
     userPicSrc: '',
     commentText: '',
     commentPic: '',
-    commentDate: ''
+    commentDate: '',
+    
 }
 
 export const initialComment: Comments = {
@@ -37,24 +41,28 @@ export const initialState: CommentsState = {
 export const commentsReducer = createReducer(
     initialState,
     on(Actions.loadComments, (state, {postId}) => {
-    const coms : Comments = {...state.comments, postId: postId}
-    return {...state, isLoading: true, comments: coms }
+    // const coms : Comments = {...state.comments, postId: postId}
+    return {...state, isLoading: true }
     }),
-    on(Actions.loadCommentsSuccess, (state, {comments}) => {
+    on(Actions.loadCommentsSuccess, (state, {userComments}) => {
         // adapter.setOne(comments, state)
-        return {...state, isLoading: false, comments: comments}
+        const newComm : Comments = {...state.comments, userComments: userComments} 
+        return {...state, isLoading: false, comments: newComm, }
     }),
     on(Actions.loadCommentsFailure, (state, {error}) => {
         return {...state, isLoading: false, error: error}
     }),
-    on(Actions.deleteUserComment, (state, {userComment}) => {
+    on(Actions.deleteUserCommentSuccess, (state, {userComment}) => {
         const userComms : UserComment[] = state.comments.userComments.filter(userComm => userComm !== userComment)
         const comms : Comments = {...state.comments, userComments: userComms}
         return {...state, comments: comms }
     }),
-    on(Actions.makeCommentSuccess, (state, {userComment}) => {
+    on(Actions.deleteUserCommentFailure, (state, {error}) => {
+        return {...state, error: error }
+    }),
+    on(Actions.makeComment, (state, {userComment}) => {
         let userComm = {...userComment, commentDate: getCurrentDateAndTime() }
-        let userComms: UserComment[] = state.comments.userComments;
+        // let userComms: UserComment[] = state.comments.userComments;
         //userComms.push(userComm);
         return {...state, comments: {...state.comments, userComments: [...state.comments.userComments, userComm]}}
 
@@ -62,7 +70,7 @@ export const commentsReducer = createReducer(
     on(Actions.makeCommentFailure, (state, {error}) => {
         return {...state, error: error}
     }),
-    on(Actions.editUserComment, (state, { userComment}) => {
+    on(Actions.editUserCommentSuccess, (state, { userComment}) => {
         const userComms: UserComment[] = state.comments.userComments;
         const userComm: UserComment | undefined = userComms.find(userComm => userComm.commentDate === userComment.commentDate);
         if(userComm){
@@ -74,6 +82,9 @@ export const commentsReducer = createReducer(
         else{
             return {...state}
         }
+    }),
+    on(Actions.editUserCommentFailure, (state, {error}) => {
+        return {...state, error: error}
     })
     // on(Actions.unsetIsLoaidng, (state) => {
     //     return {...state, isLoading: false}

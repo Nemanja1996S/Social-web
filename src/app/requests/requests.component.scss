@@ -27,6 +27,11 @@ mat-card {
     width: 100%;
 }
 
+.wholeContainer{
+    background-color: adjust-hue($color: #471863, $degrees: 3);
+    height: 100vh;
+}
+
 .example-form {
     min-width: 150px;
     // max-width: 500px;
