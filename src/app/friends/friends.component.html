@@ -21,7 +21,7 @@
                 @for (user of this.users$ | async; track user) {
            
                   <mat-option *ngIf="this.filteredOptions.includes(user.name + user.surname)" [routerLink]="['/home/profile/' + user.id]"
-                   [value]="user.name + user.surname" style="margin-bottom: 1em;" > <!-- [routerLink]="['/home/user'] [state]="user"-->
+                   [value]="user.name + user.surname" style="margin-bottom: 1em;" > 
                     
                         <div style="width: 100%;" >
                             <mat-card-title>
@@ -34,9 +34,7 @@
                                 </div>     
                             </mat-card-title>
                         </div>
-                    
                   </mat-option>
-            
                 }
               </mat-autocomplete>
             </mat-form-field>
@@ -44,7 +42,6 @@
     </mat-card-content>
 </mat-card>
 <mat-card *ngFor="let friendsAndNumberOfMuturalFriends of this.userFriendsAndNumberOfMuturalFriend$ | async">
-    <!-- <div *ngIf="this.noFriends">You have no friends, maybe search for them</div>  ne radi, zato sto imam 2 direktive ugnjezdene-->
     <div style="width: 100%;">
         <mat-card-title>
             <img mat-card-sm-image style="margin-right: 1em;" [src]="friendsAndNumberOfMuturalFriends.friend.picture" [routerLink]="['/home/profile/' + friendsAndNumberOfMuturalFriends.friend.id]"/> <!--[src]="friendsAndNumberOfMuturalFriends.friend.userImage"-->
@@ -53,7 +50,6 @@
                     {{friendsAndNumberOfMuturalFriends.friend.name + ' ' + friendsAndNumberOfMuturalFriends.friend.surname}}
                 </div>
                     <span mat-card-subtitle>Number of mutural friends: {{friendsAndNumberOfMuturalFriends.numberOfMuturalFriends}} </span>
-                    <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
                     <span mat-card-subtitle>Friends selected sports: {{friendsAndNumberOfMuturalFriends.friend.selectedSports}} </span>
             </div>     
         </mat-card-title>

@@ -6,7 +6,7 @@
             <mat-card-title>
                 <img mat-card-sm-image style="margin-right: 1em;" src={{request.fromUserImg}} [routerLink]="['/home/profile/' + request.fromUserId]" /> <!--(click)="goTo(request.fromUserId)"-->
                 <div class="titleNameAndDate">
-                    <div class="divFullname"><!--(click)="this.getUser(request.friend.id)" -->
+                    <div class="divFullname">
                         {{request.fromUserFullName}}
                     </div>
                     <span mat-card-subtitle>Following sports: {{this.getSportSelectedString(request.fromUserSelectedSports)}} </span>

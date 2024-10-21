@@ -46,8 +46,6 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
   loggedInFriendsIds: number[] = []
   isSelfProfile : boolean | null = false;
   userPosts$: Observable<Post[]> = of([])
-  // numberOfMuturalFriends: number = -1;
-  //idsOfUserSentRequstTo$: Observable<number[]> = of([])
   isProfileUserFriendsWithLoggedUser$: Observable<boolean> = of();
   isloggedUserSentRequestToProfileId$: Observable<boolean> = of()
   isProfileUserSentRequestToLoggedUser$: Observable<boolean> = of()
@@ -55,16 +53,13 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
   idsOfUserSentRequstTo: number[] = []
   sportsList: string [] = []
   readonly dialog = inject(MatDialog);
-  // readonly editDialog = inject(MatDialog)
 
   constructor(private store: Store<AppState>, private service: SportSocialService, private router: Router, private route: ActivatedRoute){
-    // console.log(this.router.getCurrentNavigation()?.extras.state)
   }
   ngOnDestroy(): void {
     this.isSelfProfile = null;
   }
   ngOnInit(): void {
-    // console.log(this.isSelfProfile)
     this.service.getAllSports().subscribe(sports => this.sportsList = sports)
     this.route.paramMap.pipe(
       mergeMap((params) => of(params.get('userId'))),
@@ -104,49 +99,9 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
         
       }
     });
-
-  
-    // this.route.paramMap.subscribe(params => {
-    //   const id = params.get('id');
-    //   if(id){
-    //     this.paramsId = parseInt(id)
-    //     console.log(id)
-    //   }
-    //   else{
-    //     this.isSelfProfile = true
-    //   }
-    // })
-    // if(this.isSelfProfile){
-    //   console.log("Ulogovan korisnik")
-    //   this.user = history.state;
-    //   this.loggedInUser$ = this.store.select(userSelector);
-    //   this.loggedInUser$.subscribe(user => {this.profileUserFriendsIds = user.friendsIds.map(id => id); this.loggedUserId = user.id} ) //{if(user.id === this.user.id) { this.isSelfProfile = true};
-    //   this.userPosts$ = this.store.select(loggedInUserPostsSelector)
-    // }
-    // else{
-    //   this.store.select(profileSelector).subscribe(user => {this.user = user; this.profileUserFriendsIds = user.friendsIds.map(id => id) })
-    //   this.store.dispatch(loadProfile({id: this.paramsId}))
-    //   this.userPosts$ = this.store.select(profilePostsSelector)
-    //   console.log("NIje ulogovan korisnik")
-
-    // }
-    // this.user = history.state;
-    // this.loggedInUser$ = this.store.select(userSelector);
-    // this.loggedInUser$.subscribe(user => {if(user.id === this.user.id) { this.isSelfProfile = true}; this.profileUserFriendsIds = user.friendsIds.map(id => id); this.loggedUserId = user.id} )
-    
-    // if(this.isSelfProfile){
-    //   this.userPosts$ = this.store.select(loggedInUserPostsSelector); //ne cita iz bazu, cita za onog ko je prijavljen
-    // }
-    // else{
-    //   this.userPosts$ = this.service.getPostsOfUser(this.user.id); //iz bazu cita, ne iz state
-    // }
-    
-   
-    // this.store.select(idsOfloggedUserSentRequestToSelector).subscribe(ids => this.idsOfUserSentRequstTo = ids);
   }
 
   isMe(): boolean{
-    //console.log(this.isSelfProfile)
     return this.isSelfProfile ?? false
   }
 
@@ -189,10 +144,6 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
     this.openDialog(enterAnimationDuration, exitAnimationDuration, data, false)
   }
 
-  // openEditDialog(enterAnimationDuration: string, exitAnimationDuration: string){
-  //   const data : EditProfileDialogInputData = {title: "Edit profile:", user: this.user, confirmString: "Save", cancelString: "Cancel"}
-  //   this.openEditDialogData(enterAnimationDuration, exitAnimationDuration, data)
-  // }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string, data: any, isDeleteProfile: boolean): void {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -227,29 +178,15 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
       data: data
     });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(result)
       if(result as EditProfileDialogOutputData){
-        //this.user = result;
         this.store.dispatch(editUser({updateUserDto: result.user}))
         if(result.selectedImage)
           this.user.picture = URL.createObjectURL(result.selectedImage)
         console.log(result)
       }
       
-      // if(isDeleteProfile){
-      //   if(result){
-      //     this.router.navigate([''])            //delete profile
-      //   }
-      // }
-      // else{
-      //                 ///delete friend from user
-      // }
     });
   }
-
-  // isProfileUserFriendsWithLogged(): Observable<boolean>{
-  //   return of(this.profileUserFriendsIds.includes(this.loggedUserId));
-  // }
 
   getWatchedUserId(): number{
     return this.isSelfProfile ? this.loggedUserId : this.user.id

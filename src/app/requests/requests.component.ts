@@ -27,7 +27,6 @@ export class RequestsComponent implements OnInit {
   friendRequests$ : Observable<FriendRequest[]> = of([])
   userId$: Observable<number> = of()
   userFriendsIds: number[] = []
-  // userFriendsIds$: Observable<number[]> = of([])
   friendFriendsIds: number[] = []
   constructor(private store: Store<AppState>, private router: Router, private service: SportSocialService){
 
@@ -35,15 +34,11 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId$ = this.store.select(userIdSelector)
-    this.userId$.subscribe(userId => this.store.dispatch(loadRequests({userId: 1})))  //ostavljeno
+    this.userId$.subscribe(userId => this.store.dispatch(loadRequests({userId: userId})))  
     this.friendRequests$ = this.store.select(friendRequestsSelector);
     this.store.select(userFriendsIdsArraySelector).subscribe(userFriendsIds => this.userFriendsIds = userFriendsIds)
-
-    // this.friendRequests$.subscribe(requests => requests.map(request => {getUserrequest.toUserId}))
   }
-  // getNumberOfMuturalFriends(userId: number): void{
-  //   this.service.getUserById(userId).subscribe(user => this.calculateMuturalFriends(user.friendsIds))
-  // }
+  
   calculateMuturalFriends(friendFriendsIds: number[]): number {
     return this.userFriendsIds.filter(id => friendFriendsIds.includes(id)).length
   }
@@ -51,10 +46,6 @@ export class RequestsComponent implements OnInit {
   getSportSelectedString(sports: string[]): string{
     return ` ${sports.slice()} `
   }
-
-  // goTo(userId: number){
-  //   this.service.getUserById(userId).subscribe(user => this.router.navigateByUrl('/home/user',{state: user} ))
-  // }
 
   acceptRequestClick(request: FriendRequest){
     this.store.dispatch(addFriend({userId: request.toUserId, friendId: request.fromUserId}));
@@ -64,8 +55,4 @@ export class RequestsComponent implements OnInit {
   deleteRequestClick(request: FriendRequest){
     this.store.dispatch(deleteRequest({friendRequest: request}));
   }
-  // getNumberOfMuturalFriends(fromUserId: number) : number{
-  //   this.getUser(fromUserId);
-  //   return this.calculateMuturalFriends
-  // }
 }

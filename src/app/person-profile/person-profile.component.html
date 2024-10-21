@@ -1,5 +1,4 @@
 <navbar activeLink=""></navbar>
-<!-- <p>person-profile works!</p> -->
 <mat-card style="border-radius: 5%;">
     <div class="contextContainer">
         <div class="listContainer">
@@ -83,7 +82,6 @@
             {{post.user.name + " " + post.user.surname}}
         </div>
         <span mat-card-subtitle>{{post.date}}</span>
-        <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
       </div>     
   </mat-card-title>
    <mat-card-content>
@@ -93,15 +91,13 @@
   </mat-card-content>
   <img mat-card-image [src]="post.image">
   <mat-card-actions>
-      <button mat-button (click)="like(post)" [color]="getColorForLikeButton(post)" ><mat-icon>thumb_up</mat-icon>Like </button><!--[color]="color" (click)="like($event)"-->
+      <button mat-button (click)="like(post)" [color]="getColorForLikeButton(post)" ><mat-icon>thumb_up</mat-icon>Like </button>
       <button mat-button (click)="dislike(post)" [color]="getColorForDislikeButton(post)"> <mat-icon>thumb_down</mat-icon>Dislike </button>
-      <button mat-button [routerLink]="['/home/', post.id]"><mat-icon>comment</mat-icon>Comment </button><!--[routerLink]="['./', post.id]"-->
-      <!-- <button mat-button><mat-icon>share</mat-icon>Share </button> -->
+      <button mat-button [routerLink]="['/home/', post.id]"><mat-icon>comment</mat-icon>Comment </button>
   </mat-card-actions>
   <mat-card-footer>
       <span class="interaction_numbers"><p>{{post.numberOfLikes}}</p><mat-icon>thumb_up</mat-icon></span>
       <span class="interaction_numbers"><p>{{post.numberOfDislikes}}</p><mat-icon>thumb_down</mat-icon></span>
       <span class="interaction_numbers"><p>{{post.numberOfComments}}</p><mat-icon>comment</mat-icon></span>
-      <!-- <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span> -->
   </mat-card-footer>
 </mat-card>

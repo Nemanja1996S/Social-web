@@ -48,12 +48,9 @@ interface LinkIconsPath{
 })
 export class NavbarComponent implements OnInit {
   
-  //usersSports : string[] = ['football', 'basketball', 'table tennis', 'voleyball', 'swiming', 'bodybuilding'];
   usersSport$: Observable<string[]> = of([]);
   user: User = initialUser;
-  // usersSports : string[] = []
   linksIcons: LinkIconsPath[] = [{link: 'Home', icon: 'home', path: 'home'}, {link: 'Friends', icon: 'group', path: 'home/friends'}, {link:'Requests', icon: 'groups', path: 'home/requests'}];
-  // activeLink = this.linksIcons[0].link;
   userPic$: Observable<string> = of('');
   @Input() activeLink: string = 'Home';
 
@@ -62,7 +59,6 @@ export class NavbarComponent implements OnInit {
 
   
   constructor(private snackBar: MatSnackBar, private store: Store<AppState>, private router: Router){
-    // this.store.select(selectedSportsSelector).subscribe(userSports => console.log(userSports)) ovo se rekli da ne valja
     const user$ = this.store.select(userSelector);
     user$.subscribe(user => this.user = user )
 
@@ -74,11 +70,8 @@ export class NavbarComponent implements OnInit {
 
   searchSports(){
     if(this.selectedSportFormControl.valid){
-      //console.log(this.selectedSportFormControl.value);
-      
       if(this.selectedSportFormControl.value){
         this.store.dispatch(setSearchSelectedSports({searchSelectedSports: this.selectedSportFormControl.value}))
-        //   this.router.navigateByUrl('/home/selectedSports', {state: this.selectedSportFormControl.value})
       }
       
     }
