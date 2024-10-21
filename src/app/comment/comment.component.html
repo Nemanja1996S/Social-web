@@ -12,9 +12,6 @@
         <label class="backLabel">Go back?</label>
         <button mat-icon-button class="backButtonContainer" (click)="$event.preventDefault(); goBack()" ><mat-icon class="backButton">arrow_back</mat-icon></button>
         <img [src]="this.userCommentImg" class="imgInput">
-        <!-- <div style="display: flex;">
-            <mat-checkbox *ngFor="let sport of this.userSelectedSport$ | async" [formControl]="postCheckListFormControl" (change)="onSportChecked(sport)">{{sport}}</mat-checkbox>
-        </div> -->
         <div>
             <button mat-flat-button (click)="$event.preventDefault(); fileInput.click()">Pick photo</button>
             <button mat-flat-button (click)="$event.preventDefault(); onComment()" 
@@ -24,8 +21,6 @@
     </div>
 </mat-form-field>
 </form>
-
-<!-- <div *ngIf="!(this.error$ | async) else noComments"> -->
     <mat-card *ngFor="let userComment of this.usersComment$ | async">
     <mat-card-title style="position: relative;">
         <img mat-card-sm-image src={{userComment.userPicSrc}} [routerLink]="['/home/profile/' + userComment.userId]"/>
@@ -34,16 +29,11 @@
                 {{userComment.userName + ' ' +userComment.userSurname}}
             </div>
             <span mat-card-subtitle>{{userComment.commentDate}}</span>
-            <!-- <mat-card-subtitle>13/04/2024</mat-card-subtitle> -->
-            
         </div>
         @if(this.currentUserId == userComment.userId){  
             <button mat-icon-button class="editButtonContainer" (click)="openEditDialog('0ms', '0ms', userComment)" ><mat-icon class="editButton">edit_note</mat-icon></button>
             <button mat-icon-button class="XbuttonContainer" (click)="openDeleteDialog('0ms', '0ms', userComment)" ><mat-icon class="Xbutton">close</mat-icon></button>
-        <!-- treba u if ===, al zato sto je jedno string, a drugo number, ne moze -->
         }
-        
-       
     </mat-card-title>
      <mat-card-content>
     <div class="contextContainer">
@@ -52,8 +42,6 @@
                 {{userComment.commentText}}
             </span>
         </div>
-        <!-- <img mat-card-image src={{userComment.userPicSrc}} class="commentPic"> -->
-         <!-- "https://primefaces.org/cdn/primeng/images/galleria/galleria10.jpg" -->
         @if (userComment.commentPic) {
             <p-image 
             src={{userComment.commentPic}} 
@@ -65,30 +53,8 @@
         }
     </div>
     </mat-card-content>
-    
-    <!-- <mat-card-actions>
-        <button mat-button (click)="like($event)" [color]="color"><mat-icon>thumb_up</mat-icon>Like </button>
-        <button mat-button><mat-icon>thumb_down</mat-icon>Dislike </button>
-        <button mat-button><mat-icon>comment</mat-icon>Comment </button>
-        <button mat-button><mat-icon>share</mat-icon>Share </button>
-    </mat-card-actions>
-    <mat-card-footer>
-        <span class="interaction_numbers"><p>{{post.numberOfLikes}}</p><mat-icon>thumb_up</mat-icon></span>
-        <span class="interaction_numbers"><p>{{post.numberOfDislikes}}</p><mat-icon>thumb_down</mat-icon></span>
-        <span class="interaction_numbers"><p>{{post.numberOfComments}}</p><mat-icon>comment</mat-icon></span>
-        <span class="interaction_numbers"><p>{{post.numberOfShares}}</p><mat-icon>share</mat-icon></span>
-    </mat-card-footer> -->
     </mat-card>
 </div>
-<!-- </div>
-<ng-template #noComments>
-    <mat-card>
-        <mat-card-content>
-            <div class="noComments">
-                No comments 
-            </div>    
-        </mat-card-content>
-    </mat-card>
-</ng-template> -->
+
 
 

@@ -15,7 +15,7 @@ import { SportSocialService } from '../services/sport-social.service';
 import { User } from '../../models/User';
 import { Route, Router, RouterLink } from '@angular/router';
 import { loadFriends } from '../store/friends/friends.actions';
-import { userIdSelector } from '../store/user/user.selector';
+import { userFriendsIdsArraySelector, userIdSelector } from '../store/user/user.selector';
 import { loadCommentsFailure } from '../store/comments/comments.actions';
 
 export interface PeopleOption{
@@ -58,10 +58,11 @@ export class FriendsComponent implements OnInit{
   //   }
   // ]
   loggedUserId$: Observable<number> = of()
+  loggedUserId : number = -1
   users$: Observable<User[]> = of([]) //PeopleOption[]
   //usersFullNames = ["Nemanja Savic", "Marko Stoijljkovic", "Bogdan Randjelovic"]
   usersFullNames : string[] = [];
-
+  userFriendsIds$: Observable<number[]> = of()
   filteredOptions: string[] = [];
   error$: Observable<string | null> = of('');
   noFriends: boolean = false
@@ -80,11 +81,17 @@ export class FriendsComponent implements OnInit{
     this.users$ = this.getUsersObservable()
     // this.users$.subscribe(users => console.log(users))
     // this.users$.subscribe(users => console.log(users.map(users => ({userFullName : users.name + users.surname } ))))
-    this.users$.subscribe((users => this.changeFilterOptionAndUsersFullNames(users.map(user => (user.name + user.surname )))))
+    this.users$.subscribe((users => this.changeFilterOptionAndUsersFullNames(
+      users.filter(user => user.id !== this.loggedUserId).map(user => (user.name + user.surname )))))
     this.loggedUserId$ = this.store.select(userIdSelector)
-    this.loggedUserId$.subscribe((id) => {
-      this.store.dispatch(loadFriends({userId: id }))
-    })
+    this.loggedUserId$.subscribe((id) => this.loggedUserId = id)
+    this.userFriendsIds$ = this.store.select(userFriendsIdsArraySelector)
+    this.userFriendsIds$.subscribe((ids) => {
+      console.log(ids)
+    this.store.dispatch(loadFriends({friendsIds: ids}))})
+    // this.loggedUserId$.subscribe((id) => {
+    //   this.store.dispatch(loadFriends({userId: id }))
+    // })
     
   }
 

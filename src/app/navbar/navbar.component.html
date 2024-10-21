@@ -36,6 +36,15 @@
     <div>
       <button mat-raised-button color='accent' class="navbutton" (click)="this.searchSports();">Search</button>
     </div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="this.logOut()">
+        <mat-icon>logout</mat-icon>
+        <span>Log out</span>
+      </button>
+    </mat-menu>
   </nav>
   <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
   <!-- <post></post> -->

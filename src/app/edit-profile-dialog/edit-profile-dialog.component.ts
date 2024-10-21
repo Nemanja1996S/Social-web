@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, Inject, inject } from '@angular/cor
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatButtonModule } from '@angular/material/button';
-import { User } from '../../models/User';
+import { UpdateUserDto, User } from '../../models/User';
 import { initialUser } from '../store/user/user.reducer';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {provideNativeDateAdapter} from '@angular/material/core';
+import {MAT_DATE_LOCALE, provideNativeDateAdapter} from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { SportSocialService } from '../services/sport-social.service';
 import { Observable, of } from 'rxjs';
@@ -24,7 +24,7 @@ export interface EditProfileDialogInputData{
 }
 
 export interface EditProfileDialogOutputData{
-  user: User,
+  user: UpdateUserDto,
   selectedImage: File | null
 }
 
@@ -32,7 +32,8 @@ export interface EditProfileDialogOutputData{
   selector: 'profile-dialog',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, FormsModule, MatSelectModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatDatepickerModule, CommonModule],
-  providers: [], //provideNativeDateAdapter()
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    provideNativeDateAdapter()], //provideNativeDateAdapter()
   templateUrl: './edit-profile-dialog.component.html',
   styleUrl: './edit-profile-dialog.component.scss',
   // changeDetection: ChangeDetectionStrategy.OnPush
@@ -115,20 +116,18 @@ export class EditProfileDialogComponent {
   //     }
       
   //   });
-    const userOutput: User = {
+    const userOutput: UpdateUserDto = {
       id: this.inputData.user.id,
       name: controls.nameFormControl.value ?? this.inputData.user.name,
       surname: controls.surnameFormControl.value ?? this.inputData.user.surname,
       email: controls.emailFormControl.value ?? this.inputData.user.email,
       password: controls.passwordFormControl.value ?? this.inputData.user.password,
-      picture: controls.pictureFormControl.value ?? this.inputData.user.picture,
-      friendsIds: this.inputData.user.friendsIds,
+      picture: this.inputData.user.picture,
       selectedSports: controls.selectedSportsFormControl.value ?? this.inputData.user.selectedSports,
-      dateOfBirth: controls.dateOfBirthFormControl.value ?? this.inputData.user.dateOfBirth,
+      dateOfBirth: this.getDateFromFormControlStringDDMMYYYY(controls.dateOfBirthFormControl.value) ?? this.inputData.user.dateOfBirth,
       education: controls.educationFormControl.value ?? this.inputData.user.education,
       work: controls.workFormControl.value ?? this.inputData.user.work,
-      aboutMe: controls.aboutMeFormControl.value ?? this.inputData.user.aboutMe,
-      requests: []
+      aboutMe: controls.aboutMeFormControl.value ?? this.inputData.user.aboutMe
     }
     const output : EditProfileDialogOutputData = {user: userOutput, selectedImage: this.selectedImageFile ?? null}
     this.dialogRef.close(output);
@@ -137,6 +136,14 @@ export class EditProfileDialogComponent {
   onNo(){
     this.dialogRef.close(false);
   }
+
+  getDateFromFormControlStringDDMMYYYY(date: string): string{
+    const yyyymmdd = date.split('-')
+    const year = yyyymmdd[0]
+    const month = yyyymmdd[1]
+    const day = yyyymmdd[2]
+    return `${day}.${month}.${year}`;
+}
 
   onFileSelected( event: any) : void{
     this.selectedImageFile = event.target.files[0];

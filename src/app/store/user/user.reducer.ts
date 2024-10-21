@@ -55,18 +55,35 @@ export const userReducer = createReducer(
     on(Actions.setSearchSelectedSports, (state, {searchSelectedSports}) => {
         return ({...state, searchSelectedSports: searchSelectedSports})
     }),
-    on(Actions.addFriend, (state, {friendId}) => {
+    on(Actions.addFriendSuccess, (state, {friendId}) => {
         let newFriendsIds = [...state.user.friendsIds]
         newFriendsIds.push(friendId);
         return ({...state, user: {...state.user, friendsIds: newFriendsIds}})
     }),
-    on(Actions.removeFriend, (state, {friendId}) => {
+    on(Actions.addFriendFailure, (state, {error}) =>  {
+        return ({...state, isLoading: false, error: error })
+    }),
+    on(Actions.removeFriendSuccess, (state, {friendId}) => {
         return ({...state, user: {...state.user, friendsIds: [...state.user.friendsIds.filter(id => id !== friendId)]}})
     }),
-    on(Actions.deleteUser, (state) => {
+    on(Actions.removeFriendFailure, (state, {error}) =>  {
+        return ({...state, isLoading: false, error: error })
+    }),
+    on(Actions.deleteUserSuccess, (state) => {
         state = initialState
         return state
-    })
+    }),
+    on(Actions.deleteUserFailure, (state, {error}) => {
+        return ({...state, isLoading: false, error: error })
+    }),
+    on(Actions.editUserSuccess, (state, {updateUserDto}) => {
+        let newUser = {...state.user}
+        Object.assign(newUser, updateUserDto)
+        return ({...state, user: newUser, isLoading: false})
+    }),
+    on(Actions.editUserFailure, (state, {error}) => {
+        return ({...state, isLoading: false, error: error })
+    }),
     
 )
 

@@ -14,8 +14,17 @@ export interface User {
     aboutMe: string
 }
 
+export interface Friendship{
+    id: number
+    friend: MiniFriend2
+}
+
 export interface MiniFriend{
     friendId: number
+}
+
+export interface MiniFriend2{
+    id: number
 }
 
 export interface MiniRequest{
@@ -30,11 +39,25 @@ export interface UserFromDatabase {
     email: string,
     password: string,
     picture: string,
-    friends: MiniFriend[],
+    friendships: Friendship[],
     requests: MiniRequest[];
     selectedSports: string[],
     dateOfBirth: string,
     education: string,
     work: string,
     aboutMe: string
+}
+
+export interface UpdateUserDto {
+    id: number 
+    name?: string;
+    surname?: string;
+    email?: string;
+    password?: string;
+    picture?: string
+    selectedSports?: string[]
+    dateOfBirth?: string
+    education?: string
+    work?: string
+    aboutMe?: string
 }

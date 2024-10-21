@@ -10,14 +10,14 @@ export const friendRequestsSelector = createSelector(
     (friendRequestsState) => friendRequestsState.friendRequests
 )
 
-export const idsOfloggedUserSentRequestToSelector = createSelector(
-    userIdSelector,
-    friendRequestsSelector,
-    (userId, requests) => requests.filter(request => request.fromUserId === userId).map(request => request.toUserId)
-)
+// export const idsOfloggedUserSentRequestToSelector = createSelector(
+//     userIdSelector,
+//     friendRequestsSelector,
+//     (userId, requests) => requests.filter(request => request.fromUserId === userId).map(request => request.toUserId)
+// )
 
-export const isloggedUserSentRequestToProfileUserSelector = createSelector(
-    profileIdSelector,
-    idsOfloggedUserSentRequestToSelector,
-    (profileId, ids) => ids.includes(profileId)
-)
+// export const isloggedUserSentRequestToProfileUserSelector = createSelector(
+//     profileIdSelector,
+//     idsOfloggedUserSentRequestToSelector,
+//     (profileId, ids) => ids.includes(profileId)
+// )

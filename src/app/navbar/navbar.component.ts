@@ -9,6 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
 import { PostComponent } from '../post/post.component';
 import { AppState } from '../store/app.state';
 import { Store } from '@ngrx/store';
@@ -35,6 +36,7 @@ interface LinkIconsPath{
     MatIconModule,
     MatTabsModule,
     MatButtonModule,
+    MatMenuModule,
     NgFor,
     ReactiveFormsModule,
     PostComponent,
@@ -95,5 +97,8 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([linkIconPath.path])
   }
   
+  logOut(){
+    this.router.navigate(['']);
+  }
 
 }

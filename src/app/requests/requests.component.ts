@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
 import { Observable, of } from 'rxjs';
 import { FriendRequest } from '../../models/Request';
-import { acceptRequest, deleteRequest, loadRequests } from '../store/requests/requests.actions';
+import { deleteRequest, loadRequests } from '../store/requests/requests.actions';
 import { friendRequestsSelector } from '../store/requests/requests.selectors';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
@@ -57,7 +57,7 @@ export class RequestsComponent implements OnInit {
   // }
 
   acceptRequestClick(request: FriendRequest){
-    this.store.dispatch(addFriend({friendId: request.fromUserId}));
+    this.store.dispatch(addFriend({userId: request.toUserId, friendId: request.fromUserId}));
     this.store.dispatch(deleteRequest({friendRequest: request}));
   }
 

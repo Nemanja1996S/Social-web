@@ -79,7 +79,7 @@ export class PostComponent implements OnInit {
     this.user$.subscribe(user => {
       
       this.user = user
-      console.log(this.user)
+      // console.log(this.user)
       this.store.dispatch(loadPosts({userId: user.id}))
       this.posts$ = this.store.select(postsSelector);
       this.userSelectedSport$ = this.store.select(selectedSportsSelector);
@@ -153,7 +153,7 @@ export class PostComponent implements OnInit {
 
  getColorForDislikeButton(post: Post): string{
   if(this.getUserReactionForPost(post) < 0)
-    return 'accent'
+    return 'warn'
   else
     return ''
 }

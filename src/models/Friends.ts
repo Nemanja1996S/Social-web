@@ -4,6 +4,8 @@
 //     userFriendsIds: number[]
 // }
 
+import { Friendship } from "./User"
+
 // export interface Friend
 // {
 //     id: number,
@@ -20,8 +22,26 @@ export interface Friend{
     surname: string,
     picture: string,
     selectedSports: string[],
-    friends: friendId[]
+    // friends: friendId[]
+    friendsIds: number[]
 }
+
+export interface FriendFromDatabase{
+    id: number,
+    name: string,
+    surname: string,
+    picture: string,
+    selectedSports: string[],
+    friendships: Friendship[]
+}
+
+        // "friendships": [
+        //     {
+        //         "id": 6,
+        //         "friend": {
+        //             "id": 3
+        //         }
+        //     }
 
 export interface friendId{
     friendId : number

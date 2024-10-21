@@ -5,7 +5,7 @@ import { Friend } from "../../../models/Friends";
 export const loadFriends = createAction(
     "Loading friends to state",
     props<{
-        userId: number
+        friendsIds: number[]
     }>()
 );
 

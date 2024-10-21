@@ -1,4 +1,4 @@
-import { MiniFriend } from "./User"
+import { Friendship, MiniFriend } from "./User"
 
 export interface FriendRequest {
     id: number,
@@ -8,6 +8,15 @@ export interface FriendRequest {
     fromUserImg: string,    //
     fromUserFriendsIds: number[],   //
     fromUserSelectedSports: string[]   //
+}
+
+export interface MiniFriendRequest{
+    id: number,
+    toUser: miniUser,
+    fromUser: miniUser
+}
+export interface miniUser{
+    id: number
 }
 
 export interface FriendRequestFromDatabase {
@@ -21,5 +30,5 @@ export interface MiniUserForRequests{
     surname: string,
     picture: string,
     selectedSports: string[],
-    friends: MiniFriend[]
+    friendships: Friendship[]
 }

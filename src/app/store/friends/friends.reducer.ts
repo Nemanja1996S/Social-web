@@ -20,12 +20,12 @@ export const initialState: FriendsState = adapter.getInitialState({
 
 export const friendsReducer = createReducer(
     initialState,
-    on(Actions.loadFriends, (state, {userId}) => {
+    on(Actions.loadFriends, (state, {friendsIds}) => {
         return {...state, isLoading: true}
     }),
     on(Actions.loadFriendsSuccess, (state, {friends}) => {
-        const newState = {...state, isLoading: false}
-        return adapter.setAll(friends, newState);
+        // const newState = {...state, isLoading: false}
+        return adapter.setAll(friends, state);
     }),
     on(Actions.loadFriendsFailure, (state, {error}) => {
         return {...state, isLoading: false, error: error}

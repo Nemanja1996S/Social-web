@@ -81,7 +81,7 @@ export class CommentComponent implements OnInit{
     this.usersComment$ = this.store.select(userCommentsSelector);
     this.currentUser$ = this.store.select(userSelector);
     this.currentUserId$ = this.store.select(userIdSelector);
-    this.usersComment$.subscribe((comments) => console.log(comments));
+    // this.usersComment$.subscribe((comments) => console.log(comments));
     this.currentUserId$.subscribe((userId) => {this.currentUserId = userId})
     this.currentUser$.subscribe(user => this.currentUser = user)
   }
@@ -92,10 +92,10 @@ export class CommentComponent implements OnInit{
   }
 
   onComment(){  //post comment
-    console.log(this.currentPostId)
-    console.log(this.commentTextFormControl.value)
-    console.log(this.userCommentImg)
-    this.currentUser$.subscribe(currentUser => console.log(currentUser))
+    // console.log(this.currentPostId)
+    // console.log(this.commentTextFormControl.value)
+    // console.log(this.userCommentImg)
+    // this.currentUser$.subscribe(currentUser => console.log(currentUser))
     let userComment: UserComment = {
       userId: this.currentUser.id, userName: this.currentUser.name, userSurname: this.currentUser.surname,
       userPicSrc: this.currentUser.picture, commentDate: '', commentPic: this.userCommentImg,

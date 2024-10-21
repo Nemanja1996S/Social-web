@@ -30,7 +30,7 @@ export class FriendRequestEffect {
 				fromUserId: request.fromUser.id,
 				fromUserFullName: request.fromUser.name + ' ' + request.fromUser.surname,
 				fromUserImg: request.fromUser.picture,
-				fromUserFriendsIds: request.fromUser.friends.map(id => id.friendId),
+				fromUserFriendsIds: request.fromUser.friendships.map(friendship => friendship.friend.id),
 				fromUserSelectedSports: request.fromUser.selectedSports
 			})
 		 )
@@ -39,11 +39,11 @@ export class FriendRequestEffect {
 
 	acceptingRequestEffect$ = createEffect( () =>
 		this.actions$.pipe(
-			ofType(FriendRequestsActions.acceptRequest),
-			switchMap( ({userId, acceptedUserId, friendRequest}) =>
-				this.service.acceptFriendRequest(userId, acceptedUserId, friendRequest.id).pipe(
-					map((friendRequests) => FriendRequestsActions.acceptRequestSuccess({userId: userId, acceptedUserId: acceptedUserId, friendRequest: friendRequest})),
-					catchError(error => of(FriendRequestsActions.acceptRequestFailure({error})))
+			ofType(FriendRequestsActions.deleteRequest),
+			switchMap( ({friendRequest}) =>
+				this.service.deleteFriendRequest(friendRequest.id).pipe(
+					map((friendRequests) => FriendRequestsActions.deleteRequestSuccess({friendRequest: friendRequest})),
+					catchError(error => of(FriendRequestsActions.deleteRequestFailure({error})))
 				)
 			)
 		)

@@ -17,13 +17,15 @@ import { SportSocialService } from '../services/sport-social.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { EditProfileDialogComponent, EditProfileDialogInputData, EditProfileDialogOutputData } from '../edit-profile-dialog/edit-profile-dialog.component';
-import { dislikePost, likePost, reactToPost } from '../store/posts/posts.actions';
+import { deletePost, dislikePost, editPost, likePost, reactToPost } from '../store/posts/posts.actions';
 import { loggedInUserPostsSelector, profilePostsSelector } from '../store/posts/posts.selector';
-import { idsOfloggedUserSentRequestToSelector, isloggedUserSentRequestToProfileUserSelector } from '../store/requests/requests.selectors';
-import { loadProfile } from '../store/profile/profile.actions';
-import { profileSelector } from '../store/profile/profile.selectors';
-import { deleteUser, removeFriend } from '../store/user/user.actions';
-import { sendRequest } from '../store/requests/requests.actions';
+// import { idsOfloggedUserSentRequestToSelector, isloggedUserSentRequestToProfileUserSelector } from '../store/requests/requests.selectors';
+import { acceptDeleteRequest, loadProfile, loadRequestBetweenUsers, sendRequest } from '../store/profile/profile.actions';
+import {  isLoggedUserSentRequestToProfileUserSelector, isProfileUserSentRequestToLoggedUserSelector, profileRequestSelector, profileSelector } from '../store/profile/profile.selectors';
+import { addFriend, deleteUser, editUser, removeFriend } from '../store/user/user.actions';
+import { MiniFriendRequest } from '../../models/Request';
+import { EditPostDialogComponent, EditPostDialogOutputData } from '../edit-post-dialog/edit-post-dialog.component';
+
 
 @Component({
   selector: 'person-profile',
@@ -48,6 +50,8 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
   //idsOfUserSentRequstTo$: Observable<number[]> = of([])
   isProfileUserFriendsWithLoggedUser$: Observable<boolean> = of();
   isloggedUserSentRequestToProfileId$: Observable<boolean> = of()
+  isProfileUserSentRequestToLoggedUser$: Observable<boolean> = of()
+  profileRequest$: Observable<MiniFriendRequest | null> = of()
   idsOfUserSentRequstTo: number[] = []
   sportsList: string [] = []
   readonly dialog = inject(MatDialog);
@@ -57,30 +61,27 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
     // console.log(this.router.getCurrentNavigation()?.extras.state)
   }
   ngOnDestroy(): void {
-    console.log("Iz destroy")
-    console.log(this.isSelfProfile)
     this.isSelfProfile = null;
   }
   ngOnInit(): void {
-    console.log("Iz init")
-    console.log(this.isSelfProfile)
+    // console.log(this.isSelfProfile)
     this.service.getAllSports().subscribe(sports => this.sportsList = sports)
     this.route.paramMap.pipe(
       mergeMap((params) => of(params.get('userId'))),
       mergeMap((id) => {
         if(id){
-          console.log("Id parametra:")
-          console.log(id)
           this.paramsId = parseInt(id);
           this.isSelfProfile = false;
           this.store.dispatch(loadProfile({id: this.paramsId}))
           this.userPosts$ = this.store.select(profilePostsSelector)
           this.profileUser$ = this.store.select(profileSelector)
           this.loggedInUser$ = this.store.select(userSelector)
+          this.store.select(userSelector).subscribe((user=>{
+            this.store.dispatch(loadRequestBetweenUsers({userId: user.id, profileUserId: this.paramsId}))
+          }))
           return this.profileUser$;
         }
         else{
-          console.log("Nema id parametra")
           this.isSelfProfile = true;
           this.user = history.state;
           this.loggedUserId = this.user.id;
@@ -96,15 +97,15 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
         this.store.select(userIdSelector).subscribe(id => this.loggedUserId = id)
         this.store.select(userFriendsIdsArraySelector).subscribe(friendsIds => this.loggedInFriendsIds = friendsIds)
         this.isProfileUserFriendsWithLoggedUser$ = this.store.select(isProfileUserFriendsWithLoggedSelector);
-        this.isloggedUserSentRequestToProfileId$ = this.store.select(isloggedUserSentRequestToProfileUserSelector);
+        this.isloggedUserSentRequestToProfileId$ = this.store.select(isLoggedUserSentRequestToProfileUserSelector);
+        this.isProfileUserSentRequestToLoggedUser$ = this.store.select(isProfileUserSentRequestToLoggedUserSelector)
         this.loggedInUser$.subscribe(user => this.loggedUser = user)
-
+        this.profileRequest$ = this.store.select(profileRequestSelector)
+        
       }
-      
-     
-      
-      // Do something with res3.
     });
+
+  
     // this.route.paramMap.subscribe(params => {
     //   const id = params.get('id');
     //   if(id){
@@ -141,7 +142,7 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
     // }
     
    
-    this.store.select(idsOfloggedUserSentRequestToSelector).subscribe(ids => this.idsOfUserSentRequstTo = ids);
+    // this.store.select(idsOfloggedUserSentRequestToSelector).subscribe(ids => this.idsOfUserSentRequstTo = ids);
   }
 
   isMe(): boolean{
@@ -154,9 +155,27 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
     return muturalFriends.length;
   }
 
-  sendRequestTo(): void{      ///////////////iddddddddddddddddddddddddddddddddddd
-    this.store.dispatch(sendRequest({friendRequest: {id: -1 ,toUserId: this.paramsId, fromUserId: this.loggedUserId, fromUserFullName: this.loggedUser.name + " " + this.loggedUser.surname, fromUserImg: this.loggedUser.picture, fromUserSelectedSports: this.loggedUser.selectedSports, fromUserFriendsIds: []}}))
-    //console.log({toUserId: this.paramsId, fromUserId: this.loggedUserId, fromUserFullName: this.loggedUser.name + " " + this.loggedUser.surname, fromUserImg: this.loggedUser.picture, fromUserSelectedSports: this.loggedUser.selectedSports, fromUserFriendsIds: []}) 
+  sendRequestTo(): void{      
+    this.store.dispatch(sendRequest({fromUserId: this.loggedUserId, toUserId: this.paramsId}))
+  }
+
+  acceptRequest(){
+    this.profileRequest$.subscribe((request) => {
+      console.log("Sending accept, request:")
+      console.log(request)
+      if(request){
+        this.store.dispatch(acceptDeleteRequest({requestId: request.id}))
+        this.store.dispatch(addFriend({userId: request.toUser.id, friendId: request.fromUser.id}))
+      }
+    })
+  }
+ 
+  deleteRequest(){
+    this.profileRequest$.subscribe((request) => {
+      if(request){
+        this.store.dispatch(acceptDeleteRequest({requestId: request.id}))
+      }
+    })
   }
 
 
@@ -185,13 +204,13 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
     dialogRef.afterClosed().subscribe(result => {
       if(isDeleteProfile){
         if(result){
-          this.store.dispatch(deleteUser())
+          this.store.dispatch(deleteUser({userId: this.loggedUserId}))
           this.router.navigate([''])            
         }
       }
       else{
         if(result){
-          this.store.dispatch(removeFriend({friendId: this.paramsId}));          
+          this.store.dispatch(removeFriend({userId: this.loggedUserId,friendId: this.paramsId}));          
         }           
       }
     });
@@ -211,7 +230,9 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
       // console.log(result)
       if(result as EditProfileDialogOutputData){
         //this.user = result;
-        this.user.picture = URL.createObjectURL(result.selectedImage)
+        this.store.dispatch(editUser({updateUserDto: result.user}))
+        if(result.selectedImage)
+          this.user.picture = URL.createObjectURL(result.selectedImage)
         console.log(result)
       }
       
@@ -249,6 +270,8 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
     return 0;
  }
 
+
+
   getColorForLikeButton(post: Post): string{
     if(this.getUserReactionForPost(post) > 0)
       return 'primary'
@@ -258,8 +281,43 @@ export class PersonProfileComponent implements OnInit, OnDestroy{
 
  getColorForDislikeButton(post: Post): string{
   if(this.getUserReactionForPost(post) < 0)
-    return 'accent'
+    return 'warn'
   else
     return ''
+}
+
+openDeletePostDialog(enterAnimationDuration: string, exitAnimationDuration: string, postId: number): void {
+  const dialogRef = this.dialog.open(DialogComponent, {
+    width: '250px',
+    enterAnimationDuration,
+    exitAnimationDuration,
+    data: {title: "Delete post:", content: "Would you like to delete this post?", confirmString: "Yes", cancelString: "No"}
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result){
+      console.log(result)
+      this.store.dispatch(deletePost({postId: postId}))       
+    }
+  });
+}
+
+openEditPostDialog(enterAnimationDuration: string, exitAnimationDuration: string, post: Post): void {
+  const dialogRef = this.dialog.open(EditPostDialogComponent, {
+    width: '500px',
+    enterAnimationDuration,
+    exitAnimationDuration,
+    data: {title: "Edit post:", post: post, user: this.user, confirmString: "Save", cancelString: "Cancel"}
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result as EditPostDialogOutputData){
+      let editText: string = result.postText
+      let imgUrl = ''
+      if(result.selectedImage){
+        imgUrl = URL.createObjectURL(result.selectedImage)
+      }
+      console.log(result)
+      this.store.dispatch(editPost({postId: post.id, postText: editText, postImage: imgUrl}));
+    }
+  });
 }
 }

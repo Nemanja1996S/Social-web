@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { User } from "../../../models/User";
+import { UpdateUserDto, User } from "../../../models/User";
 
 
 export const setIsLoading = createAction("Set isLoading to userState");
@@ -42,20 +42,78 @@ export const setSearchSelectedSports = createAction(
 );
 
 export const addFriend = createAction(		
-	"Add friend to user state",			
-	props<{					
+	"Add friend to database and state",			
+	props<{				
+		userId: number	
 		friendId: number
+	}>()
+);
+export const addFriendSuccess = createAction(		
+	"Add friend to database and state success",			
+	props<{				
+		friendId: number
+	}>()
+);
+export const addFriendFailure = createAction(		
+	"Add friend to database and state failure",			
+	props<{				
+		error: string
 	}>()
 );
 
 export const removeFriend = createAction(		
-	"Remove friend to user state",			
+	"Remove friend from user state and database",			
+	props<{			
+		userId: number		
+		friendId: number
+	}>()
+);
+
+export const removeFriendSuccess = createAction(		
+	"Remove friend from user state and database success",			
 	props<{					
 		friendId: number
 	}>()
 );
 
+export const removeFriendFailure = createAction(		
+	"Remove friend from user state and database failure",			
+	props<{					
+		error: string
+	}>()
+);
+
 export const deleteUser = createAction(		
-	"Delete profile and user from state",			
-	
+	"Delete profile and user from state and database",		
+	props<{					
+		userId: number
+	}>()
+);
+export const deleteUserSuccess = createAction(		
+	"Delete profile and user from state and database success"
+);
+export const deleteUserFailure = createAction(		
+	"Delete profile and user from state and database failure",		
+	props<{					
+		error: string
+	}>()
+);
+
+export const editUser = createAction(		
+	"Edit profile and user from state and database",		
+	props<{					
+		updateUserDto: UpdateUserDto
+	}>()
+);
+export const editUserSuccess = createAction(		
+	"Edit profile and user from state and database success",
+	props<{					
+		updateUserDto: UpdateUserDto
+	}>()
+);
+export const editUserFailure = createAction(		
+	"Edit profile and user from state and database failure",		
+	props<{					
+		error: string
+	}>()
 );

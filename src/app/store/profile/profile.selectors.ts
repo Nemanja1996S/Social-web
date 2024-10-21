@@ -1,14 +1,15 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
 import { ProfileState } from "./profile.reducer"; 
-import { userIdSelector } from "../user/user.selector";
+
 
 // const somethingFeatureKey = 'userReducer'; // Should match with what you pass to .forRoot 
 
 
 // const selectSomething = createFeatureSelector<UserState>(somethingFeatureKey)
 
-export const selectProfileFeature = (state: AppState) => state.profileState;	
+export const selectProfileFeature = (state: AppState) => state.profileState;
+export const selectUserFeature = (state: AppState) => state.userState;	
 
 export const profileSelector = createSelector(
     selectProfileFeature,
@@ -18,6 +19,25 @@ export const profileSelector = createSelector(
 export const profileIdSelector = createSelector(
     profileSelector,
     (user) => user.id
+)
+
+export const profileRequestSelector = createSelector(
+    selectProfileFeature,
+    (profileState) => profileState.request ?? null
+)
+
+export const isLoggedUserSentRequestToProfileUserSelector = createSelector(
+    selectUserFeature,
+    profileRequestSelector,
+    (userState, request) => request ? request.fromUser.id === userState.user.id : false
+
+)
+
+export const isProfileUserSentRequestToLoggedUserSelector = createSelector(
+    selectUserFeature,
+    profileRequestSelector,
+    (userState, request) => request ? request.toUser.id === userState.user.id : false
+
 )
 
 

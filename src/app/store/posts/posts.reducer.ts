@@ -3,6 +3,7 @@ import { Post, ReactionEnum, UserReaction } from "../../../models/Post";
 import * as Actions from './posts.actions'
 import { createEntityAdapter, EntityState } from "@ngrx/entity";
 import { getCurrentDateAndTime } from "../comments/comments.reducer";
+import { deleteUserCommentSuccess } from "../comments/comments.actions";
 
 export interface PostsState extends EntityState<Post> {
     isLoading: boolean,
@@ -58,29 +59,6 @@ export const postsReducer = createReducer(
     on(Actions.editPostFailure, (state, {error}) => {
         return {...state, error: error}
     }),
-    // on(Actions.likePostSuccess, (state, {post, userId}) => {
-    //     const oldNumberOfLikes = post.numberOfLikes;
-    //     const oldNumberOfDislikes = post.numberOfDislikes;
-    //     const usersReactionsArray = post.usersReactions;
-    //     const userReaction = usersReactionsArray.find(userReaction => userReaction.reactedUserId === userId);
-    //     if(userReaction){
-    //         if( userReaction.reaction < 0){//disliked
-    //             const updatedUserReaction = {...userReaction, reaction: 1 }
-    //             return adapter.updateOne({id: post.id, changes: { numberOfLikes: oldNumberOfLikes + 1,
-    //                  numberOfDislikes: oldNumberOfDislikes - 1,
-    //                   usersReactions: [...post.usersReactions.filter(reaction => reaction.reactedUserId !== userId), updatedUserReaction ]} }, state)
-    //         }
-    //         if(userReaction.reaction > 0 ){//already liked && usersReactionsArray.includes({reactedUserId: userId, reaction: 1}
-    //             const updatedUserReaction = {...userReaction, reaction: 0 }
-    //             return adapter.updateOne({id: post.id, changes:{numberOfLikes: oldNumberOfLikes - 1,
-    //                  usersReactions: [...post.usersReactions.filter(reaction => reaction.reactedUserId !== userId), updatedUserReaction ] }}, state)
-    //         }
-    //     }
-    //     const newUserReaction: UserReaction = {reactedUserId: userId, reaction: 1 }
-    //     return adapter.upsertOne({...post, numberOfLikes: oldNumberOfLikes + 1,
-    //         usersReactions: [...post.usersReactions.filter(reaction => reaction.reactedUserId !== userId), newUserReaction ] }, state)
-    //     // return {...state};
-    // }),
     on(Actions.reactToPostSuccess, (state, {post, userId, reactionEnum}) => {
         const oldNumberOfLikes = post.numberOfLikes;
         const oldNumberOfDislikes = post.numberOfDislikes;
@@ -132,35 +110,36 @@ export const postsReducer = createReducer(
     on(Actions.likePostFailure, (state, {error}) => {
         return {...state, error: error}
     }),
-    // on(Actions.dislikePost, (state, {post, userId}) => {
-    //     const oldNumberOfLikes = post.numberOfLikes;
-    //     const oldNumberOfDislikes = post.numberOfDislikes;
-    //     const usersReactionsArray = post.usersReactions;
-    //     const userReaction = usersReactionsArray.find(userReaction => userReaction.reactedUserId === userId);
-    //     if(userReaction){
-    //         if( userReaction.reaction > 0){//liked
-    //             const updatedUserReaction = {...userReaction, reaction: -1 }
-    //             return adapter.updateOne({id: post.id, changes: { numberOfLikes: oldNumberOfLikes - 1,
-    //                  numberOfDislikes: oldNumberOfDislikes + 1,
-    //                   usersReactions: [...post.usersReactions.filter(reaction => reaction.reactedUserId !== userId), updatedUserReaction ]} }, state)
-    //         }
-    //         if(userReaction.reaction < 0 ){//already disliked 
-    //             const updatedUserReaction = {...userReaction, reaction: 0 }
-    //             return adapter.updateOne({id: post.id, changes:{numberOfDislikes: oldNumberOfDislikes - 1,
-    //                  usersReactions: [...post.usersReactions.filter(reaction => reaction.reactedUserId !== userId), updatedUserReaction ] }}, state)
-    //         }
-    //     }
-    //     const newUserReaction: UserReaction = {reactedUserId: userId, reaction: -1 }
-    //     return adapter.upsertOne({...post, numberOfDislikes: oldNumberOfDislikes + 1,
-    //         usersReactions: [...post.usersReactions.filter(reaction => reaction.reactedUserId !== userId), newUserReaction ] }, state)
-    //     // return {...state};
+    // on(deleteUserCommentSuccess, (state, {userComment}) => {
+    //     let post = state.entities[userComment.postId] ?? null
+    //     if(!post)
+    //         return state
+    //     post.numberOfComments = post.numberOfComments - 1
+    //     adapter.removeOne(userComment.postId, state)
+    //     return adapter.addOne(post, state)
     // }),
     on(Actions.changeNumberOfCommentsOfPost, (state, {postId, amount}) => {
-        const post = {...state.entities[postId]};
+        const post = state.entities[postId] ?? null;
+        console.log("Iz post reducera, pre uslova za post")
+        if(!post)
+            return {...state}
+        console.log("post")
+        console.log(post)
+        console.log("Iz post reducera, pre uslova za komentari")
+        if(post.numberOfComments < 0)
+            return {...state}
+        console.log("Iz psot reducera")
+        
         const oldNumberOfComments = post.numberOfComments;
-        if(oldNumberOfComments)
-            return adapter.updateOne({id: postId, changes: {numberOfComments: oldNumberOfComments + amount}}, state);
-        else return {...state }
+        console.log("number of commetns " + oldNumberOfComments )
+        const newNumberOfComments = oldNumberOfComments + amount
+        console.log("new number of commetns " + newNumberOfComments )
+        if(oldNumberOfComments >= 0)
+            return adapter.updateOne({id: postId, changes: {numberOfComments: newNumberOfComments}}, state);
+        else {
+            console.log("doslo do else")
+            return {...state }
+        }
     }),
     on(Actions.loadPostsForSports, (state, {userId, selectedSports}) => {
         return {...state, isLoading: true}

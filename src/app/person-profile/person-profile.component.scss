@@ -17,6 +17,11 @@ div>.imageContainer img{
     position: relative;
     right: 15px;
 }
+.width25 {
+    width: 25%;
+    position: relative;
+    right: 15px;
+}
 
 .listContainer{
     max-width: 40%;
@@ -46,7 +51,7 @@ mat-card {
     margin-bottom: 1em;
 }
 
-.mdc-card__media:first-child {
+.mdc-card__media:first-child, .mat-mdc-card-sm-image{
     border-radius: 50%;
 }
 
@@ -82,4 +87,23 @@ mat-card-footer{
 
 mat-card-content {
     padding-bottom: 1em;
+}
+
+mat-card-content p{
+    color: #cbcdcf;
+}
+
+.XbuttonContainer{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.Xbutton{
+    color: rgb(150, 19, 19);
+}
+.editButtonContainer{
+    position: absolute;
+    top: 5px;
+    right: 50px;
 }

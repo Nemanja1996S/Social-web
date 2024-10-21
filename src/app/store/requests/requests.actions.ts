@@ -23,40 +23,35 @@ export const loadRequestsFailure = createAction(
     }>()
 );
 
-export const sendRequest = createAction(
-    "Sending request",
-    props<{
-        friendRequest: FriendRequest
-    }>()
-);
+
+
+// export const deleteRequest = createAction(
+//     "Deleting request",
+//     props<{
+//         friendRequest: FriendRequest
+//     }>()
+// );
 
 export const deleteRequest = createAction(
-    "Deleting request",
+    "Delete request",
     props<{
+        // userId: number,
+        // acceptedUserId: number,
         friendRequest: FriendRequest
     }>()
 );
 
-export const acceptRequest = createAction(
-    "Accepting request",
+export const deleteRequestSuccess = createAction(
+    "Delete request success",
     props<{
-        userId: number,
-        acceptedUserId: number,
+        // userId: number,
+        // acceptedUserId: number,
         friendRequest: FriendRequest
     }>()
 );
 
-export const acceptRequestSuccess = createAction(
-    "Accepting request",
-    props<{
-        userId: number,
-        acceptedUserId: number,
-        friendRequest: FriendRequest
-    }>()
-);
-
-export const acceptRequestFailure = createAction(
-    "Accepting request",
+export const deleteRequestFailure = createAction(
+    "Delete request failure",
     props<{
         error: string;
     }>()

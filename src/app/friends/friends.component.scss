@@ -45,5 +45,6 @@ mat-card {
 
   .wholeContainer{
     background-color: adjust-hue($color: #471863, $degrees: 3);
-    height: 100vh;
+    background-attachment:local;
+    // height: 100vh;
   }

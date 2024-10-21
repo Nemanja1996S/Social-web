@@ -1,14 +1,14 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User, UserFromDatabase } from '../../models/User';
+import { MiniFriend2, UpdateUserDto, User, UserFromDatabase } from '../../models/User';
 import { catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { createPost, Post, ReactionEnum } from '../../models/Post';
 import { CommentEntityFromDatabase, Comments, CreateUserComment, UserComment } from '../../models/Comment';
 // import { UserFriends } from '../../models/Friends';
 import { PeopleOption } from '../friends/friends.component';
-import { FriendRequest, FriendRequestFromDatabase } from '../../models/Request';
-import { Friend } from '../../models/Friends';
+import { FriendRequest, FriendRequestFromDatabase, MiniFriendRequest } from '../../models/Request';
+import { Friend, FriendFromDatabase } from '../../models/Friends';
 
 @Injectable({
   providedIn: 'root'
@@ -49,13 +49,25 @@ export class SportSocialService {
 
   getUserById(id: number){
     return this.httpClient
-    .get<User>(`${environment.apiUrl}/users/${id}`)
+    .get<UserFromDatabase>(`${environment.apiUrl}/users/${id}`)
     .pipe(catchError(this.errorHandler));
   }
 
   getUser(email: string, password: string){   
     return this.httpClient
     .get<UserFromDatabase>(`${environment.apiUrl}/users/login/user?email=${email}&password=${password}`)  
+    .pipe(catchError(this.errorHandler));
+  }
+
+  deleteUser(userId: number){
+    return this.httpClient
+    .delete(`${environment.apiUrl}/users/${userId}`)
+    .pipe(catchError(this.errorHandler));
+  }
+
+  editUser(updateUserDto: UpdateUserDto ){
+    return this.httpClient
+    .patch(`${environment.apiUrl}/users`, updateUserDto)
     .pipe(catchError(this.errorHandler));
   }
 
@@ -99,11 +111,36 @@ export class SportSocialService {
       .pipe(catchError(this.errorHandler));
   }
 
-  acceptFriendRequest(userId: number, acceptedUserId: number, friendRequestId: number){
+  getRequestBetween(userId: number, friendId: number){
+    console.log("Contacting api with userId: " + userId + " and friendId: " + friendId)
     return this.httpClient
-      .post<FriendRequestFromDatabase[]>(`${environment.apiUrl}/requests/accept`, {userId, acceptedUserId, friendRequestId})
+    .get<MiniFriendRequest>(`${environment.apiUrl}/requests/${userId}/${friendId}`)
+    .pipe(catchError(this.errorHandler));
+  }
+
+  addFriend(userId: number, friendId: number){
+    return this.httpClient
+      .post(`${environment.apiUrl}/friendship`, {userId: userId, friendId: friendId})
       .pipe(catchError(this.errorHandler));
-  }jn
+  }
+
+  removeFriend(userId: number, friendId: number){
+    return this.httpClient
+    .delete(`${environment.apiUrl}/friendship/${userId}/${friendId}`)
+    .pipe(catchError(this.errorHandler));
+  }
+
+  deleteFriendRequest(friendRequestId: number){
+    return this.httpClient
+      .delete(`${environment.apiUrl}/requests/${friendRequestId}`)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  sendRequest(fromUserId: number, toUserId: number){
+    return this.httpClient
+      .post(`${environment.apiUrl}/requests`,{toUser: toUserId, fromUser: fromUserId})
+      .pipe(catchError(this.errorHandler));
+  }
 
   // getFriendsForUser(id: number){
   //   return this.httpClient
@@ -111,9 +148,10 @@ export class SportSocialService {
   //     .pipe(catchError(this.errorHandler));
   // }
 
-  getFriendsForUser(id: number){
+  getFriendsForUser(friendsIds: number[]){
+    const miniFriends: MiniFriend2[] = friendsIds.map(id => ({id: id}))
     return this.httpClient
-      .get<Friend[]>(`${environment.apiUrl}/users/friends/${id}`)
+      .post<FriendFromDatabase[]>(`${environment.apiUrl}/users/friendsAndTheirFriendsIds`, miniFriends) ///users/friends/${id}`)
       .pipe(catchError(this.errorHandler));
   }
 

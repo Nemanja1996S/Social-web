@@ -46,7 +46,7 @@ export const friendsAndNumberOfMuturalFriendsSelector = createSelector(
                 if(userFriendsIds){
                     let friendAndNuberOfMuturalFriendsArray : FriendAndNumberOfMuturalFriends[] = []
                     friendsArray.forEach(friend => {
-                        const friendFriendsIds = friend?.friends.map(friend => friend.friendId)
+                        const friendFriendsIds = friend?.friendsIds
                         if(friendFriendsIds){
                             const numberOfMuturalFriends: number = userFriendsIds.filter(id => friendFriendsIds.includes(id)).length
                             friendAndNuberOfMuturalFriendsArray.push({friend: friend, numberOfMuturalFriends: numberOfMuturalFriends})

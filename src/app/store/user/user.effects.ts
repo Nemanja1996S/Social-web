@@ -22,6 +22,54 @@ export class UserEffect {
 		)
 	)
 
+	addFriendEffect$ = createEffect( () =>
+		this.actions$.pipe(
+			ofType(UserActions.addFriend),
+			switchMap( ({friendId, userId}) =>
+				this.service.addFriend(userId, friendId).pipe(
+					map((friendRequests) => UserActions.addFriendSuccess({friendId: friendId})),
+					catchError(error => of(UserActions.addFriendFailure({error})))
+				)
+			)
+		)
+	)
+
+	removeFriendEffect$ = createEffect( () =>
+		this.actions$.pipe(
+			ofType(UserActions.removeFriend),
+			switchMap( ({userId, friendId}) =>
+				this.service.removeFriend(userId, friendId).pipe(
+					map((friendRequests) => UserActions.removeFriendSuccess({friendId: friendId})),
+					catchError(error => of(UserActions.removeFriendFailure({error})))
+				)
+			)
+		)
+	)
+
+	editUserEffect$ = createEffect( () =>
+		this.actions$.pipe(
+			ofType(UserActions.editUser),
+			switchMap( ({updateUserDto}) =>
+				this.service.editUser(updateUserDto).pipe(
+					map(() => UserActions.editUserSuccess({updateUserDto: updateUserDto})),
+					catchError(error => of(UserActions.editUserFailure({error})))
+				)
+			)
+		)
+	)
+
+	deleteUserEffect$ = createEffect( () =>
+		this.actions$.pipe(
+			ofType(UserActions.deleteUser),
+			switchMap( ({userId}) =>
+				this.service.deleteUser(userId).pipe(
+					map(() => UserActions.deleteUserSuccess()),
+					catchError(error => of(UserActions.deleteUserFailure({error})))
+				)
+			)
+		)
+	)
+
 	userAdapt(userFromDatabase : UserFromDatabase): User{
 		let user : User = {
 			id: 0,
@@ -39,7 +87,8 @@ export class UserEffect {
 			aboutMe: ""
 		}
 		Object.assign(user, userFromDatabase)
-		userFromDatabase.friends.map(friend => user.friendsIds.push(friend.friendId))
+		userFromDatabase.friendships.map(friendship => friendship.friend.id)
+		userFromDatabase.friendships.map(friendship => user.friendsIds.push(friendship.friend.id))
 		return user
 	}
 

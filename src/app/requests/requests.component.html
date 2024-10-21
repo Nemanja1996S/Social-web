@@ -12,8 +12,8 @@
                     <span mat-card-subtitle>Following sports: {{this.getSportSelectedString(request.fromUserSelectedSports)}} </span>
                     <span mat-card-subtitle>Number of mutural friends: {{calculateMuturalFriends(request.fromUserFriendsIds)}} </span>
                     <div>
-                        <button mat-stroked-button (click)="acceptRequestClick(request)">Accept</button>
-                        <button mat-stroked-button (click)="deleteRequestClick(request)">Delete request</button>
+                        <button mat-stroked-button (click)="$event.preventDefault(); acceptRequestClick(request)">Accept</button>
+                        <button mat-stroked-button (click)="$event.preventDefault(); deleteRequestClick(request)">Delete request</button>
                     </div>  
                 </div>     
             </mat-card-title>
